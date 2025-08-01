@@ -19,21 +19,23 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="爬虫*发送 HTTP 请求：爬虫通过 HTTP 请求从目标网站获取 HTML 页面，常用的库包括 requests。解析 HTML 内容：获取 HTML 页面后，爬虫需要解析内容并提取数据，常用的库有 BeautifulSoup、lxml、Scrapy 等。提取数据：通过定位 HTML 元素（如标签、属性、类名等）来提取所需的数据。存储数据：将提取的数据存储到数据库、CSV 文件、JSON 文件等">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2025/08/01/hello-world/index.html">
+<meta property="og:title" content="爬虫">
+<meta property="og:url" content="http://example.com/2025/08/01/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0_hexo/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="爬虫*发送 HTTP 请求：爬虫通过 HTTP 请求从目标网站获取 HTML 页面，常用的库包括 requests。解析 HTML 内容：获取 HTML 页面后，爬虫需要解析内容并提取数据，常用的库有 BeautifulSoup、lxml、Scrapy 等。提取数据：通过定位 HTML 元素（如标签、属性、类名等）来提取所需的数据。存储数据：将提取的数据存储到数据库、CSV 文件、JSON 文件等">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-08-01T07:36:06.885Z">
-<meta property="article:modified_time" content="2025-08-01T07:36:06.886Z">
+<meta property="article:published_time" content="2025-08-01T01:11:32.000Z">
+<meta property="article:modified_time" content="2025-08-01T09:11:51.461Z">
 <meta property="article:author" content="WZN">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Web开发">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - 哒妮哒妮</title>
+  <title>爬虫 - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="爬虫"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-01 15:36" pubdate>
-          2025年8月1日 下午
+        <time datetime="2025-08-01 09:11" pubdate>
+          2025年8月1日 上午
         </time>
       </span>
     
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18 字
+          328 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          1 分钟
+          3 分钟
         
       </span>
     
@@ -270,25 +272,33 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hello World</h1>
+            <h1 id="seo-header">爬虫</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <p><em><strong>爬虫</strong></em>*<br>发送 HTTP 请求：爬虫通过 HTTP 请求从目标网站获取 HTML 页面，常用的库包括 requests。<br>解析 HTML 内容：获取 HTML 页面后，爬虫需要解析内容并提取数据，常用的库有 BeautifulSoup、lxml、Scrapy 等。<br>提取数据：通过定位 HTML 元素（如标签、属性、类名等）来提取所需的数据。<br>存储数据：将提取的数据存储到数据库、CSV 文件、JSON 文件等格式中，以便后续使用或分析。</p>
+<p>from bs4 import BeautifulSoup<br>    # 读取示例 HTML 文件<br>html &#x3D; “””</p>
+<html>
+    <head>
+        <title>Example Page</title>
+    </head>
+    <body>
+        <h1>Hello, World!</h1>
+    </body>
+</html>
+"""
+    # 创建 BeautifulSoup 对象，并指定解析器为 lxml
+soup = BeautifulSoup(html, 'lxml')
+    # 找到第一个 h1 标签，并输出其文本内容
+h1 = soup.find('h1')
+print(h1.text)
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+<h3 id="可以使用-BeautifulSoup-对象-soup-来提取其中的数据。例如，要获取文档标题，可以使用-title-属性"><a href="#可以使用-BeautifulSoup-对象-soup-来提取其中的数据。例如，要获取文档标题，可以使用-title-属性" class="headerlink" title="可以使用 BeautifulSoup 对象 soup 来提取其中的数据。例如，要获取文档标题，可以使用 title 属性"></a>可以使用 BeautifulSoup 对象 soup 来提取其中的数据。例如，要获取文档标题，可以使用 title 属性</h3><p>print(soup.title)<br>    # <title>Example Page</title>   </p>
+<h3 id="要获取标签的文本内容，可以使用-text-属性或-string-属性："><a href="#要获取标签的文本内容，可以使用-text-属性或-string-属性：" class="headerlink" title="要获取标签的文本内容，可以使用 text 属性或 string 属性："></a>要获取标签的文本内容，可以使用 text 属性或 string 属性：</h3><p>print(soup.h1.text)</p>
+<h3 id="要获取标签的属性，可以使用-attrs-属性："><a href="#要获取标签的属性，可以使用-attrs-属性：" class="headerlink" title="要获取标签的属性，可以使用 attrs 属性："></a>要获取标签的属性，可以使用 attrs 属性：</h3><p>print(soup.a.attrs[‘href’])</p>
+<h3 id="要获取所有符合条件的标签，可以使用-find-all-方法："><a href="#要获取所有符合条件的标签，可以使用-find-all-方法：" class="headerlink" title="要获取所有符合条件的标签，可以使用 find_all 方法："></a>要获取所有符合条件的标签，可以使用 find_all 方法：</h3><h1 id="获取所有-p-标签"><a href="#获取所有-p-标签" class="headerlink" title="获取所有 p 标签"></a>获取所有 p 标签</h1><p>ps &#x3D; soup.find_all(‘p’)<br>for p in ps:<br>    print(p.text)<br>    #    This is the first paragraph.<br>    # This is the second paragraph.<br>    # 获取 class 为 “second” 的 p 标签<br>    p &#x3D; soup.find(‘p’, {‘class’: ‘second’})<br>print(p.text)<br>    # This is the second paragraph.</p>
+<h3 id="BeautifulSoup-支持使用-CSS-选择器来查找标签，可以使用-select-方法"><a href="#BeautifulSoup-支持使用-CSS-选择器来查找标签，可以使用-select-方法" class="headerlink" title="BeautifulSoup 支持使用 CSS 选择器来查找标签，可以使用 select 方法"></a>BeautifulSoup 支持使用 CSS 选择器来查找标签，可以使用 select 方法</h3>
                 
               </div>
             
@@ -296,6 +306,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Flask/" class="category-chain-item">Flask</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Web%E5%BC%80%E5%8F%91/" class="print-no-link">#Web开发</a>
+      
+    </div>
   
 </div>
 
@@ -305,8 +345,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2025/08/01/hello-world/</div>
+      <div>爬虫</div>
+      <div>http://example.com/2025/08/01/爬虫学习_hexo/</div>
     </div>
     <div class="license-meta">
       
@@ -350,9 +390,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                      <a href="/2025/08/01/hello-world/" title="Hello World">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试文章</span>
+                        <span class="hidden-mobile">Hello World</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -360,8 +400,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/01/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0_hexo/" title="爬虫">
-                        <span class="hidden-mobile">爬虫</span>
+                      <a href="/2025/08/01/Flask%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0_hexo_cleaned/" title="Flask">
+                        <span class="hidden-mobile">Flask</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
