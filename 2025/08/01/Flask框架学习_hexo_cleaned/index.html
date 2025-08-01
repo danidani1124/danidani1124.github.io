@@ -1,0 +1,692 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WZN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Flask 一、 简介Flask是一个非常小的PythonWeb框架，被称为微型框架；只提供了一个稳健的核心，其他功能全部是通过扩展实现的 二、 概要1）安装： pip install flask2）组成：WSGI系统、调试、路由3）模板引擎：Jinja2（由Flask核心开发者人员开发）4）使用到装饰器：以@开头的代码方法 三、 知识点（附代码）1. Flask基础入门1）路由route的创建：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask">
+<meta property="og:url" content="http://example.com/2025/08/01/Flask%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0_hexo_cleaned/index.html">
+<meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="Flask 一、 简介Flask是一个非常小的PythonWeb框架，被称为微型框架；只提供了一个稳健的核心，其他功能全部是通过扩展实现的 二、 概要1）安装： pip install flask2）组成：WSGI系统、调试、路由3）模板引擎：Jinja2（由Flask核心开发者人员开发）4）使用到装饰器：以@开头的代码方法 三、 知识点（附代码）1. Flask基础入门1）路由route的创建：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-01T01:04:35.000Z">
+<meta property="article:modified_time" content="2025-08-01T09:07:42.482Z">
+<meta property="article:author" content="WZN">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Web开发">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Flask - 哒妮哒妮</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Flask"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-01 09:04" pubdate>
+          2025年8月1日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          22 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Flask</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><strong>Flask</strong></p>
+<h1 id="一、-简介"><a href="#一、-简介" class="headerlink" title="一、 简介"></a>一、 简介</h1><p>Flask是一个非常小的PythonWeb框架，被称为微型框架；只提供了一个稳健的核心，其他功能全部是通过扩展实现的</p>
+<h1 id="二、-概要"><a href="#二、-概要" class="headerlink" title="二、 概要"></a>二、 概要</h1><p>1）安装： pip install flask<br>2）组成：WSGI系统、调试、路由<br>3）模板引擎：Jinja2（由Flask核心开发者人员开发）<br>4）使用到装饰器：以@开头的代码方法</p>
+<h1 id="三、-知识点（附代码）"><a href="#三、-知识点（附代码）" class="headerlink" title="三、 知识点（附代码）"></a>三、 知识点（附代码）</h1><h2 id="1-Flask基础入门"><a href="#1-Flask基础入门" class="headerlink" title="1. Flask基础入门"></a>1. Flask基础入门</h2><h3 id="1）路由route的创建："><a href="#1）路由route的创建：" class="headerlink" title="1）路由route的创建："></a>1）路由route的创建：</h3><p>methods&#x3D;[]支持的请求方式参数设置，不设置默认为GET<br>  @app.route(‘&#x2F;login’, methods&#x3D;[‘GET’, ‘PoSt’])  # 请求参数设置不区分大小写，源码中自动进行了upper<br>  def login():  ✅ 访问 &#x2F;login 这个地址时：<br>🔹 如果是 GET 请求（比如你在浏览器地址栏输入 &#x2F;login）就返回一个 login.html 页面（登录表单页面）<br>      if request.method &#x3D;&#x3D; ‘GET’:<br>          return render_template(‘login.html’)<br>    🔹 如果是 POST 请求（比如你在表单里点“登录”按钮提交）：从表单里取出两个字段：<br>      elif request.method &#x3D;&#x3D; ‘POST’:<br>          username &#x3D; request.form.get(‘username’)<br>          pwd &#x3D; request.form.get(‘pwd’)<br>          🔹如果用户名是 yang 且密码是 123456：<br>          if username &#x3D;&#x3D; ‘yang’ and pwd &#x3D;&#x3D; ‘123456’:<br>          🔹把用户名存到 session（表示用户已登录）<br>              session[‘username’] &#x3D; username<br>              return ‘login successed 200  ok!’<br>          else:<br>             return ‘login failed!!!’</p>
+<p>🔹视图函数：✅ 一句话解释<br>视图函数（view function）就是 Flask 中“处理某个 URL 请求并返回响应”的 Python 函数。它相当于 MVC 里的 C（Controller）+V（View） 的结合体：接收请求 → 做业务逻辑 → 把结果（HTML&#x2F;JSON&#x2F;文本）返回</p>
+<p>url_map.converters	Flask 的转换器注册表，把自己的转换器“挂”进去<br>&lt;re(…)&gt;	路由里的尖括号表达式，用来捕获并转换 URL 片段<br>✅ 第 2 步：我们想干啥？让路由支持正则表达式匹配！<br>✅ 第 3 步：写个“手机验证”转换器<br>class RegexConverter(BaseConverter):<br>    def <strong>init</strong>(self, url_map, regex):<br>        super().<strong>init</strong>(url_map)   # 先让父类干活<br>        self.regex &#x3D; regex          # 把我们传的正则保存起来<br>    def to_python(self, value):<br>        print(‘to_python被调用，拿到值：’, value)<br>        return value                # 原样返回即可<br><strong>init</strong>：Flask 会把路由里写的正则自动塞给你（regex 参数）。<br>to_python：Flask 每捕获一次，就调用它，你可以做额外处理（这里只是打印）。<br>✅ 第 4 步：把转换器“挂”到 Flask 上<br>app.url_map.converters[‘re’] &#x3D; RegexConverter    app你创建的 Flask 应用<br>现在可以用 &lt;re(…)&gt; 这种语法了！<br>✅ 第 5 步：用转换器写路由<br>@app.route(“&#x2F;index&#x2F;&lt;re(‘1\d{10}’):value&gt;”)<br>def index(value):<br>    print(‘视图函数收到的 value：’, value)<br>    return “Hello World!<br>‘1\d{10}’ 是正则：以 1 开头、后面 10 位数字 → 11 位手机号。<br>&lt;re(…)&gt; 里的 re 就是刚才注册的转换器。<br>捕获到的字符串会经 to_python 处理后，传给 index(value)。</p>
+<h3 id="2）endpoint的作用"><a href="#2）endpoint的作用" class="headerlink" title="2）endpoint的作用"></a>2）endpoint的作用</h3><p>🔹说明：每个app中都存在一个url_map，这个url_map中包含了url到endpoint的映射；<br>🔹作用：当request请求传来一个url的时候，会在url_map中先通过rule找到endpoint，然后再在view_functions中根据endpoint再找到对应的视图函数view_func</p>
+<p>自定义装饰器装饰多个视图函数时，如果在路由中没有指定唯一的endpoint,<br> 则所有装饰的视图函数返回的都是装饰器中的inner函数，同名因此会报错<br> def decorator(f):<br>    def inner(*args, **kwargs):<br>        return f(*args, **kwargs)<br>    return inner          # ← 所有被装饰的函数最终都叫 inner</p>
+<p>@app.route(‘&#x2F;a’)<br>@decorator<br>def a():                  # 实际注册的是 inner<br>    return ‘a’</p>
+<p>@app.route(‘&#x2F;b’)<br>@decorator<br>def b():                  # 又注册一个 inner → 同名冲突！<br>    return ‘b’</p>
+<h3 id="3）request对象的使用"><a href="#3）request对象的使用" class="headerlink" title="3）request对象的使用"></a>3）request对象的使用</h3><p>render_template()：可以用于呈现一个我们编写的html文件模板</p>
+<h3 id="4）请求钩子before-after-request"><a href="#4）请求钩子before-after-request" class="headerlink" title="4）请求钩子before&#x2F;after_request"></a>4）请求钩子before&#x2F;after_request</h3><p>🔹想要在正常执行的代码的前、中、后时期，强行执行一段我们想要执行的功能代码，便要用到钩子函数——用特定装饰器装饰的函数。<br>1.before_request：在每一次请求之前调用；执行顺序是先绑定的先执行；<br>2.after_request：每一次请求之后都会调用；执行的顺序是先绑定的后执行；</p>
+<h3 id="5）redirect重定向"><a href="#5）redirect重定向" class="headerlink" title="5）redirect重定向"></a>5）redirect重定向</h3><p>🔹在flask 中，重定向是通过flask.redirect(location, code&#x3D;302)这个函数来实现的，location表示需要重定向的url, 应该配合url_for函数来使用， code表示采用哪个重定向，默认是302，即临时性重定向, 可以修改为301来实现永性重定向；</p>
+<h3 id="6）返回json数据给前端"><a href="#6）返回json数据给前端" class="headerlink" title="6）返回json数据给前端"></a>6）返回json数据给前端</h3><p>1.使用：make_response方法和json库共同完成<br>response &#x3D; make_response(json.dumps(data,ensure_ascii&#x3D;False))<br>   response.mimetype &#x3D; ‘application&#x2F;json’<br>   return response<br>2.使用：jsonify库实现，减少代码行数</p>
+<h3 id="7）abort函数的使用"><a href="#7）abort函数的使用" class="headerlink" title="7）abort函数的使用"></a>7）abort函数的使用</h3><p>🔹使用类似于python中的raise函数，可以在需要退出请求的地方抛出错误，并结束该请求；可以使用errorhandler()装饰器来进行异常的捕获与自定义：</p>
+<h3 id="8）url-for实现反转"><a href="#8）url-for实现反转" class="headerlink" title="8）url_for实现反转"></a>8）url_for实现反转</h3><p>🔹视图函数 → \rightarrow →url；</p>
+<h2 id="2-Flask高级视图"><a href="#2-Flask高级视图" class="headerlink" title="2. Flask高级视图"></a>2. Flask高级视图</h2><h3 id="1）add-url-rule的初登场"><a href="#1）add-url-rule的初登场" class="headerlink" title="1）add_url_rule的初登场"></a>1）add_url_rule的初登场</h3><p>实现url与视图函数的绑定，除了使用路由装饰器@app.route,  add_url_rule(rule,endpoint&#x3D;None,view_func&#x3D;None)</p>
+<h3 id="2）类视图的引入"><a href="#2）类视图的引入" class="headerlink" title="2）类视图的引入"></a>2）类视图的引入</h3><p>🔹 定义的视图都是通过函数来实现的,所以称之为视图函数,但其实视图还可以由类来实现，即类视图；<br>🔹标准类视图：<br>        定义时需要继承flask的views.View这一基类;<br>        每个类视图内必须包含一个dispatch_request方法，每当类视图接收到请求时都会执行该方法，返回值的设定和视图函数相同；<br>        视图函数可以通过@app.route和app.add_url_rule来进行注册（映射到url），但类视图只能通过app.add_url_rule来注册，注册时view_func不能直接使用类名，需要调用基类中的as_view方法来为自己取一个“视图函数名”<br>from flask import Flask,render_template,views<br>app &#x3D; Flask(<strong>name</strong>)</p>
+<h1 id="定义父视图类继承基类View"><a href="#定义父视图类继承基类View" class="headerlink" title="定义父视图类继承基类View"></a>定义父视图类继承基类View</h1><p>class Ads(views.View):<br>    def <strong>init</strong>(self):<br>        super(Ads, self).<strong>init</strong>()<br>        # 实例属性<br>        self.context&#x3D;{<br>            ‘ads’:’这是对联广告！’<br>        }</p>
+<h1 id="定义子视图类继承父类并实现工程"><a href="#定义子视图类继承父类并实现工程" class="headerlink" title="定义子视图类继承父类并实现工程"></a>定义子视图类继承父类并实现工程</h1><p>class Index(Ads):<br>    def dispatch_request(self):<br>        # 字典传参方式&#x3D;&#x3D;不定长的关键字传参<br>        return render_template(‘class_mould&#x2F;index.html’,**self.context)<br>class Login(Ads):<br>    def dispatch_request(self):<br>        # 字典传参方式&#x3D;&#x3D;不定长的关键字传参<br>        return render_template(‘class_mould&#x2F;login.html’,**self.context)<br>class Register(Ads):<br>    def dispatch_request(self):<br>        # 字典传参方式&#x3D;&#x3D;不定长的关键字传参<br>        return render_template(‘class_mould&#x2F;register.html’,**self.context)</p>
+<h1 id="注册我们创建的类视图-as-view给类视图起名"><a href="#注册我们创建的类视图-as-view给类视图起名" class="headerlink" title="注册我们创建的类视图,as_view给类视图起名"></a>注册我们创建的类视图,as_view给类视图起名</h1><p>app.add_url_rule(rule&#x3D;’&#x2F;‘,endpoint&#x3D;’index’,view_func&#x3D;Index.as_view(‘index’))<br>app.add_url_rule(rule&#x3D;’&#x2F;login&#x2F;‘,endpoint&#x3D;’login’,view_func&#x3D;Login.as_view(‘login’))<br>app.add_url_rule(rule&#x3D;’&#x2F;register&#x2F;‘,endpoint&#x3D;’register’,view_func&#x3D;Register.as_view(‘register’))</p>
+<p>if <strong>name</strong>&#x3D;&#x3D;’<strong>main</strong>‘:<br>    print(app.view_functions)<br>    app.run(debug&#x3D;True)</p>
+<h3 id="3）装饰器的自定义与使用"><a href="#3）装饰器的自定义与使用" class="headerlink" title="3）装饰器的自定义与使用"></a>3）装饰器的自定义与使用</h3><h3 id="4）蓝图的使用"><a href="#4）蓝图的使用" class="headerlink" title="4）蓝图的使用"></a>4）蓝图的使用</h3><p>当接收到请求时，Flask会遍历Flask对象下（已注册）的各蓝图对象，比对蓝图对象中记录的url，比对成功则映射到该url绑定的视图函数并返回响应<br>📌 举个例子（不用蓝图 vs 用蓝图）<br>❌ 不用蓝图：所有代码写在一个文件<br>from flask import Flask<br>app &#x3D; Flask(<strong>name</strong>)<br>@app.route(‘&#x2F;‘)<br>def home():<br>    return ‘Home’<br>@app.route(‘&#x2F;admin’)<br>def admin():<br>    return ‘Admin’<br>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    app.run()<br>✅ 用蓝图：按模块拆分</p>
+<h1 id="文件：admin-routes-py"><a href="#文件：admin-routes-py" class="headerlink" title="文件：admin&#x2F;routes.py"></a>文件：admin&#x2F;routes.py</h1><p>from flask import Blueprint<br>admin_bp &#x3D; Blueprint(‘admin’, <strong>name</strong>, url_prefix&#x3D;’&#x2F;admin’)</p>
+<p>@admin_bp.route(‘&#x2F;‘)<br>def admin_home():<br>    return ‘Admin Home’</p>
+<h1 id="文件：main-py"><a href="#文件：main-py" class="headerlink" title="文件：main.py"></a>文件：main.py</h1><p>from flask import Flask<br>from admin.routes import admin_bp</p>
+<p>app &#x3D; Flask(<strong>name</strong>)<br>app.register_blueprint(admin_bp)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:<br>    app.run()</p>
+<h3 id="5）url-prefix设置蓝图前缀"><a href="#5）url-prefix设置蓝图前缀" class="headerlink" title="5）url_prefix设置蓝图前缀"></a>5）url_prefix设置蓝图前缀</h3><p>蓝图对象定义时添加，为当前蓝图下的所有视图函数添加统一的前缀<br>new_list &#x3D; Blueprint(‘news’,<strong>name</strong>,url_prefix&#x3D;’&#x2F;index’)<br>@new_list.route(‘&#x2F;news’)<br>def new():<br>    return ‘这是新闻模块！’<br>此外，在主路由中注册蓝图时也可以为蓝图添加前缀，并且此次添加会覆写蓝图对象创建时添加的前缀；<br>如下例中，注册后的新闻模块的url又变为了”&#x2F;test&#x2F;news”：<br>app.register_blueprint(news.new_list,url_prefix&#x3D;’&#x2F;test’)</p>
+<h3 id="6）subdomain设置蓝图子域名"><a href="#6）subdomain设置蓝图子域名" class="headerlink" title="6）subdomain设置蓝图子域名"></a>6）subdomain设置蓝图子域名</h3><p>通过修改Flask对象的配置,为我们的网站设置域名,用字段为’SERVER_NAME’,为该域名指定端口号：</p>
+<h1 id="当前网站域名设置为example-com，端口号为5000"><a href="#当前网站域名设置为example-com，端口号为5000" class="headerlink" title="当前网站域名设置为example.com，端口号为5000"></a>当前网站域名设置为example.com，端口号为5000</h1><pre><code class="hljs">app.config[&#39;SERVER_NAME&#39;] = &#39;example.com:5000&#39;
+</code></pre>
+<p>修改位于 C:\Windows\System32\drivers\etc 下的域名重定向文件 hosts<br>📌设置子域名:在蓝图文件admin.py中注册蓝图对象，添加subdomain&#x3D;’admin’即为该蓝图设置子域名admin；<br>再在hosts文件中添加记录：10.240.142.216 admin.example<br>📌再在hosts文件中添加记录：10.240.142.216 admin.example.com后，我们便可以通过域名：<a target="_blank" rel="noopener" href="http://admin.example.com:5000/ad%E6%9D%A5%E8%AE%BF%E9%97%AE%E8%AF%A5%E8%93%9D%E5%9B%BE%EF%BC%88%E4%B8%8B%E4%B8%80%E7%BA%A7%E5%9F%9F%E5%90%8D%E5%9C%A8%E4%B8%8A%E4%B8%80%E7%BA%A7%E5%B7%A6%E4%BE%A7%EF%BC%89%EF%BC%9B">http://admin.example.com:5000/ad来访问该蓝图（下一级域名在上一级左侧）；</a><br>        from flask import Blueprint<br>        bp &#x3D; Blueprint(‘admin’,<strong>name</strong>,subdomain &#x3D; ‘admin’)<br>        @bp.route(‘&#x2F;ad’)<br>        def admin():<br>            return ‘Admin Page’</p>
+<h2 id="3-jinja2模板引擎"><a href="#3-jinja2模板引擎" class="headerlink" title="3.jinja2模板引擎"></a>3.jinja2模板引擎</h2><h3 id="1）模板的导入与使用"><a href="#1）模板的导入与使用" class="headerlink" title="1）模板的导入与使用"></a>1）模板的导入与使用</h3><pre><code class="hljs">Flask通过render_template来实现模板的渲染。要导入from flask     import rander_template，模板中注释需放在中
+</code></pre>
+<h3 id="2）模板中的控制语句"><a href="#2）模板中的控制语句" class="headerlink" title="2）模板中的控制语句"></a>2）模板中的控制语句</h3><pre><code class="hljs">jinja2模板引擎中也可使用if和for控制语句，但是语句需要放置在&#123;% %&#125;中；
+
+if条件判断语句必须包含结束标签&#123;% endif %&#125;，其他部分与python中类似，可以与比较运算符&gt; &gt;= &lt; &lt;= == !=结合使用，或与逻辑运算符and,or,not,()结合使用；
+</code></pre>
+<h3 id="3）过滤器的使用与自定义"><a href="#3）过滤器的使用与自定义" class="headerlink" title="3）过滤器的使用与自定义"></a>3）过滤器的使用与自定义</h3><p>&lt;— 自定义过滤器 —&gt;<br>def list_step(li):<br>    # 返回列表，步长为2<br>    return li[::2]</p>
+<pre><code class="hljs"># 注册模板过滤器（filter）
+# 参数1为该过滤器调用的函数参数2为在前端中调用该过滤器使用的名称
+</code></pre>
+<p>app.add_template_filter(list_step,’li2’)</p>
+<p>可以在前端模板内  <!-- 原为 Jinja2 过滤器语法，已移除过滤器部分 -->的” | “后使用；</p>
+<h2 id="4-Flask数据交互"><a href="#4-Flask数据交互" class="headerlink" title="4.Flask数据交互"></a>4.Flask数据交互</h2><h3 id="4）Cookie的使用"><a href="#4）Cookie的使用" class="headerlink" title="4）Cookie的使用"></a>4）Cookie的使用</h3><p>📌 在网站中，http请求是呈无序状态的<br>无序状态是指协议对于事务处理没有记忆能力，同一个服务器上你新打开的网页和之前打开的网页之间没有任何联系，你的当前请求和上一次请求究竟是不是一个用户发出的，服务器也无从得知；</p>
+<p>Cookie一般通过Response对象的set_cookie()方法来设置<br>    # 前两个参数必须设置，后续参数则为可选参数<br>set_cookie(key,value[,max_age,expires,path,domain,secure,httponly,samesite])<br>key(或name)	必需项，规定cookie的名称，字符串<br>value	必需项，规定cookie的内容，字符串</p>
+<p>除此之外，我们也可以通过修改响应对象Response的表单头headers来设置cookie：<br>@app.route(‘&#x2F;h’)<br>def set_cookie_h():<br>    resp &#x3D; Response(“设置Cookie！”)<br>    # 通过添加表头的键值对来实现cookie设置<br>    # 第一项为key&#x3D;value，需要同时设置这两个参数，后续项则用分号分隔<br>    resp.headers[‘Set-Cookie’] &#x3D; “ testname &#x3D; lisi; Expires &#x3D; SUN,01-Nov-2021 05:10:12 GMT; Max-Age&#x3D;3600; path&#x3D;&#x2F; “<br>    return resp</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Flask/" class="category-chain-item">Flask</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Web%E5%BC%80%E5%8F%91/" class="print-no-link">#Web开发</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Flask</div>
+      <div>http://example.com/2025/08/01/Flask框架学习_hexo_cleaned/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WZN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月1日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/08/01/hello-world/" title="Hello World">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
