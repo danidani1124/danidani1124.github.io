@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>生成器</title>
+    <link href="/2025/08/13/%E7%94%9F%E6%88%90%E5%99%A8/"/>
+    <url>/2025/08/13/%E7%94%9F%E6%88%90%E5%99%A8/</url>
+    
+    <content type="html"><![CDATA[<h2 id="生成器函数和生成器对象的区别"><a href="#生成器函数和生成器对象的区别" class="headerlink" title="生成器函数和生成器对象的区别"></a>生成器函数和生成器对象的区别</h2><p>生成器函数被调用时，并不会立即执行函数体，而是返回一个生成器对象。只有在<strong>迭代生成器对象</strong>时，代码才会一步步执行。</p><hr><h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code class="language-python">def gen():    print(&quot;Generator started&quot;)    yield 1    print(&quot;Yielded 1, continue...&quot;)    yield 2    print(&quot;Yielded 2, finish&quot;)print(&quot;Calling gen()...&quot;)g = gen()  # 创建生成器对象，不执行函数体print(&quot;Generator object created:&quot;, g)print(&quot;Calling next(g)...&quot;)val1 = next(g)  # 执行到第一个 yieldprint(&quot;Received:&quot;, val1)print(&quot;Calling next(g) again...&quot;)val2 = next(g)  # 执行到第二个 yieldprint(&quot;Received:&quot;, val2)print(&quot;Calling next(g) final time...&quot;)try:    val3 = next(g)  # 执行剩余代码，结束except StopIteration:    print(&quot;Generator exhausted&quot;)print(&quot;Done.&quot;)运行结果Calling gen()...Generator object created: &lt;generator object gen at 0x...&gt;Calling next(g)...Generator startedReceived: 1Calling next(g) again...Yielded 1, continue...Received: 2Calling next(g) final time...Yielded 2, finishGenerator exhaustedDone.术语解释迭代器驱动迭代器不会自己执行，需要外部调用 next() 或使用 for 循环来“驱动”它。每次调用 next()，代码会从上一次 yield 后的位置继续运行，直到遇到下一个 yield 或结束。next()Python 内置函数，等价于调用迭代器的 __next__() 方法。功能：运行生成器到下一个 yield，返回其后的值。当没有更多值时，会抛出 StopIteration 异常。callable(obj)Python 内置函数，用于判断对象 obj 是否可调用。可调用对象包括：函数、方法，或者实现了 __call__() 方法的类实例。callable(res) 的应用场景在某些代码（如 res = self._run()）中：场景res 类型callable(res)处理方式普通组件字符串、字典、DataFrame…False直接记录耗时流式组件生成器函数、functools.partialTrue再调用一次获取生成器，开始迭代为什么不能立即记录耗时？如果 res 是生成器函数，还没开始迭代就记录结束时间，会导致耗时被严重低估，无法反映真实执行时间。</code></pre>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+      <tag>生成器</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>测试文章</title>
     <link href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/"/>
     <url>/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/</url>

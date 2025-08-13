@@ -19,21 +19,23 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="测试文章">
-<meta property="og:url" content="http://example.com/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/index.html">
+    <meta name="description" content="生成器函数和生成器对象的区别生成器函数被调用时，并不会立即执行函数体，而是返回一个生成器对象。只有在迭代生成器对象时，代码才会一步步执行。  示例def gen():     print(&quot;Generator started&quot;)     yield 1     print(&quot;Yielded 1, continue...&quot;)     yield 2     p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="生成器">
+<meta property="og:url" content="http://example.com/2025/08/13/%E7%94%9F%E6%88%90%E5%99%A8/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="生成器函数和生成器对象的区别生成器函数被调用时，并不会立即执行函数体，而是返回一个生成器对象。只有在迭代生成器对象时，代码才会一步步执行。  示例def gen():     print(&quot;Generator started&quot;)     yield 1     print(&quot;Yielded 1, continue...&quot;)     yield 2     p">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/%E5%A3%81%E7%BA%B8.jpg">
-<meta property="article:published_time" content="2025-08-01T08:35:07.000Z">
-<meta property="article:modified_time" content="2025-08-01T08:45:58.230Z">
+<meta property="article:published_time" content="2025-08-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-13T07:22:19.274Z">
 <meta property="article:author" content="WZN">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="生成器">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/%E5%A3%81%E7%BA%B8.jpg">
   
   
   
-  <title>测试文章 - 哒妮哒妮</title>
+  <title>生成器 - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="测试文章"></span>
+            <span id="subtitle" data-typed-text="生成器"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-01 16:35" pubdate>
-          2025年8月1日 下午
+        <time datetime="2025-08-13 00:00" pubdate>
+          2025年8月13日 凌晨
         </time>
       </span>
     
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          474 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          1 分钟
+          4 分钟
         
       </span>
     
@@ -270,12 +272,82 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">测试文章</h1>
+            <h1 id="seo-header">生成器</h1>
             
             
               <div class="markdown-body">
                 
-                <p><img src="/./%E5%A3%81%E7%BA%B8.jpg" srcset="/img/loading.gif" lazyload alt="壁纸"></p>
+                <h2 id="生成器函数和生成器对象的区别"><a href="#生成器函数和生成器对象的区别" class="headerlink" title="生成器函数和生成器对象的区别"></a>生成器函数和生成器对象的区别</h2><p>生成器函数被调用时，并不会立即执行函数体，而是返回一个生成器对象。只有在<strong>迭代生成器对象</strong>时，代码才会一步步执行。</p>
+<hr>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code class="language-python">def gen():
+    print(&quot;Generator started&quot;)
+    yield 1
+    print(&quot;Yielded 1, continue...&quot;)
+    yield 2
+    print(&quot;Yielded 2, finish&quot;)
+
+print(&quot;Calling gen()...&quot;)
+g = gen()  # 创建生成器对象，不执行函数体
+print(&quot;Generator object created:&quot;, g)
+
+print(&quot;Calling next(g)...&quot;)
+val1 = next(g)  # 执行到第一个 yield
+print(&quot;Received:&quot;, val1)
+
+print(&quot;Calling next(g) again...&quot;)
+val2 = next(g)  # 执行到第二个 yield
+print(&quot;Received:&quot;, val2)
+
+print(&quot;Calling next(g) final time...&quot;)
+try:
+    val3 = next(g)  # 执行剩余代码，结束
+except StopIteration:
+    print(&quot;Generator exhausted&quot;)
+
+print(&quot;Done.&quot;)
+
+
+运行结果
+Calling gen()...
+Generator object created: &lt;generator object gen at 0x...&gt;
+Calling next(g)...
+Generator started
+Received: 1
+Calling next(g) again...
+Yielded 1, continue...
+Received: 2
+Calling next(g) final time...
+Yielded 2, finish
+Generator exhausted
+Done.
+
+术语解释
+迭代器驱动
+迭代器不会自己执行，需要外部调用 next() 或使用 for 循环来“驱动”它。
+
+每次调用 next()，代码会从上一次 yield 后的位置继续运行，直到遇到下一个 yield 或结束。
+
+next()
+Python 内置函数，等价于调用迭代器的 __next__() 方法。
+
+功能：运行生成器到下一个 yield，返回其后的值。
+
+当没有更多值时，会抛出 StopIteration 异常。
+
+callable(obj)
+Python 内置函数，用于判断对象 obj 是否可调用。
+
+可调用对象包括：函数、方法，或者实现了 __call__() 方法的类实例。
+
+callable(res) 的应用场景
+在某些代码（如 res = self._run()）中：
+场景	res 类型	callable(res)	处理方式
+普通组件	字符串、字典、DataFrame…	False	直接记录耗时
+流式组件	生成器函数、functools.partial	True	再调用一次获取生成器，开始迭代
+
+为什么不能立即记录耗时？
+如果 res 是生成器函数，还没开始迭代就记录结束时间，会导致耗时被严重低估，无法反映真实执行时间。
+</code></pre>
 
                 
               </div>
@@ -284,6 +356,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/%E7%94%9F%E6%88%90%E5%99%A8/" class="print-no-link">#生成器</a>
+      
+    </div>
   
 </div>
 
@@ -293,8 +395,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>测试文章</div>
-      <div>http://example.com/2025/08/01/测试文章/</div>
+      <div>生成器</div>
+      <div>http://example.com/2025/08/13/生成器/</div>
     </div>
     <div class="license-meta">
       
@@ -306,7 +408,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年8月1日</div>
+          <div>2025年8月13日</div>
         </div>
       
       
@@ -338,18 +440,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/13/%E7%94%9F%E6%88%90%E5%99%A8/" title="生成器">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">生成器</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/01/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                        <span class="hidden-mobile">测试文章</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
