@@ -1,0 +1,1032 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WZN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="RAGFLOW什么是RAGFLOWRAGFlow 是一个基于深度文档理解的开源 RAG（检索增强生成）引擎。它为任何规模的企业提供了简化的 RAG 工作流程，结合了 LLM（大型语言模型）提供真实的问答功能，并以来自各种复杂格式的有根据的引文为后盾。 SDK 是 Software Development Kit（软件开发工具包）的缩写，中文通常称“开发工具包”，用于开发特定平台或软件应用的工具集合">
+<meta property="og:type" content="article">
+<meta property="og:title" content="study">
+<meta property="og:url" content="http://example.com/2025/08/21/study/index.html">
+<meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="RAGFLOW什么是RAGFLOWRAGFlow 是一个基于深度文档理解的开源 RAG（检索增强生成）引擎。它为任何规模的企业提供了简化的 RAG 工作流程，结合了 LLM（大型语言模型）提供真实的问答功能，并以来自各种复杂格式的有根据的引文为后盾。 SDK 是 Software Development Kit（软件开发工具包）的缩写，中文通常称“开发工具包”，用于开发特定平台或软件应用的工具集合">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-21T01:56:12.575Z">
+<meta property="article:author" content="WZN">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>study - 哒妮哒妮</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="study"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-08-21 00:00" pubdate>
+          2025年8月21日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">study</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="RAGFLOW"><a href="#RAGFLOW" class="headerlink" title="RAGFLOW"></a>RAGFLOW</h1><h2 id="什么是RAGFLOW"><a href="#什么是RAGFLOW" class="headerlink" title="什么是RAGFLOW"></a>什么是RAGFLOW</h2><p><a target="_blank" rel="noopener" href="https://ragflow.io/">RAGFlow</a> 是一个基于深度文档理解的开源 RAG（检索增强生成）引擎。它为任何规模的企业提供了简化的 RAG 工作流程，结合了 LLM（大型语言模型）提供真实的问答功能，并以来自各种复杂格式的有根据的引文为后盾。</p>
+<p><strong>SDK</strong> 是 <strong>Software Development Kit</strong>（<strong>软件开发工具包</strong>）的缩写，中文通常称“开发工具包”，用于开发特定平台或软件应用的工具集合。</p>
+<h3 id="Integrations"><a href="#Integrations" class="headerlink" title="Integrations"></a>Integrations</h3><blockquote>
+<p><code>integrations</code> 目录中 RAGFlow 与 ChatGPT-on-WeChat 对接。</p>
+</blockquote>
+<h3 id="NLTK"><a href="#NLTK" class="headerlink" title="NLTK"></a>NLTK</h3><blockquote>
+<p>NLTK 是 Natural Language Toolkit（自然语言处理工具包）</p>
+</blockquote>
+<ul>
+<li><strong>文本分词</strong>（tokenization）</li>
+<li><strong>词性标注</strong>（POS tagging）</li>
+<li><strong>命名实体识别</strong>（NER）</li>
+<li><strong>句法分析</strong>（parsing）</li>
+</ul>
+<h3 id="uv-lock-Python项目的依赖组件"><a href="#uv-lock-Python项目的依赖组件" class="headerlink" title="uv.lock Python项目的依赖组件"></a>uv.lock Python项目的依赖组件</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1893299536002261393%20%20ragFlow">https://zhuanlan.zhihu.com/p/1893299536002261393 RAGFlow</a> 项目结构</p>
+<p><strong>Werkzeug</strong>：Werkzeug 是一个纯 Python 编写的 WSGI 工具库，由 Flask 的核心开发者（Pallets 团队）维护。它的定位是：“HTTP 和 WSGI 的瑞士军刀”，提供构建 Web 框架&#x2F;服务器所需的各种底层功能，但本身不是一个完整的 Web 框架。</p>
+<p>SIGINT：信息获取，SIGTERM：关闭。</p>
+<p>WSGI：的全称是 <strong>Web Server Gateway Interface</strong>（Web 服务器网关接口）。一句话概括：<strong>它是 Python Web 应用（或框架）与 Web 服务器之间的“通用翻译官”</strong>。</p>
+<p><strong>Node.js（简称 node）</strong> 是让你在浏览器之外也能运行 JavaScript 的“发动机”。运行 JavaScript 代码不用浏览器，直接在命令行。</p>
+<p><strong>JavaScript</strong> 是让网页从“静态海报”变成“交互应用”的魔法语言，现在更是前后端通吃的万能胶水。</p>
+<p><strong>构造函数</strong>：在 Python 中，构造函数的名字总是 <code>__init__</code>，是<strong>在创建对象时自动调用的特殊方法</strong>，用于初始化对象的状态（属性）。</p>
+<p><code>dir()</code> 是 Python 的一个内置函数，作用是<strong>列出对象的属性和方法名称</strong>。</p>
+<p><code>setattr</code> 是 Python 内置函数，用于<strong>给对象动态地设置属性值</strong>。<code>setattr(object, name, value)</code></p>
+<p><code>__dict__</code>：实例属性，你创建一个类的实例后，实例的属性就会被存放在 <code>__dict__</code> 中。</p>
+<p><strong>双下划线</strong>（dunder，double underscore）的函数，在 Python 里统称为**“魔术方法 &#x2F; 特殊方法”**。它们不让你直接调用，而是由 <strong>Python 解释器在特定场景下自动触发</strong>，用来定义对象的核心行为。</p>
+<p><strong>三引号</strong>：就是“多行字符串”，至于拿来干什么，取决于它放在哪里。</p>
+<ul>
+<li><strong>当放在模块、类、函数或方法的第一行</strong> —— 它就是文档字符串（docstring），通过 <code>help(func)</code> 或 <code>func.__doc__</code> 能拿到这段说明。</li>
+<li><strong>当放在赋值语句右边</strong> —— 它就是普通字符串，只是跨行写起来更方便。</li>
+<li><strong>当放在代码里但既不赋值也不当 docstring</strong> —— 它就只是被忽略的字符串常量。</li>
+</ul>
+<hr>
+<h2 id="JSON-处理"><a href="#JSON-处理" class="headerlink" title="JSON 处理"></a>JSON 处理</h2><p>✅ <code>json.dumps(obj)</code>：<strong>Python → JSON 字符串</strong><br>✅ <code>json.loads(json_str)</code>：<strong>JSON 字符串 → Python 对象（通常是字典）</strong>。</p>
+<hr>
+<h2 id="Python-命名约定"><a href="#Python-命名约定" class="headerlink" title="Python 命名约定"></a>Python 命名约定</h2><p>在 Python 中，变量名前加下划线（例如 <code>_param</code>）<strong>是一种约定，表示这是一个“内部变量”或“私有属性”</strong>。</p>
+<p>Python 函数在调用时必须已经先定义在调用上方，函数内调用不分先后。</p>
+<hr>
+<h2 id="集合与生成器"><a href="#集合与生成器" class="headerlink" title="集合与生成器"></a>集合与生成器</h2><p>🟢 <code>set([])</code> 是什么意思？创建空集合。</p>
+<p><code>yield</code> 是一个用于**生成器函数（generator function）**的关键字，可以让函数一次返回一个值，同时记住上次执行的位置。边执行边产出。“暂停一下，先给你一条消息，等你处理完了我再继续往下走。”</p>
+<h3 id="🧠-yield-与-return-的区别"><a href="#🧠-yield-与-return-的区别" class="headerlink" title="🧠 yield 与 return 的区别"></a>🧠 yield 与 return 的区别</h3><table>
+<thead>
+<tr>
+<th><strong>比较项</strong></th>
+<th><strong>return</strong></th>
+<th><strong>yield</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>函数类型</td>
+<td>普通函数</td>
+<td>生成器函数（返回生成器对象）</td>
+</tr>
+<tr>
+<td>返回行为</td>
+<td>一次性返回，函数结束</td>
+<td>暂停函数，保留状态，下次继续</td>
+</tr>
+<tr>
+<td>可多次输出？</td>
+<td>否，一次</td>
+<td>是，多次（使用 for 或 next()）</td>
+</tr>
+<tr>
+<td>内存效率</td>
+<td>不高（返回整个列表等）</td>
+<td>高效（按需生成，每次一个值）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>✅ 一句话解释：<code>try-except-raise</code> 用于：</p>
+<ul>
+<li><strong>捕获异常</strong>（<code>try</code>）：可能出错的代码</li>
+<li><strong>做出处理</strong>（<code>except</code>）：先处理一下，比如打印日志</li>
+<li><strong>重新抛出异常</strong>（<code>raise</code>），让它传给外部或中止程序</li>
+</ul>
+<hr>
+<h2 id="切片与装饰器"><a href="#切片与装饰器" class="headerlink" title="切片与装饰器"></a>切片与装饰器</h2><ul>
+<li><code>[::-1]</code> 是 Python 的切片语法，用于反转序列：<ul>
+<li>第一个 <code>:</code> 表示从开始到结束</li>
+<li>第二个 <code>:</code> 后是步长（step），<code>-1</code> 表示从后向前遍历</li>
+</ul>
+</li>
+</ul>
+<p><code>@property</code> 装饰器将方法伪装成属性。用户像操作属性一样使用（无需显式调用方法）。</p>
+<p><code>@</code> 是<strong>装饰器（Decorator）语法</strong>的标志，用于<strong>包装函数、方法或类</strong>，在不改变其原始定义的前提下，增强或修改其行为。</p>
+<pre><code class="language-python">@decorator
+def func():
+    pass
+等价于：
+
+python
+def func():
+    pass
+func = decorator(func)
+装饰器（Decorator）就是一个“包装函数”，在不修改原函数代码的前提下，给它加功能。
+
+✅ 举个生活例子：
+你点了一杯奶茶，店员在封口前又给你加了层奶盖 —— 这就是“装饰”：奶茶（原函数）没变，但多了奶盖（新功能）。
+
+python
+def login_required(func):
+    def wrapper(*args, **kwargs):
+        if session.get(&#39;username&#39;):
+            return func(*args, **kwargs)  # 用户已登录，正常执行原函数
+        else:
+            return &#39;请先登录！&#39;  # 未登录，拦截请求
+    return wrapper
+
+@app.route(&#39;/profile&#39;)
+@login_required  # 👈 装饰器：给 /profile 加“登录检查”功能
+def profile():
+    return &#39;个人中心页面&#39;
+req = request.json 是 Flask 中获取请求体中的 JSON 数据的一种方式。
+
+nonlocal 是 Python 中的一个关键字，用于在嵌套函数中声明一个变量不是局部变量，而是来自外层（非全局）作用域的变量。
+
+后端路由定位
+根据 URL 定位后端路由：
+
+框架	搜索关键词示例	路由定义示例
+Spring Boot	@PostMapping(&quot;/v1/chunk/list&quot;) 或 @RequestMapping	@PostMapping(&quot;/v1/chunk/list&quot;)
+数据库索引
+KEY devparamtemplate_create_time (create_time)：这些语句是给表里的字段加普通索引（KEY），作用是为了提高查询速度，但不会限制字段值唯一。
+
+类型	作用	是否防重复
+KEY 或 INDEX	提升查询性能	❌ 不限制重复
+UNIQUE KEY	防重复值 + 提升查询性能	✅ 限制重复
+ORM 模型示例
+python
+class DevParamTemplate(DataBaseModel):
+    id = CharField(max_length=32, primary_key=True)
+    name = CharField(max_length=100, null=False, help_text=&quot;模板名称&quot;, index=True)
+    agent_id = CharField(max_length=64, null=True, help_text=&quot;关联的agentID&quot;, index=True)
+    auth = CharField(max_length=255, null=True, help_text=&quot;授权信息&quot;)
+    template = TextField(null=True, help_text=&quot;参数模板内容&quot;, default=list)
+    status = CharField(max_length=1, null=True, default=&quot;1&quot;, help_text=&quot;状态 1是开启 0是关闭&quot;, index=True)
+
+    class Meta:
+        db_table = &quot;dev_param_template&quot;
+Index=True 表示为这个字段创建普通索引（提高查询速度，但不会防止重复值）。
+
+接口设计与错误码
+改一下接口 create_paramtemplate 加一步“唯一性校验”，否则当用户传入重复的 name 时，数据库会抛出 IntegrityError，前端只会收到 500（HTTP 状态码，表示服务器内部错误）。
+
+场景	HTTP 状态码	业务返回码（示例）
+请求成功	200	code=0
+参数错误	400	code=100
+权限不足	200（或 403）	code=401
+服务器异常	500	code=500
+分层架构
+Service 层：Controller 只负责接收参数、调用服务、返回结果，不做业务逻辑。
+
+Controller（控制器）层
+像前台接待员：
+
+只负责“收快递”（接收 HTTP 请求参数）
+
+把快递交给后台仓库（Service 层）
+
+再把仓库返回的结果打包发回给客人（返回 JSON 给前端）
+一句话：不处理业务逻辑，只做“收、转、返”。
+
+Service（业务）层
+像后台仓库：
+
+真正拆包裹、检查货物（参数校验、业务规则）
+
+决定能不能入库（判断名称是否重复）
+
+把最终入库单交给工人（DAO / ORM）去落库
+一句话：所有“能不能做、该怎么做”的判断都在这里。
+
+MVC / 分层结构
+就是把代码按职责切成三层（或更多层）：
+
+M Model（数据模型，对应数据库表）
+
+V View（前端页面 / JSON 视图）
+
+C Controller（上面说的前台接待员）
+
+S Service（后台仓库）
+好处：各层互不干扰，代码好维护、好测试、好复用。
+
+Jenkins 与 CI/CD
+Jenkins：
+Jenkins 是一个开源的、提供友好操作界面的持续集成（CI）工具，起源于 Hudson，主要用于持续、自动的构建/测试软件项目。
+
+CI/CD 是什么？
+
+CI（Continuous Integration，持续集成）：一种软件开发实践。持续集成强调开发人员提交了新代码之后，立刻进行构建、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。
+
+CD（Continuous Delivery，持续交付）：是在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境（类生产环境）中。比如，我们完成单元测试后，可以把代码部署到连接数据库的 Staging 环境中更多的测试。如果代码没有问题，可以继续手动部署到生产环境。
+
+Tomcat
+功能	说明
+接收浏览器请求	别人输入网址，Tomcat 听见“有人敲门”
+把你的代码跑起来	它帮你把 Java 代码变成网页，回给浏览器
+管理“网站生命”	网站启动、关闭、重启，都由 Tomcat 管
+npm 命令
+npm run build = 把“开发时的源代码”变成“用户真正看到的网页”，就像把厨房半成品变成端上桌的硬菜。
+
+npm run dev = 开发专用“实时预览 + 调试”模式，菜还没正式上桌，但厨师可以随时尝咸淡。
+
+线程池
+🧠 基本概念
+
+概念	含义
+线程池（ThreadPool）	提前准备好的几个“工作线程”
+任务（Task）	你要执行的函数，比如 get_data()
+Future	表示“将来”会返回结果的对象，你可以等待它完成
+submit()	提交一个任务给线程池
+map()	批量处理多个任务，像 map() 函数一样
+with … as	自动关闭线程池资源的推荐写法
+🧪 示例代码（带中文注释）
+
+python
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# 假设这是你要并行执行的函数
+def fetch_data(name, wait=1):
+    print(f&quot;[&#123;name&#125;] 开始执行任务，预计耗时 &#123;wait&#125; 秒&quot;)
+    time.sleep(wait)  # 模拟 I/O 操作（比如请求网页）
+    print(f&quot;[&#123;name&#125;] 完成任务&quot;)
+    return f&quot;&#123;name&#125; 的数据&quot;
+
+# 主程序开始
+if __name__ == &quot;__main__&quot;:
+    # 创建一个线程池，最多同时执行 3 个任务
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        # 提交多个任务给线程池执行
+        futures = []
+        for i in range(5):
+            # submit(函数, 参数1, 参数2, ...)
+            future = executor.submit(fetch_data, f&quot;任务&#123;i+1&#125;&quot;, wait=i % 3 + 1)
+            futures.append(future)
+
+        # 等待所有任务完成（异步）
+        for future in as_completed(futures):
+            result = future.result()  # 获取返回值（阻塞直到完成）
+            print(f&quot;[主程序] 收到结果：&#123;result&#125;&quot;)
+🧠 学习小笔记（建议记下来）
+
+点	说明
+✅ ThreadPoolExecutor(max_workers=N)	N 是最多同时运行几个任务（线程数）
+✅ submit(func, *args)	异步执行函数，立即返回 Future
+✅ as_completed(futures)	按任务完成顺序返回结果
+✅ .result()	获取函数运行完后的返回值
+❗ 适合 I/O 密集型任务	比如网络请求、数据库查询、文件操作
+❌ 不适合 CPU 密集型	如训练模型、数学计算 → 请用多进程
+正则表达式
+常用元字符
+字符	描述	实例	试一试
+[]	一组字符	&quot;[a-m]&quot;	
+\	示意特殊序列（也可用于转义特殊字符）	&quot;\d&quot;	
+.	任何字符（换行符除外）	&quot;he..o&quot;	
+^	起始于	&quot;^hello&quot;	
+$	结束于	&quot;world$&quot;	
+*	零次或多次出现	&quot;aix*&quot;	
++	一次或多次出现	&quot;aix+&quot;	
+&#123;&#125;	确切地指定的出现次数	&quot;al&#123;2&#125;&quot;	
+`	`	两者任一	`&quot;falls	stays&quot;`	
+特殊序列
+字符	描述	实例
+\A	如果指定的字符位于字符串的开头，则返回匹配项	&quot;\AThe&quot;
+\b	返回指定字符位于单词的开头或末尾的匹配项	r&quot;\bain&quot;, r&quot;ain\b&quot;
+\B	返回指定字符存在的匹配项，但不在单词的开头（或结尾处）	r&quot;\Bain&quot;, r&quot;ain\B&quot;
+\d	返回字符串包含数字的匹配项（数字 0-9）	&quot;\d&quot;
+\D	返回字符串不包含数字的匹配项	&quot;\D&quot;
+\s	返回字符串包含空白字符的匹配项	&quot;\s&quot;
+\S	返回字符串不包含空白字符的匹配项	&quot;\S&quot;
+\w	返回一个匹配项，其中字符串包含任何单词字符（a-z, A-Z, 0-9, _）	&quot;\w&quot;
+\W	返回一个匹配项，其中字符串不包含任何单词字符	&quot;\W&quot;
+\Z	如果指定的字符位于字符串的末尾，则返回匹配项	&quot;Spain\Z&quot;
+集合
+表达式	描述
+[arn]	返回一个匹配项，其中存在指定字符（a, r 或 n）之一
+[a-n]	返回字母顺序 a 和 n 之间的任意小写字符匹配项
+[^arn]	返回除 a、r 和 n 之外的任意字符的匹配项
+[0123]	返回存在任何指定数字（0、1、2 或 3）的匹配项
+[0-9]	返回 0 与 9 之间任意数字的匹配
+[0-5][0-9]	返回介于 0 到 9 之间的任何数字的匹配项
+[a-zA-Z]	返回字母顺序 a 和 z 之间的任何字符的匹配，小写或大写
+[+]	在集合中，+, *, ., `	, (), $, &#123;&#125;没有特殊含义，因此[+]表示返回字符串中任何+` 字符的匹配项
+正则函数
+findall() 函数返回包含所有匹配项的列表。
+
+search() 函数搜索字符串中的匹配项，如果存在匹配则返回 Match 对象。如果有多个匹配，则仅返回首个匹配项。
+
+sub() 函数把匹配替换为您选择的文本。
+
+模块与脚本
+✅ 模块（module）和脚本（script）的区别
+
+特性	模块（Module）	脚本（Script）
+定义	一个可以被导入和复用的 Python 文件	一个可以直接运行的 Python 文件
+用途	提供功能、函数、类供其他代码调用	执行某个特定任务或程序流程
+入口点	没有主入口，供其他文件使用	通常有 if __name__ == &#39;__main__&#39;
+导入方式	import mymodule	不能被别的脚本导入（如果它只是用来执行）
+重复使用性	高，可复用	通常低，更专注执行任务
+举例	math.py, utils.py（定义函数供别人用）	
+Peewee ORM 示例
+模型转字典
+
+python
+class BaseModel(Model):
+    def to_dict(self):
+        return self.__dict__[&#39;__data__&#39;]  # 直接访问对象内部字典属性
+
+    def to_human_model_dict(self, only_primary_with: list = None):
+        model_dict = self.__dict__[&#39;__data__&#39;]
+        if not only_primary_with:
+            return &#123;remove_field_name_prefix(k): v for k, v in model_dict.items()&#125;
+        human_model_dict = &#123;&#125;
+        for k in self._meta.primary_key.field_names:
+            human_model_dict[remove_field_name_prefix(k)] = model_dict[k]
+        for k in only_primary_with:
+            human_model_dict[k] = model_dict[f&#39;f_&#123;k&#125;&#39;]
+        return human_model_dict
+
+    @property
+    def meta(self) -&gt; Metadata:
+        return self._meta
+
+    @classmethod
+    def get_primary_keys_name(cls):
+        return cls._meta.primary_key.field_names if isinstance(cls._meta.primary_key, CompositeKey) else [cls._meta.primary_key.name]
+
+    @classmethod
+    def getter_by(cls, attr):
+        return operator.attrgetter(attr)(cls)
+
+    @classmethod
+    def query(cls, reverse=None, order_by=None, **kwargs):
+        filters = []
+        for f_n, f_v in kwargs.items():
+            attr_name = &#39;%s&#39; % f_n
+            if not hasattr(cls, attr_name) or f_v is None:
+                continue
+            if type(f_v) in &#123;list, set&#125;:
+                f_v = list(f_v)
+                if is_continuous_field(type(getattr(cls, attr_name))):
+                    if len(f_v) == 2:
+                        for i, v in enumerate(f_v):
+                            if isinstance(v, str) and f_n in auto_date_timestamp_field():
+                                f_v[i] = utils.date_string_to_timestamp(v)
+                        lt_value = f_v[0]
+                        gt_value = f_v[1]
+                        if lt_value is not None and gt_value is not None:
+                            filters.append(cls.getter_by(attr_name).between(lt_value, gt_value))
+                        elif lt_value is not None:
+                            filters.append(operator.attrgetter(attr_name)(cls) &gt;= lt_value)
+                        elif gt_value is not None:
+                            filters.append(operator.attrgetter(attr_name)(cls) &lt;= gt_value)
+                else:
+                    filters.append(operator.attrgetter(attr_name)(cls) &lt;&lt; f_v)
+            else:
+                filters.append(operator.attrgetter(attr_name)(cls) == f_v)
+        if filters:
+            query_records = cls.select().where(*filters)
+            if reverse is not None:
+                if not order_by or not hasattr(cls, f&quot;&#123;order_by&#125;&quot;):
+                    order_by = &quot;create_time&quot;
+                if reverse is True:
+                    query_records = query_records.order_by(cls.getter_by(f&quot;&#123;order_by&#125;&quot;).desc())
+                elif reverse is False:
+                    query_records = query_records.order_by(cls.getter_by(f&quot;&#123;order_by&#125;&quot;).asc())
+            return [query_record for query_record in query_records]
+        else:
+            return []
+
+Peewee 基础
+Peewee 是一个轻量级的 ORM（对象关系映射）框架，ORM 的核心思想就是用 Python 类来表示数据库表。在定义模型类时，Meta 就是 Peewee 提供的一种机制，告诉 ORM 框架这个类在数据库中应该怎么表现。
+
+过滤器
+.startswith(prefix)：搜索以前缀开头的值
+
+.endswith(suffix)：搜索以后缀结尾的值
+
+.regexp(exp)：正则表达式匹配（区分大小写）
+
+.iregexp(exp)：正则表达式匹配（不区分大小写）
+
+.cast(type)：将列的值转换为给定类型
+
+
+
+Utils 工具目录
+在一个项目里，utils（utilities） 文件或目录并不是官方规范，而是约定俗成的“工具箱”。它的核心定位是：放置那些与业务逻辑解耦、可在多处复用、与框架/库无关的通用代码。
+</code></pre>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Python/" class="category-chain-item">Python</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>study</div>
+      <div>http://example.com/2025/08/21/study/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WZN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年8月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/08/13/%E7%94%9F%E6%88%90%E5%99%A8/" title="生成器">
+                        <span class="hidden-mobile">生成器</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
