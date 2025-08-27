@@ -27,7 +27,7 @@
 <meta property="og:description" content="RAGFLOW什么是RAGFLOWRAGFlow 是一个基于深度文档理解的开源 RAG（检索增强生成）引擎。它为任何规模的企业提供了简化的 RAG 工作流程，结合了 LLM（大型语言模型）提供真实的问答功能，并以来自各种复杂格式的有根据的引文为后盾。 SDK 是 Software Development Kit（软件开发工具包）的缩写，中文通常称“开发工具包”，用于开发特定平台或软件应用的工具集合">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-08-21T01:56:12.575Z">
+<meta property="article:modified_time" content="2025-08-27T03:06:50.221Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
@@ -361,312 +361,101 @@
 </ul>
 <p><code>@property</code> 装饰器将方法伪装成属性。用户像操作属性一样使用（无需显式调用方法）。</p>
 <p><code>@</code> 是<strong>装饰器（Decorator）语法</strong>的标志，用于<strong>包装函数、方法或类</strong>，在不改变其原始定义的前提下，增强或修改其行为。</p>
-<pre><code class="language-python">@decorator
-def func():
-    pass
-等价于：
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@decorator</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>():<br>    <span class="hljs-keyword">pass</span><br>等价于：<br><br>python<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">func</span>():<br>    <span class="hljs-keyword">pass</span><br>func = decorator(func)<br></code></pre></td></tr></table></figure>
 
-python
-def func():
-    pass
-func = decorator(func)
-装饰器（Decorator）就是一个“包装函数”，在不修改原函数代码的前提下，给它加功能。
+<p>装饰器（Decorator）就是一个“包装函数”，在不修改原函数代码的前提下，给它加功能。</p>
+<p>✅ 举个生活例子：<br>你点了一杯奶茶，店员在封口前又给你加了层奶盖 —— 这就是“装饰”：奶茶（原函数）没变，但多了奶盖（新功能）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">login_required</span>(<span class="hljs-params">func</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">wrapper</span>(<span class="hljs-params">*args, **kwargs</span>):<br>        <span class="hljs-keyword">if</span> session.get(<span class="hljs-string">&#x27;username&#x27;</span>):<br>            <span class="hljs-keyword">return</span> func(*args, **kwargs)  <span class="hljs-comment"># 用户已登录，正常执行原函数</span><br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;请先登录！&#x27;</span>  <span class="hljs-comment"># 未登录，拦截请求</span><br>    <span class="hljs-keyword">return</span> wrapper<br><br><span class="hljs-meta">@app.route(<span class="hljs-params"><span class="hljs-string">&#x27;/profile&#x27;</span></span>)</span><br><span class="hljs-meta">@login_required  </span><span class="hljs-comment"># 👈 装饰器：给 /profile 加“登录检查”功能</span><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">profile</span>():<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;个人中心页面&#x27;</span><br></code></pre></td></tr></table></figure>
 
-✅ 举个生活例子：
-你点了一杯奶茶，店员在封口前又给你加了层奶盖 —— 这就是“装饰”：奶茶（原函数）没变，但多了奶盖（新功能）。
+<p>req &#x3D; request.json 是 Flask 中获取请求体中的 JSON 数据的一种方式。</p>
+<p>nonlocal 是 Python 中的一个关键字，用于在嵌套函数中声明一个变量不是局部变量，而是来自外层（非全局）作用域的变量。</p>
+<p>后端路由定位<br>根据 URL 定位后端路由：</p>
+<p>框架	搜索关键词示例	路由定义示例<br>Spring Boot	@PostMapping(“&#x2F;v1&#x2F;chunk&#x2F;list”) 或 @RequestMapping	@PostMapping(“&#x2F;v1&#x2F;chunk&#x2F;list”)<br>数据库索引<br>KEY devparamtemplate_create_time (create_time)：这些语句是给表里的字段加普通索引（KEY），作用是为了提高查询速度，但不会限制字段值唯一。</p>
+<p>类型	作用	是否防重复<br>KEY 或 INDEX	提升查询性能	❌ 不限制重复<br>UNIQUE KEY	防重复值 + 提升查询性能	✅ 限制重复<br>ORM 模型示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">DevParamTemplate</span>(<span class="hljs-title class_ inherited__">DataBaseModel</span>):<br>    <span class="hljs-built_in">id</span> = CharField(max_length=<span class="hljs-number">32</span>, primary_key=<span class="hljs-literal">True</span>)<br>    name = CharField(max_length=<span class="hljs-number">100</span>, null=<span class="hljs-literal">False</span>, help_text=<span class="hljs-string">&quot;模板名称&quot;</span>, index=<span class="hljs-literal">True</span>)<br>    agent_id = CharField(max_length=<span class="hljs-number">64</span>, null=<span class="hljs-literal">True</span>, help_text=<span class="hljs-string">&quot;关联的agentID&quot;</span>, index=<span class="hljs-literal">True</span>)<br>    auth = CharField(max_length=<span class="hljs-number">255</span>, null=<span class="hljs-literal">True</span>, help_text=<span class="hljs-string">&quot;授权信息&quot;</span>)<br>    template = TextField(null=<span class="hljs-literal">True</span>, help_text=<span class="hljs-string">&quot;参数模板内容&quot;</span>, default=<span class="hljs-built_in">list</span>)<br>    status = CharField(max_length=<span class="hljs-number">1</span>, null=<span class="hljs-literal">True</span>, default=<span class="hljs-string">&quot;1&quot;</span>, help_text=<span class="hljs-string">&quot;状态 1是开启 0是关闭&quot;</span>, index=<span class="hljs-literal">True</span>)<br><br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Meta</span>:<br>        db_table = <span class="hljs-string">&quot;dev_param_template&quot;</span><br></code></pre></td></tr></table></figure>
 
-python
-def login_required(func):
-    def wrapper(*args, **kwargs):
-        if session.get(&#39;username&#39;):
-            return func(*args, **kwargs)  # 用户已登录，正常执行原函数
-        else:
-            return &#39;请先登录！&#39;  # 未登录，拦截请求
-    return wrapper
-
-@app.route(&#39;/profile&#39;)
-@login_required  # 👈 装饰器：给 /profile 加“登录检查”功能
-def profile():
-    return &#39;个人中心页面&#39;
-req = request.json 是 Flask 中获取请求体中的 JSON 数据的一种方式。
-
-nonlocal 是 Python 中的一个关键字，用于在嵌套函数中声明一个变量不是局部变量，而是来自外层（非全局）作用域的变量。
-
-后端路由定位
-根据 URL 定位后端路由：
-
-框架	搜索关键词示例	路由定义示例
-Spring Boot	@PostMapping(&quot;/v1/chunk/list&quot;) 或 @RequestMapping	@PostMapping(&quot;/v1/chunk/list&quot;)
-数据库索引
-KEY devparamtemplate_create_time (create_time)：这些语句是给表里的字段加普通索引（KEY），作用是为了提高查询速度，但不会限制字段值唯一。
-
-类型	作用	是否防重复
-KEY 或 INDEX	提升查询性能	❌ 不限制重复
-UNIQUE KEY	防重复值 + 提升查询性能	✅ 限制重复
-ORM 模型示例
-python
-class DevParamTemplate(DataBaseModel):
-    id = CharField(max_length=32, primary_key=True)
-    name = CharField(max_length=100, null=False, help_text=&quot;模板名称&quot;, index=True)
-    agent_id = CharField(max_length=64, null=True, help_text=&quot;关联的agentID&quot;, index=True)
-    auth = CharField(max_length=255, null=True, help_text=&quot;授权信息&quot;)
-    template = TextField(null=True, help_text=&quot;参数模板内容&quot;, default=list)
-    status = CharField(max_length=1, null=True, default=&quot;1&quot;, help_text=&quot;状态 1是开启 0是关闭&quot;, index=True)
-
-    class Meta:
-        db_table = &quot;dev_param_template&quot;
-Index=True 表示为这个字段创建普通索引（提高查询速度，但不会防止重复值）。
-
-接口设计与错误码
-改一下接口 create_paramtemplate 加一步“唯一性校验”，否则当用户传入重复的 name 时，数据库会抛出 IntegrityError，前端只会收到 500（HTTP 状态码，表示服务器内部错误）。
-
-场景	HTTP 状态码	业务返回码（示例）
-请求成功	200	code=0
-参数错误	400	code=100
-权限不足	200（或 403）	code=401
-服务器异常	500	code=500
-分层架构
-Service 层：Controller 只负责接收参数、调用服务、返回结果，不做业务逻辑。
-
-Controller（控制器）层
-像前台接待员：
-
-只负责“收快递”（接收 HTTP 请求参数）
-
-把快递交给后台仓库（Service 层）
-
-再把仓库返回的结果打包发回给客人（返回 JSON 给前端）
-一句话：不处理业务逻辑，只做“收、转、返”。
-
-Service（业务）层
-像后台仓库：
-
-真正拆包裹、检查货物（参数校验、业务规则）
-
-决定能不能入库（判断名称是否重复）
-
-把最终入库单交给工人（DAO / ORM）去落库
-一句话：所有“能不能做、该怎么做”的判断都在这里。
-
-MVC / 分层结构
-就是把代码按职责切成三层（或更多层）：
-
-M Model（数据模型，对应数据库表）
-
-V View（前端页面 / JSON 视图）
-
-C Controller（上面说的前台接待员）
-
-S Service（后台仓库）
-好处：各层互不干扰，代码好维护、好测试、好复用。
-
-Jenkins 与 CI/CD
-Jenkins：
-Jenkins 是一个开源的、提供友好操作界面的持续集成（CI）工具，起源于 Hudson，主要用于持续、自动的构建/测试软件项目。
-
-CI/CD 是什么？
-
-CI（Continuous Integration，持续集成）：一种软件开发实践。持续集成强调开发人员提交了新代码之后，立刻进行构建、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。
-
-CD（Continuous Delivery，持续交付）：是在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境（类生产环境）中。比如，我们完成单元测试后，可以把代码部署到连接数据库的 Staging 环境中更多的测试。如果代码没有问题，可以继续手动部署到生产环境。
-
-Tomcat
-功能	说明
-接收浏览器请求	别人输入网址，Tomcat 听见“有人敲门”
-把你的代码跑起来	它帮你把 Java 代码变成网页，回给浏览器
-管理“网站生命”	网站启动、关闭、重启，都由 Tomcat 管
-npm 命令
-npm run build = 把“开发时的源代码”变成“用户真正看到的网页”，就像把厨房半成品变成端上桌的硬菜。
-
-npm run dev = 开发专用“实时预览 + 调试”模式，菜还没正式上桌，但厨师可以随时尝咸淡。
-
-线程池
-🧠 基本概念
-
-概念	含义
-线程池（ThreadPool）	提前准备好的几个“工作线程”
-任务（Task）	你要执行的函数，比如 get_data()
-Future	表示“将来”会返回结果的对象，你可以等待它完成
-submit()	提交一个任务给线程池
-map()	批量处理多个任务，像 map() 函数一样
-with … as	自动关闭线程池资源的推荐写法
-🧪 示例代码（带中文注释）
-
-python
-import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
-
-# 假设这是你要并行执行的函数
-def fetch_data(name, wait=1):
-    print(f&quot;[&#123;name&#125;] 开始执行任务，预计耗时 &#123;wait&#125; 秒&quot;)
-    time.sleep(wait)  # 模拟 I/O 操作（比如请求网页）
-    print(f&quot;[&#123;name&#125;] 完成任务&quot;)
-    return f&quot;&#123;name&#125; 的数据&quot;
-
-# 主程序开始
-if __name__ == &quot;__main__&quot;:
-    # 创建一个线程池，最多同时执行 3 个任务
-    with ThreadPoolExecutor(max_workers=3) as executor:
-        # 提交多个任务给线程池执行
-        futures = []
-        for i in range(5):
-            # submit(函数, 参数1, 参数2, ...)
-            future = executor.submit(fetch_data, f&quot;任务&#123;i+1&#125;&quot;, wait=i % 3 + 1)
-            futures.append(future)
-
-        # 等待所有任务完成（异步）
-        for future in as_completed(futures):
-            result = future.result()  # 获取返回值（阻塞直到完成）
-            print(f&quot;[主程序] 收到结果：&#123;result&#125;&quot;)
-🧠 学习小笔记（建议记下来）
-
-点	说明
-✅ ThreadPoolExecutor(max_workers=N)	N 是最多同时运行几个任务（线程数）
-✅ submit(func, *args)	异步执行函数，立即返回 Future
-✅ as_completed(futures)	按任务完成顺序返回结果
-✅ .result()	获取函数运行完后的返回值
-❗ 适合 I/O 密集型任务	比如网络请求、数据库查询、文件操作
-❌ 不适合 CPU 密集型	如训练模型、数学计算 → 请用多进程
-正则表达式
-常用元字符
-字符	描述	实例	试一试
-[]	一组字符	&quot;[a-m]&quot;	
-\	示意特殊序列（也可用于转义特殊字符）	&quot;\d&quot;	
-.	任何字符（换行符除外）	&quot;he..o&quot;	
-^	起始于	&quot;^hello&quot;	
-$	结束于	&quot;world$&quot;	
-*	零次或多次出现	&quot;aix*&quot;	
-+	一次或多次出现	&quot;aix+&quot;	
-&#123;&#125;	确切地指定的出现次数	&quot;al&#123;2&#125;&quot;	
-`	`	两者任一	`&quot;falls	stays&quot;`	
-特殊序列
-字符	描述	实例
-\A	如果指定的字符位于字符串的开头，则返回匹配项	&quot;\AThe&quot;
-\b	返回指定字符位于单词的开头或末尾的匹配项	r&quot;\bain&quot;, r&quot;ain\b&quot;
-\B	返回指定字符存在的匹配项，但不在单词的开头（或结尾处）	r&quot;\Bain&quot;, r&quot;ain\B&quot;
-\d	返回字符串包含数字的匹配项（数字 0-9）	&quot;\d&quot;
-\D	返回字符串不包含数字的匹配项	&quot;\D&quot;
-\s	返回字符串包含空白字符的匹配项	&quot;\s&quot;
-\S	返回字符串不包含空白字符的匹配项	&quot;\S&quot;
-\w	返回一个匹配项，其中字符串包含任何单词字符（a-z, A-Z, 0-9, _）	&quot;\w&quot;
-\W	返回一个匹配项，其中字符串不包含任何单词字符	&quot;\W&quot;
-\Z	如果指定的字符位于字符串的末尾，则返回匹配项	&quot;Spain\Z&quot;
-集合
-表达式	描述
-[arn]	返回一个匹配项，其中存在指定字符（a, r 或 n）之一
-[a-n]	返回字母顺序 a 和 n 之间的任意小写字符匹配项
-[^arn]	返回除 a、r 和 n 之外的任意字符的匹配项
-[0123]	返回存在任何指定数字（0、1、2 或 3）的匹配项
-[0-9]	返回 0 与 9 之间任意数字的匹配
-[0-5][0-9]	返回介于 0 到 9 之间的任何数字的匹配项
-[a-zA-Z]	返回字母顺序 a 和 z 之间的任何字符的匹配，小写或大写
-[+]	在集合中，+, *, ., `	, (), $, &#123;&#125;没有特殊含义，因此[+]表示返回字符串中任何+` 字符的匹配项
-正则函数
-findall() 函数返回包含所有匹配项的列表。
-
-search() 函数搜索字符串中的匹配项，如果存在匹配则返回 Match 对象。如果有多个匹配，则仅返回首个匹配项。
-
-sub() 函数把匹配替换为您选择的文本。
-
-模块与脚本
-✅ 模块（module）和脚本（script）的区别
-
-特性	模块（Module）	脚本（Script）
-定义	一个可以被导入和复用的 Python 文件	一个可以直接运行的 Python 文件
-用途	提供功能、函数、类供其他代码调用	执行某个特定任务或程序流程
-入口点	没有主入口，供其他文件使用	通常有 if __name__ == &#39;__main__&#39;
-导入方式	import mymodule	不能被别的脚本导入（如果它只是用来执行）
-重复使用性	高，可复用	通常低，更专注执行任务
-举例	math.py, utils.py（定义函数供别人用）	
-Peewee ORM 示例
-模型转字典
-
-python
-class BaseModel(Model):
-    def to_dict(self):
-        return self.__dict__[&#39;__data__&#39;]  # 直接访问对象内部字典属性
-
-    def to_human_model_dict(self, only_primary_with: list = None):
-        model_dict = self.__dict__[&#39;__data__&#39;]
-        if not only_primary_with:
-            return &#123;remove_field_name_prefix(k): v for k, v in model_dict.items()&#125;
-        human_model_dict = &#123;&#125;
-        for k in self._meta.primary_key.field_names:
-            human_model_dict[remove_field_name_prefix(k)] = model_dict[k]
-        for k in only_primary_with:
-            human_model_dict[k] = model_dict[f&#39;f_&#123;k&#125;&#39;]
-        return human_model_dict
-
-    @property
-    def meta(self) -&gt; Metadata:
-        return self._meta
-
-    @classmethod
-    def get_primary_keys_name(cls):
-        return cls._meta.primary_key.field_names if isinstance(cls._meta.primary_key, CompositeKey) else [cls._meta.primary_key.name]
-
-    @classmethod
-    def getter_by(cls, attr):
-        return operator.attrgetter(attr)(cls)
-
-    @classmethod
-    def query(cls, reverse=None, order_by=None, **kwargs):
-        filters = []
-        for f_n, f_v in kwargs.items():
-            attr_name = &#39;%s&#39; % f_n
-            if not hasattr(cls, attr_name) or f_v is None:
-                continue
-            if type(f_v) in &#123;list, set&#125;:
-                f_v = list(f_v)
-                if is_continuous_field(type(getattr(cls, attr_name))):
-                    if len(f_v) == 2:
-                        for i, v in enumerate(f_v):
-                            if isinstance(v, str) and f_n in auto_date_timestamp_field():
-                                f_v[i] = utils.date_string_to_timestamp(v)
-                        lt_value = f_v[0]
-                        gt_value = f_v[1]
-                        if lt_value is not None and gt_value is not None:
-                            filters.append(cls.getter_by(attr_name).between(lt_value, gt_value))
-                        elif lt_value is not None:
-                            filters.append(operator.attrgetter(attr_name)(cls) &gt;= lt_value)
-                        elif gt_value is not None:
-                            filters.append(operator.attrgetter(attr_name)(cls) &lt;= gt_value)
-                else:
-                    filters.append(operator.attrgetter(attr_name)(cls) &lt;&lt; f_v)
-            else:
-                filters.append(operator.attrgetter(attr_name)(cls) == f_v)
-        if filters:
-            query_records = cls.select().where(*filters)
-            if reverse is not None:
-                if not order_by or not hasattr(cls, f&quot;&#123;order_by&#125;&quot;):
-                    order_by = &quot;create_time&quot;
-                if reverse is True:
-                    query_records = query_records.order_by(cls.getter_by(f&quot;&#123;order_by&#125;&quot;).desc())
-                elif reverse is False:
-                    query_records = query_records.order_by(cls.getter_by(f&quot;&#123;order_by&#125;&quot;).asc())
-            return [query_record for query_record in query_records]
-        else:
-            return []
-
-Peewee 基础
-Peewee 是一个轻量级的 ORM（对象关系映射）框架，ORM 的核心思想就是用 Python 类来表示数据库表。在定义模型类时，Meta 就是 Peewee 提供的一种机制，告诉 ORM 框架这个类在数据库中应该怎么表现。
-
-过滤器
-.startswith(prefix)：搜索以前缀开头的值
-
-.endswith(suffix)：搜索以后缀结尾的值
-
-.regexp(exp)：正则表达式匹配（区分大小写）
-
-.iregexp(exp)：正则表达式匹配（不区分大小写）
-
-.cast(type)：将列的值转换为给定类型
-
-
-
-Utils 工具目录
-在一个项目里，utils（utilities） 文件或目录并不是官方规范，而是约定俗成的“工具箱”。它的核心定位是：放置那些与业务逻辑解耦、可在多处复用、与框架/库无关的通用代码。
+<p>Index&#x3D;True 表示为这个字段创建普通索引（提高查询速度，但不会防止重复值）。</p>
+<p>接口设计与错误码<br>改一下接口 create_paramtemplate 加一步“唯一性校验”，否则当用户传入重复的 name 时，数据库会抛出 IntegrityError，前端只会收到 500（HTTP 状态码，表示服务器内部错误）。</p>
+<p>场景	HTTP 状态码	业务返回码（示例）<br>请求成功	200	code&#x3D;0<br>参数错误	400	code&#x3D;100<br>权限不足	200（或 403）	code&#x3D;401<br>服务器异常	500	code&#x3D;500<br>分层架构<br>Service 层：Controller 只负责接收参数、调用服务、返回结果，不做业务逻辑。</p>
+<p>Controller（控制器）层<br>像前台接待员：</p>
+<p>只负责“收快递”（接收 HTTP 请求参数）</p>
+<p>把快递交给后台仓库（Service 层）</p>
+<p>再把仓库返回的结果打包发回给客人（返回 JSON 给前端）<br>一句话：不处理业务逻辑，只做“收、转、返”。</p>
+<p>Service（业务）层<br>像后台仓库：</p>
+<p>真正拆包裹、检查货物（参数校验、业务规则）</p>
+<p>决定能不能入库（判断名称是否重复）</p>
+<p>把最终入库单交给工人（DAO &#x2F; ORM）去落库<br>一句话：所有“能不能做、该怎么做”的判断都在这里。</p>
+<p>MVC &#x2F; 分层结构<br>就是把代码按职责切成三层（或更多层）：</p>
+<p>M Model（数据模型，对应数据库表）</p>
+<p>V View（前端页面 &#x2F; JSON 视图）</p>
+<p>C Controller（上面说的前台接待员）</p>
+<p>S Service（后台仓库）<br>好处：各层互不干扰，代码好维护、好测试、好复用。</p>
+<p>Jenkins 与 CI&#x2F;CD<br>Jenkins：<br>Jenkins 是一个开源的、提供友好操作界面的持续集成（CI）工具，起源于 Hudson，主要用于持续、自动的构建&#x2F;测试软件项目。</p>
+<p>CI&#x2F;CD 是什么？</p>
+<p>CI（Continuous Integration，持续集成）：一种软件开发实践。持续集成强调开发人员提交了新代码之后，立刻进行构建、（单元）测试。根据测试结果，我们可以确定新代码和原有代码能否正确地集成在一起。</p>
+<p>CD（Continuous Delivery，持续交付）：是在持续集成的基础上，将集成后的代码部署到更贴近真实运行环境（类生产环境）中。比如，我们完成单元测试后，可以把代码部署到连接数据库的 Staging 环境中更多的测试。如果代码没有问题，可以继续手动部署到生产环境。</p>
+<p>Tomcat<br>功能	说明<br>接收浏览器请求	别人输入网址，Tomcat 听见“有人敲门”<br>把你的代码跑起来	它帮你把 Java 代码变成网页，回给浏览器<br>管理“网站生命”	网站启动、关闭、重启，都由 Tomcat 管<br>npm 命令<br>npm run build &#x3D; 把“开发时的源代码”变成“用户真正看到的网页”，就像把厨房半成品变成端上桌的硬菜。</p>
+<p>npm run dev &#x3D; 开发专用“实时预览 + 调试”模式，菜还没正式上桌，但厨师可以随时尝咸淡。</p>
+<h2 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h2><p>🧠 基本概念<br>概念	含义<br>线程池（ThreadPool）	提前准备好的几个“工作线程”<br>任务（Task）	你要执行的函数，比如 get_data()<br>Future	表示“将来”会返回结果的对象，你可以等待它完成<br>submit()	提交一个任务给线程池<br>map()	批量处理多个任务，像 map() 函数一样<br>with … as	自动关闭线程池资源的推荐写法<br>🧪 示例代码（带中文注释）</p>
+<p>python<br>import time<br>from concurrent.futures import ThreadPoolExecutor, as_completed</p>
+<h3 id="假设这是你要并行执行的函数"><a href="#假设这是你要并行执行的函数" class="headerlink" title="假设这是你要并行执行的函数"></a>假设这是你要并行执行的函数</h3><p>def fetch_data(name, wait&#x3D;1):<br>    print(f”[{name}] 开始执行任务，预计耗时 {wait} 秒”)<br>    time.sleep(wait)  # 模拟 I&#x2F;O 操作（比如请求网页）<br>    print(f”[{name}] 完成任务”)<br>    return f”{name} 的数据”</p>
+<h3 id="主程序开始"><a href="#主程序开始" class="headerlink" title="主程序开始"></a>主程序开始</h3><p>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>    # 创建一个线程池，最多同时执行 3 个任务<br>    with ThreadPoolExecutor(max_workers&#x3D;3) as executor:<br>        # 提交多个任务给线程池执行<br>        futures &#x3D; []<br>        for i in range(5):<br>            # submit(函数, 参数1, 参数2, …)<br>            future &#x3D; executor.submit(fetch_data, f”任务{i+1}”, wait&#x3D;i % 3 + 1)<br>            futures.append(future)</p>
+<pre><code class="hljs">    # 等待所有任务完成（异步）
+    for future in as_completed(futures):
+        result = future.result()  # 获取返回值（阻塞直到完成）
+        print(f&quot;[主程序] 收到结果：&#123;result&#125;&quot;)
 </code></pre>
+<p>🧠 学习小笔记（建议记下来）</p>
+<p>点	说明<br>✅ ThreadPoolExecutor(max_workers&#x3D;N)	N 是最多同时运行几个任务（线程数）<br>✅ submit(func, *args)	异步执行函数，立即返回 Future<br>✅ as_completed(futures)	按任务完成顺序返回结果<br>✅ .result()	获取函数运行完后的返回值<br>❗ 适合 I&#x2F;O 密集型任务	比如网络请求、数据库查询、文件操作<br>❌ 不适合 CPU 密集型	如训练模型、数学计算 → 请用多进程</p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>常用元字符<br>字符	描述	实例	试一试<br>[]	一组字符	“[a-m]”	<br>\	示意特殊序列（也可用于转义特殊字符）	“\d”	<br>.	任何字符（换行符除外）	“he..o”	<br>^	起始于	“^hello”	<br>$	结束于	“world$”	<br>*	零次或多次出现	“aix*”	<br>+	一次或多次出现	“aix+”	<br>{}	确切地指定的出现次数	“al{2}”	<br><code>	</code>	两者任一	<code>&quot;falls	stays&quot;</code>	<br>特殊序列<br>字符	描述	实例<br>\A	如果指定的字符位于字符串的开头，则返回匹配项	“\AThe”<br>\b	返回指定字符位于单词的开头或末尾的匹配项	r”\bain”, r”ain\b”<br>\B	返回指定字符存在的匹配项，但不在单词的开头（或结尾处）	r”\Bain”, r”ain\B”<br>\d	返回字符串包含数字的匹配项（数字 0-9）	“\d”<br>\D	返回字符串不包含数字的匹配项	“\D”<br>\s	返回字符串包含空白字符的匹配项	“\s”<br>\S	返回字符串不包含空白字符的匹配项	“\S”<br>\w	返回一个匹配项，其中字符串包含任何单词字符（a-z, A-Z, 0-9, _）	“\w”<br>\W	返回一个匹配项，其中字符串不包含任何单词字符	“\W”<br>\Z	如果指定的字符位于字符串的末尾，则返回匹配项	“Spain\Z”<br>集合<br>表达式	描述<br>[arn]	返回一个匹配项，其中存在指定字符（a, r 或 n）之一<br>[a-n]	返回字母顺序 a 和 n 之间的任意小写字符匹配项<br>[^arn]	返回除 a、r 和 n 之外的任意字符的匹配项<br>[0123]	返回存在任何指定数字（0、1、2 或 3）的匹配项<br>[0-9]	返回 0 与 9 之间任意数字的匹配<br>[0-5][0-9]	返回介于 0 到 9 之间的任何数字的匹配项<br>[a-zA-Z]	返回字母顺序 a 和 z 之间的任何字符的匹配，小写或大写<br>[+]	在集合中，+, *, ., <code>	, (), $, &#123;&#125;没有特殊含义，因此[+]表示返回字符串中任何+</code> 字符的匹配项<br>正则函数<br>findall() 函数返回包含所有匹配项的列表。</p>
+<p>search() 函数搜索字符串中的匹配项，如果存在匹配则返回 Match 对象。如果有多个匹配，则仅返回首个匹配项。</p>
+<p>sub() 函数把匹配替换为您选择的文本。</p>
+<p>模块与脚本<br>✅ 模块（module）和脚本（script）的区别</p>
+<p>特性	模块（Module）	脚本（Script）<br>定义	一个可以被导入和复用的 Python 文件	一个可以直接运行的 Python 文件<br>用途	提供功能、函数、类供其他代码调用	执行某个特定任务或程序流程<br>入口点	没有主入口，供其他文件使用	通常有 if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘<br>导入方式	import mymodule	不能被别的脚本导入（如果它只是用来执行）<br>重复使用性	高，可复用	通常低，更专注执行任务<br>举例	math.py, utils.py（定义函数供别人用）	<br>Peewee ORM 示例<br>模型转字典</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BaseModel</span>(<span class="hljs-title class_ inherited__">Model</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">to_dict</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.__dict__[<span class="hljs-string">&#x27;__data__&#x27;</span>]  <span class="hljs-comment"># 直接访问对象内部字典属性</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">to_human_model_dict</span>(<span class="hljs-params">self, only_primary_with: <span class="hljs-built_in">list</span> = <span class="hljs-literal">None</span></span>):<br>        model_dict = <span class="hljs-variable language_">self</span>.__dict__[<span class="hljs-string">&#x27;__data__&#x27;</span>]<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> only_primary_with:<br>            <span class="hljs-keyword">return</span> &#123;remove_field_name_prefix(k): v <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> model_dict.items()&#125;<br>        human_model_dict = &#123;&#125;<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-variable language_">self</span>._meta.primary_key.field_names:<br>            human_model_dict[remove_field_name_prefix(k)] = model_dict[k]<br>        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> only_primary_with:<br>            human_model_dict[k] = model_dict[<span class="hljs-string">f&#x27;f_<span class="hljs-subst">&#123;k&#125;</span>&#x27;</span>]<br>        <span class="hljs-keyword">return</span> human_model_dict<br><br><span class="hljs-meta">    @property</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">meta</span>(<span class="hljs-params">self</span>) -&gt; Metadata:<br>        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>._meta<br><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_primary_keys_name</span>(<span class="hljs-params">cls</span>):<br>        <span class="hljs-keyword">return</span> cls._meta.primary_key.field_names <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(cls._meta.primary_key, CompositeKey) <span class="hljs-keyword">else</span> [cls._meta.primary_key.name]<br><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">getter_by</span>(<span class="hljs-params">cls, attr</span>):<br>        <span class="hljs-keyword">return</span> operator.attrgetter(attr)(cls)<br><br><span class="hljs-meta">    @classmethod</span><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">query</span>(<span class="hljs-params">cls, reverse=<span class="hljs-literal">None</span>, order_by=<span class="hljs-literal">None</span>, **kwargs</span>):<br>        filters = []<br>        <span class="hljs-keyword">for</span> f_n, f_v <span class="hljs-keyword">in</span> kwargs.items():<br>            attr_name = <span class="hljs-string">&#x27;%s&#x27;</span> % f_n<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">hasattr</span>(cls, attr_name) <span class="hljs-keyword">or</span> f_v <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(f_v) <span class="hljs-keyword">in</span> &#123;<span class="hljs-built_in">list</span>, <span class="hljs-built_in">set</span>&#125;:<br>                f_v = <span class="hljs-built_in">list</span>(f_v)<br>                <span class="hljs-keyword">if</span> is_continuous_field(<span class="hljs-built_in">type</span>(<span class="hljs-built_in">getattr</span>(cls, attr_name))):<br>                    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(f_v) == <span class="hljs-number">2</span>:<br>                        <span class="hljs-keyword">for</span> i, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(f_v):<br>                            <span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(v, <span class="hljs-built_in">str</span>) <span class="hljs-keyword">and</span> f_n <span class="hljs-keyword">in</span> auto_date_timestamp_field():<br>                                f_v[i] = utils.date_string_to_timestamp(v)<br>                        lt_value = f_v[<span class="hljs-number">0</span>]<br>                        gt_value = f_v[<span class="hljs-number">1</span>]<br>                        <span class="hljs-keyword">if</span> lt_value <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span> <span class="hljs-keyword">and</span> gt_value <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>                            filters.append(cls.getter_by(attr_name).between(lt_value, gt_value))<br>                        <span class="hljs-keyword">elif</span> lt_value <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>                            filters.append(operator.attrgetter(attr_name)(cls) &gt;= lt_value)<br>                        <span class="hljs-keyword">elif</span> gt_value <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>                            filters.append(operator.attrgetter(attr_name)(cls) &lt;= gt_value)<br>                <span class="hljs-keyword">else</span>:<br>                    filters.append(operator.attrgetter(attr_name)(cls) &lt;&lt; f_v)<br>            <span class="hljs-keyword">else</span>:<br>                filters.append(operator.attrgetter(attr_name)(cls) == f_v)<br>        <span class="hljs-keyword">if</span> filters:<br>            query_records = cls.select().where(*filters)<br>            <span class="hljs-keyword">if</span> reverse <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>                <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> order_by <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">hasattr</span>(cls, <span class="hljs-string">f&quot;<span class="hljs-subst">&#123;order_by&#125;</span>&quot;</span>):<br>                    order_by = <span class="hljs-string">&quot;create_time&quot;</span><br>                <span class="hljs-keyword">if</span> reverse <span class="hljs-keyword">is</span> <span class="hljs-literal">True</span>:<br>                    query_records = query_records.order_by(cls.getter_by(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;order_by&#125;</span>&quot;</span>).desc())<br>                <span class="hljs-keyword">elif</span> reverse <span class="hljs-keyword">is</span> <span class="hljs-literal">False</span>:<br>                    query_records = query_records.order_by(cls.getter_by(<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;order_by&#125;</span>&quot;</span>).asc())<br>            <span class="hljs-keyword">return</span> [query_record <span class="hljs-keyword">for</span> query_record <span class="hljs-keyword">in</span> query_records]<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">return</span> []<br></code></pre></td></tr></table></figure>
+
+<p>Peewee 基础<br>Peewee 是一个轻量级的 ORM（对象关系映射）框架，ORM 的核心思想就是用 Python 类来表示数据库表。在定义模型类时，Meta 就是 Peewee 提供的一种机制，告诉 ORM 框架这个类在数据库中应该怎么表现。</p>
+<p>过滤器<br>.startswith(prefix)：搜索以前缀开头的值</p>
+<p>.endswith(suffix)：搜索以后缀结尾的值</p>
+<p>.regexp(exp)：正则表达式匹配（区分大小写）</p>
+<p>.iregexp(exp)：正则表达式匹配（不区分大小写）</p>
+<p>.cast(type)：将列的值转换为给定类型</p>
+<p>Utils 工具目录<br>在一个项目里，utils（utilities） 文件或目录并不是官方规范，而是约定俗成的“工具箱”。它的核心定位是：放置那些与业务逻辑解耦、可在多处复用、与框架&#x2F;库无关的通用代码。</p>
+<h2 id="logger"><a href="#logger" class="headerlink" title="&#x2F;logger&#x2F;"></a>&#x2F;<em>logger</em>&#x2F;</h2><p><code>只有当「Logger 设置的级别」≤「日志级别」时，才会输出。</code></p>
+<table>
+<thead>
+<tr>
+<th>Logger 设置的级别</th>
+<th>会打印的级别</th>
+<th>不会打印的级别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DEBUG</td>
+<td>DEBUG、INFO、WARNING、ERROR、CRITICAL</td>
+<td>无</td>
+</tr>
+<tr>
+<td>INFO</td>
+<td>INFO、WARNING、ERROR、CRITICAL</td>
+<td>DEBUG</td>
+</tr>
+<tr>
+<td>WARNING</td>
+<td>WARNING、ERROR、CRITICAL</td>
+<td>DEBUG、INFO</td>
+</tr>
+<tr>
+<td>ERROR</td>
+<td>ERROR、CRITICAL</td>
+<td>DEBUG、INFO、WARNING</td>
+</tr>
+<tr>
+<td>CRITICAL</td>
+<td>CRITICAL</td>
+<td>DEBUG、INFO、WARNING、ERROR</td>
+</tr>
+</tbody></table>
 
                 
               </div>
@@ -756,6 +545,12 @@ Utils 工具目录
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/" title="">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -19,21 +19,23 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="scrapy简介 Engine：引擎，处理整个系统的数据流和事件，是整个框架的核心， Item： 它是一个抽象的数据结构，它定义了爬取结果的数据结构，爬取的数据会被赋值成 Item 对象。每个 Item 就是一个类，类里面定义了爬取结果的数据字段 Scheduler： 调度器，它用来接受 Engine 发过来的 Request 并将其加入队列中，同时也可以将 Request 发回给 Engine">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://example.com/2025/08/01/hello-world/index.html">
+<meta property="og:title" content="Scrapy">
+<meta property="og:url" content="http://example.com/2025/08/01/Scrapy/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="scrapy简介 Engine：引擎，处理整个系统的数据流和事件，是整个框架的核心， Item： 它是一个抽象的数据结构，它定义了爬取结果的数据结构，爬取的数据会被赋值成 Item 对象。每个 Item 就是一个类，类里面定义了爬取结果的数据字段 Scheduler： 调度器，它用来接受 Engine 发过来的 Request 并将其加入队列中，同时也可以将 Request 发回给 Engine">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-08-01T07:36:06.885Z">
-<meta property="article:modified_time" content="2025-08-01T07:36:06.886Z">
+<meta property="article:published_time" content="2025-08-01T01:11:32.000Z">
+<meta property="article:modified_time" content="2025-08-27T03:34:33.740Z">
 <meta property="article:author" content="WZN">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="爬虫">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hello World - 哒妮哒妮</title>
+  <title>Scrapy - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Hello World"></span>
+            <span id="subtitle" data-typed-text="Scrapy"></span>
           
         </div>
 
@@ -210,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-01 15:36" pubdate>
-          2025年8月1日 下午
+        <time datetime="2025-08-01 09:11" pubdate>
+          2025年8月1日 上午
         </time>
       </span>
     
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          18 字
+          829 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          1 分钟
+          7 分钟
         
       </span>
     
@@ -270,24 +272,42 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Hello World</h1>
+            <h1 id="seo-header">Scrapy</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure>
+                <h2 id="scrapy简介"><a href="#scrapy简介" class="headerlink" title="scrapy简介"></a>scrapy简介</h2><ul>
+<li>Engine：引擎，处理整个系统的数据流和事件，是整个框架的核心，</li>
+<li>Item： 它是一个抽象的数据结构，它定义了爬取结果的数据结构，爬取的数据会被赋值成 Item 对象。每个 Item 就是一个类，类里面定义了爬取结果的数据字段</li>
+<li>Scheduler： 调度器，它用来接受 Engine 发过来的 Request 并将其加入队列中，同时也可以将 Request 发回给 Engine 供 Downloader 执行，它主要维护 Request 的调度逻辑，比如先进先出、先进后出、优先级进出等等。</li>
+<li>Spiders： 每个 Spider 里面定义了站点的爬取逻辑和页面的解析规则，它主要负责解析响应并生成 Item 和新的请求然后发给 Engine 进行处理。</li>
+<li>Downloader： 下载器，即完成 向服务器发送请求，然后拿到响应 的过程，得到的响应会再发送给 Engine 处理。</li>
+<li>Item Pipelines： 项目管道，这也是一个复数统称，可以对应多个 Item Pipeline。Item Pipeline 主要负责处理由 Spider 从页面中抽取的 Item，做一些数据清洗、验证和存储等工作，比如将 Item 的某些字段进行规整，将 Item 存储到数据库等操作都可以由 Item Pipeline 来完成。</li>
+<li>Downloader Middlewares： 图中 Engine 和 Downloader 之间的方块部分，中文可以称为下载器中间件，同样也是复数统称，其包含多个 Downloader Middleware，它是位于 Engine 和 Downloader 之间的 Hook 框架，负责实现 Downloader 和 Engine 之间的请求和响应的处理过程。</li>
+<li>Spider Middlewares： 图中 Engine 和 Spiders 之间的方块部分，中文可以称为蜘蛛中间件，它是位于 Engine 和 Spiders 之间的 Hook 框架，负责实现 Spiders 和 Engine 之间的 Item，请求和响应的处理过程</li>
+</ul>
+<h2 id="项目运行过程"><a href="#项目运行过程" class="headerlink" title="项目运行过程"></a>项目运行过程</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><p><code>scrapy startproject tutorial</code><br>这将创建一个名为 tutorial 的目录，其内容如下<br>tutorial&#x2F;<br>    scrapy.cfg            # deploy configuration file</p>
+<pre><code class="hljs">tutorial/             # project&#39;s Python module, you&#39;ll import your code from here
+    __init__.py
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure>
+    items.py          # project items definition file
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure>
+    middlewares.py    # project middlewares file
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure>
+    pipelines.py      # project pipelines file
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    settings.py       # project settings file
+
+    spiders/          # a directory where you&#39;ll later put your spiders
+        __init__.py
+</code></pre>
+<h3 id="我们的第一个-Spider"><a href="#我们的第一个-Spider" class="headerlink" title="我们的第一个 Spider"></a>我们的第一个 Spider</h3><p>Spider 是您定义的类，Scrapy 使用它们从网站（或一组网站）抓取信息。它们必须继承自Spider，并定义初始请求，以及（可选地）如何跟踪页面中的链接和解析下载的页面内容以提取数据。</p>
+<p>这是我们第一个 Spider 的代码。将其保存在项目目录 tutorial&#x2F;spiders 下名为 quotes_spider.py 的文件中</p>
+<p><code>scrapy genspider sina news.sina.com.cn</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> pathlib <span class="hljs-keyword">import</span> Path<br><span class="hljs-keyword">import</span> scrapy<br><span class="hljs-keyword">class</span> <span class="hljs-title class_">QuotesSpider</span>(scrapy.Spider):<br>    name = <span class="hljs-string">&quot;quotes&quot;</span><br><br>    <span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">start</span>(<span class="hljs-params">self</span>):<br>        urls = [<br>            <span class="hljs-string">&quot;https://quotes.toscrape.com/page/1/&quot;</span>,<br>            <span class="hljs-string">&quot;https://quotes.toscrape.com/page/2/&quot;</span>,<br>        ]<br>        <span class="hljs-keyword">for</span> url <span class="hljs-keyword">in</span> urls:<br>            <span class="hljs-keyword">yield</span> scrapy.Request(url=url, callback=<span class="hljs-variable language_">self</span>.parse)<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">parse</span>(<span class="hljs-params">self, response</span>):<br>        page = response.url.split(<span class="hljs-string">&quot;/&quot;</span>)[-<span class="hljs-number">2</span>]<br>        filename = <span class="hljs-string">f&quot;quotes-<span class="hljs-subst">&#123;page&#125;</span>.html&quot;</span><br>        Path(filename).write_bytes(response.body)<br>        <span class="hljs-variable language_">self</span>.log(<span class="hljs-string">f&quot;Saved file <span class="hljs-subst">&#123;filename&#125;</span>&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>name：用于标识 Spider。它在项目内必须是唯一的，也就是说，您不能为不同的 Spider 设置相同的名称。<br>start()：必须是一个异步生成器，用于产生供 spider 开始抓取的请求（以及可选的 item）。后续请求将从这些初始请求中连续生成。<br>parse()：一个将被调用的方法，用于处理每个请求下载的响应。response 参数是TextResponse 的一个实例，它包含页面内容并具有其他有用的方法来处理它。</p>
+<h3 id="如何运行我们的-spider"><a href="#如何运行我们的-spider" class="headerlink" title="如何运行我们的 spider"></a>如何运行我们的 spider</h3><p>要运行我们的 spider，请进入项目的顶层目录并运行<br><code>scrapy crawl quotes</code></p>
 
                 
               </div>
@@ -296,6 +316,36 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%88%AC%E8%99%AB/" class="category-chain-item">爬虫</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/%E7%88%AC%E8%99%AB/" class="print-no-link">#爬虫</a>
+      
+    </div>
   
 </div>
 
@@ -305,8 +355,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Hello World</div>
-      <div>http://example.com/2025/08/01/hello-world/</div>
+      <div>Scrapy</div>
+      <div>http://example.com/2025/08/01/Scrapy/</div>
     </div>
     <div class="license-meta">
       
@@ -350,9 +400,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/" title="测试文章">
+                      <a href="/2025/08/01/bs4/" title="bs4">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">测试文章</span>
+                        <span class="hidden-mobile">bs4</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -360,8 +410,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/01/bs4/" title="bs4">
-                        <span class="hidden-mobile">bs4</span>
+                      <a href="/2025/08/01/playwright/" title="Playwright">
+                        <span class="hidden-mobile">Playwright</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
