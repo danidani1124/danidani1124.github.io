@@ -19,15 +19,15 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Playwright*** 框架对比***    需求维度 推荐工具    纯静态&#x2F;海量列表 Scrapy   少量动态页面 Playwright 直接脚本   大规模+少量 JS Scrapy + scrapy-playwright   复杂人机交互 Playwright&#x2F;Selenium   必须 IE 兼容 Selenium    两者如何混合——“Scrapy 管调度，">
+    <meta name="description" content="requests1234import requests   #加载requests模块r &#x3D; requests.get(&#x27;https:&#x2F;&#x2F;www.baidu.com&#x27;) #爬取url的网址信息print(r.status_code)   #查看状态200为正常，404为错误r.headers                #获得头部信息   response对象的属性   属性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Playwright">
-<meta property="og:url" content="http://example.com/2025/08/01/playwright/index.html">
+<meta property="og:title" content="Scrapy">
+<meta property="og:url" content="http://example.com/2025/09/02/requests%E5%BA%93/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="Playwright*** 框架对比***    需求维度 推荐工具    纯静态&#x2F;海量列表 Scrapy   少量动态页面 Playwright 直接脚本   大规模+少量 JS Scrapy + scrapy-playwright   复杂人机交互 Playwright&#x2F;Selenium   必须 IE 兼容 Selenium    两者如何混合——“Scrapy 管调度，">
+<meta property="og:description" content="requests1234import requests   #加载requests模块r &#x3D; requests.get(&#x27;https:&#x2F;&#x2F;www.baidu.com&#x27;) #爬取url的网址信息print(r.status_code)   #查看状态200为正常，404为错误r.headers                #获得头部信息   response对象的属性   属性">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-08-01T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-09-02T02:22:21.717Z">
+<meta property="article:published_time" content="2025-09-02T01:11:32.000Z">
+<meta property="article:modified_time" content="2025-09-02T05:41:20.724Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="爬虫">
@@ -35,7 +35,7 @@
   
   
   
-  <title>Playwright - 哒妮哒妮</title>
+  <title>Scrapy - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Playwright"></span>
+            <span id="subtitle" data-typed-text="Scrapy"></span>
           
         </div>
 
@@ -212,8 +212,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-08-01 09:11" pubdate>
-          2025年8月1日 上午
+        <time datetime="2025-09-02 09:11" pubdate>
+          2025年9月2日 上午
         </time>
       </span>
     
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          973 字
+          715 字
         
       </span>
     
@@ -235,7 +235,7 @@
         
         
         
-          9 分钟
+          6 分钟
         
       </span>
     
@@ -272,104 +272,105 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Playwright</h1>
+            <h1 id="seo-header">Scrapy</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Playwright"><a href="#Playwright" class="headerlink" title="Playwright"></a>Playwright</h1><p>*** 框架对比***</p>
-<table>
+                <h2 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests   <span class="hljs-comment">#加载requests模块</span><br>r = requests.get(<span class="hljs-string">&#x27;https://www.baidu.com&#x27;</span>) <span class="hljs-comment">#爬取url的网址信息</span><br><span class="hljs-built_in">print</span>(r.status_code)   <span class="hljs-comment">#查看状态200为正常，404为错误</span><br>r.headers                <span class="hljs-comment">#获得头部信息</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="response对象的属性"><a href="#response对象的属性" class="headerlink" title="response对象的属性"></a>response对象的属性</h2><table>
 <thead>
 <tr>
-<th>需求维度</th>
-<th>推荐工具</th>
+<th>属性</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>纯静态&#x2F;海量列表</td>
-<td>Scrapy</td>
+<td><code>r.status_code</code></td>
+<td>HTTP 请求的返回状态</td>
 </tr>
 <tr>
-<td>少量动态页面</td>
-<td>Playwright 直接脚本</td>
+<td><code>r.text</code></td>
+<td>HTTP 响应内容的字符串形式，即 URL 对应页面的文本内容</td>
 </tr>
 <tr>
-<td>大规模+少量 JS</td>
-<td>Scrapy + scrapy-playwright</td>
+<td><code>r.encoding</code></td>
+<td>从 HTTP header 中推测的响应内容编码方式</td>
 </tr>
 <tr>
-<td>复杂人机交互</td>
-<td>Playwright&#x2F;Selenium</td>
+<td><code>r.apparent_encoding</code></td>
+<td>从内容中分析出的响应内容编码方式（备选编码方式）</td>
 </tr>
 <tr>
-<td>必须 IE 兼容</td>
-<td>Selenium</td>
+<td><code>r.content</code></td>
+<td>HTTP 响应内容的二进制形式</td>
 </tr>
 </tbody></table>
-<ul>
-<li>两者如何混合——“Scrapy 管调度，Playwright 管渲染”<br>• scrapy-playwright：官方插件，把 Playwright 作为 Scrapy 的下载器。</li>
-<li>优点：<br>– 继续享受 Scrapy 的调度&#x2F;去重&#x2F;管道；<br>– 只有真正需要 JS 的请求才走 Playwright，其他仍走高速 HTTP。</li>
+<h2 id="使用-re-模块匹配字符串"><a href="#使用-re-模块匹配字符串" class="headerlink" title="使用 re 模块匹配字符串"></a>使用 re 模块匹配字符串</h2><ul>
+<li>使用 match() 方法进行匹配<br>  match() 方法用于从字符串的开始处进行匹配，如果在起始位置匹配成功，则返回 Match 对象，否则返回 None。其语法格式如下：(一旦当第一个字母不符合条件时，则不再进行匹配)</li>
 </ul>
-<p><code>Playwright = 一个可以“自动化任何现代浏览器”（Chromium、Firefox、WebKit）的跨语言库，用它写出来的脚本能像真人一样打开网页、点击、输入、滚动、截图、下文件、抓接口、跑单测、生成 PDF/视频——速度快、稳定性高、反爬绕过能力强。</code></p>
-<p>1️⃣ <code>inner_text</code>基本用法: 获取某个元素「可见文本」的API</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ptthon">text = await page.inner_text(selector) #selector：CSS/XPath 选择器，定位目标元素。<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.<span class="hljs-keyword">match</span>(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
+<p><code>pattern：表示模式字符串，由要匹配的正则表达式转换而来。string：表示要匹配的字符串。</code></p>
+<ul>
+<li>使用 search() 方法进行匹配<br>  search() 方法用于在整个字符串中搜索第一个匹配的值，如果匹配成功，则返回 Match 对象，否则返回 None。search() 方法的语法格式如下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.search(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 findall() 方法进行匹配<br>  在整个字符串中搜索所有符合正则表达式的字符串，并以列表的形式返回所有符合条件的结果。如果匹配不成功，返回空列表。findall() 方法的语法格式如下：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.findall(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
+
+<h2 id="使用-re-模块替换字符串"><a href="#使用-re-模块替换字符串" class="headerlink" title="使用 re 模块替换字符串"></a>使用 re 模块替换字符串</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.sub(pattern, repl, string, count, flags)<br></code></pre></td></tr></table></figure>
+<p><code>pattern：表示模式字符串，要被替换的。repl：用来替换的字符串。string：表示要被查找替换的原始字符串。count：可选参数，表示模式匹配后替换的最大次数，默认值为 0，表示替换所有的匹配。flags：可选参数，表示标志位，用于控制匹配方式，如是否区分字母大小写、是否包括换行等等。</code></p>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><code>“^” 表示行的开始，“$” 表示行的结尾</code></p>
 <table>
 <thead>
 <tr>
-<th>方法</th>
-<th>是否只取可见文本</th>
-<th>是否包含隐藏元素文本</th>
+<th>元字符</th>
+<th>说明</th>
+<th>举例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>inner_text()</code></td>
-<td>✅ 只取可见</td>
-<td>❌ 不包含</td>
+<td><code>.</code></td>
+<td>匹配除换行符以外的任意字符</td>
+<td><code>a.c</code> 可匹配“acdin8Rit”中的 <code>a、c、d、8、R、it</code></td>
 </tr>
 <tr>
-<td><code>text_content()</code></td>
-<td>❌ 取所有（包括 <code>display:none</code>）</td>
-<td>✅ 包含</td>
+<td><code>\w</code></td>
+<td>匹配字母、数字、下划线或汉字</td>
+<td><code>\w</code> 可匹配“miO次9inqw”中的 <code>m、i、O、次、9、q、w</code>，不能匹配空格</td>
+</tr>
+<tr>
+<td><code>\W</code></td>
+<td>匹配除 <code>\w</code> 以外的字符</td>
+<td><code>\W</code> 可匹配“92dinsc”中的 <code>in</code>，不能匹配 <code>9、2、d、s、c</code></td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>匹配单个空白符（包括 Tab 和换行）</td>
+<td><code>\s</code> 可匹配“c\t8B”中的 <code>\t</code></td>
+</tr>
+<tr>
+<td><code>\S</code></td>
+<td>匹配除空白符以外的所有字符</td>
+<td><code>\S</code> 可匹配“字we2it90”中的 <code>字、w、e、2、9、0</code></td>
+</tr>
+<tr>
+<td><code>\b</code></td>
+<td>匹配单词边界（开始或结束）</td>
+<td>在“there were deserts where”中，<code>\bw</code> 匹配 <code>were</code> 的 <code>w</code>，不匹配 <code>where</code> 的 <code>w</code></td>
+</tr>
+<tr>
+<td><code>\d</code></td>
+<td>匹配数字</td>
+<td><code>\d</code> 可匹配“dg34&amp;”中的 <code>3、4</code></td>
 </tr>
 </tbody></table>
-<p>2️⃣ <code>query_selector </code> 根据 CSS&#x2F;XPath 选择器，返回第一个匹配的元素句柄（ElementHandle），找不到就返回 None。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>返回</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>query_selector</code></td>
-<td>第一个匹配元素（ElementHandle 或 None）</td>
-</tr>
-<tr>
-<td><code>query_selector_all</code></td>
-<td><strong>列表</strong> <code>[ElementHandle, …]</code>，空列表 <code>[]</code></td>
-</tr>
-</tbody></table>
-<p>3️⃣ <code>get_attribute</code> 把 HTML 标签里的 属性&#x3D;”值” 取出来。</p>
-<table>
-<thead>
-<tr>
-<th>方法</th>
-<th>功能</th>
-<th>示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>get_attribute</code></td>
-<td>取 <strong>标签属性值</strong></td>
-<td><code>&lt;a href=&quot;x&quot;&gt;</code> → <code>&quot;x&quot;</code></td>
-</tr>
-<tr>
-<td><code>inner_text</code> &#x2F; <code>text_content</code></td>
-<td>取 <strong>元素内部可见文本</strong></td>
-<td><code>&lt;a href=&quot;x&quot;&gt;点我&lt;/a&gt;</code> → <code>&quot;点我&quot;</code></td>
-</tr>
-</tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> async_playwright() <span class="hljs-keyword">as</span> p: <span class="hljs-comment">#Playwright 的“启动写法</span><br>    browser = <span class="hljs-keyword">await</span> p.chromium.launch(<br>                            headless=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># 无界面运行，省资源。</span><br>                            args=[<br>                                <span class="hljs-string">&#x27;--disable-gpu&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--disable-dev-shm-usage&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--no-sandbox&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--disable-blink-features=AutomationControlled&#x27;</span>,    <span class="hljs-comment">#去掉 navigator.webdriver=true 等自动化特征，降低被反爬识别概率。</span><br>                                <span class="hljs-string">&#x27;--disable-features=IsolateOrigins,site-per-process&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--disable-site-isolation-trials&#x27;</span><br>                            ],<br>                            proxy=playwright_proxy<br>                        )<br>    iphone = p.devices[<span class="hljs-string">&quot;iPhone 12&quot;</span>] <span class="hljs-comment"># Playwright 自带的「iPhone 12」设备配置（含视口、UA、触控等）。</span><br>                    <span class="hljs-comment">#创建一个新的浏览器上下文（Context），相当于一个独立的浏览器环境（类似于一个新的窗口或用户）。</span><br>                    context = <span class="hljs-keyword">await</span> browser.new_context(<br>                        **iphone,<br>                        extra_http_headers=&#123;<br>                            <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://mp.weixin.qq.com/&quot;</span>,<br>                            <span class="hljs-string">&quot;User-Agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.42(0x18002a2e) NetType/WIFI Language/zh_CN&quot;</span>,<br>                            <span class="hljs-string">&quot;Accept&quot;</span>: <span class="hljs-string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;</span>,<br>                            <span class="hljs-string">&quot;Accept-Language&quot;</span>: <span class="hljs-string">&quot;zh-CN,zh;q=0.9,en;q=0.8&quot;</span>,<br>                            <span class="hljs-string">&quot;Accept-Encoding&quot;</span>: <span class="hljs-string">&quot;gzip, deflate, br&quot;</span>,<br>                            <span class="hljs-string">&quot;Connection&quot;</span>: <span class="hljs-string">&quot;keep-alive&quot;</span>,<br>                            <span class="hljs-string">&quot;Upgrade-Insecure-Requests&quot;</span>: <span class="hljs-string">&quot;1&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-Dest&quot;</span>: <span class="hljs-string">&quot;document&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-Mode&quot;</span>: <span class="hljs-string">&quot;navigate&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-Site&quot;</span>: <span class="hljs-string">&quot;same-origin&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-User&quot;</span>: <span class="hljs-string">&quot;?1&quot;</span>,<br>                            <span class="hljs-string">&quot;Cache-Control&quot;</span>: <span class="hljs-string">&quot;max-age=0&quot;</span><br>                        &#125;<br>                    )<br>                    <span class="hljs-comment"># 每个新页面加载前注入自定义 JavaScript 脚本。</span><br>                    <span class="hljs-keyword">await</span> context.add_init_script(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">                        Object.defineProperty(navigator, &#x27;webdriver&#x27;, &#123;</span><br><span class="hljs-string">                            get: () =&gt; undefined</span><br><span class="hljs-string">                        &#125;);</span><br><span class="hljs-string">                        Object.defineProperty(navigator, &#x27;plugins&#x27;, &#123;</span><br><span class="hljs-string">                            get: () =&gt; [1, 2, 3, 4, 5]</span><br><span class="hljs-string">                        &#125;);</span><br><span class="hljs-string">                        Object.defineProperty(navigator, &#x27;languages&#x27;, &#123;</span><br><span class="hljs-string">                            get: () =&gt; [&#x27;zh-CN&#x27;, &#x27;zh&#x27;]</span><br><span class="hljs-string">                        &#125;);</span><br><span class="hljs-string">                    &quot;&quot;&quot;</span>)<br>                    <span class="hljs-comment"># 创建页面并访问 同一个上下文下的页面共享 Cookie、存储等环境</span><br>                    page = <span class="hljs-keyword">await</span> context.new_page()<br>                     <span class="hljs-keyword">try</span>:<br>                        logger.info(<span class="hljs-string">f&quot;[PDF] 开始访问URL: <span class="hljs-subst">&#123;url&#125;</span>&quot;</span>)<br>                        <span class="hljs-comment"># wait_until=等待页面网络空闲（即没有新的网络请求），通常表示页面和资源加载完成。</span><br>                        <span class="hljs-keyword">await</span> page.goto(url, wait_until=<span class="hljs-string">&quot;networkidle&quot;</span>, timeout=<span class="hljs-number">10000</span>)<br>                        logger.info(<span class="hljs-string">&quot;[PDF] 页面加载完成&quot;</span>)<br>                        <span class="hljs-keyword">try</span>:<br>                            body_text = <span class="hljs-keyword">await</span> page.inner_text(<span class="hljs-string">&#x27;body&#x27;</span>)<br>                        <span class="hljs-keyword">except</span> Exception:<br>                            body_text = <span class="hljs-string">&quot;&quot;</span><br>                        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;安全验证&quot;</span> <span class="hljs-keyword">in</span> body_text <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;网络超时&quot;</span> <span class="hljs-keyword">in</span> body_text <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;网络不给力&quot;</span> <span class="hljs-keyword">in</span> body_text:<br>                            logger.warning(<span class="hljs-string">&quot;[PDF] 检测到安全验证或网络超时提示，移除当前代理并重试&quot;</span>)<br>                            <span class="hljs-keyword">if</span> proxy:<br>                                proxy_pool.remove_proxy(proxy)<br>                            <span class="hljs-keyword">continue</span><br>                        error_text = <span class="hljs-keyword">await</span> page.query_selector(<span class="hljs-string">&quot;div.weui-msg__title&quot;</span>)<br>                        <span class="hljs-keyword">if</span> error_text:<br>                            error_content = <span class="hljs-keyword">await</span> error_text.inner_text()<br>                            <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;环境异常&quot;</span> <span class="hljs-keyword">in</span> error_content:<br>                                <span class="hljs-keyword">if</span> proxy:<br>                                    logger.warning(<span class="hljs-string">f&quot;[PDF] 检测到环境异常，移除代理: <span class="hljs-subst">&#123;proxy&#125;</span>&quot;</span>)<br>                                    proxy_pool.remove_proxy(proxy)<br>                                <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;微信环境检测异常，已移除当前代理，请稍后重试&quot;</span>)<br>                        title = <span class="hljs-keyword">await</span> page.title()<br>                        meta_img = <span class="hljs-keyword">await</span> page.query_selector(<span class="hljs-string">&quot;meta[property=&#x27;og:image&#x27;]&quot;</span>)<br>                        <span class="hljs-keyword">if</span> meta_img:<br>                            cover_image_url = <span class="hljs-keyword">await</span> meta_img.get_attribute(<span class="hljs-string">&quot;content&quot;</span>)<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -416,8 +417,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Playwright</div>
-      <div>http://example.com/2025/08/01/playwright/</div>
+      <div>Scrapy</div>
+      <div>http://example.com/2025/09/02/requests库/</div>
     </div>
     <div class="license-meta">
       
@@ -429,7 +430,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年8月1日</div>
+          <div>2025年9月2日</div>
         </div>
       
       
@@ -461,18 +462,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/" title="bs4">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">bs4</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/01/XPath/" title="XPath">
-                        <span class="hidden-mobile">XPath</span>
+                      <a href="/2025/08/21/study/" title="study">
+                        <span class="hidden-mobile">study</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

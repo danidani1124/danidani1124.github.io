@@ -19,15 +19,15 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Playwright*** 框架对比***    需求维度 推荐工具    纯静态&#x2F;海量列表 Scrapy   少量动态页面 Playwright 直接脚本   大规模+少量 JS Scrapy + scrapy-playwright   复杂人机交互 Playwright&#x2F;Selenium   必须 IE 兼容 Selenium    两者如何混合——“Scrapy 管调度，">
+    <meta name="description" content="Xpath解析   表达式 描述    nodename 选取此节点的所有子节点。   &#x2F; 从根节点选取（取子节点）。   &#x2F;&#x2F; 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置（取子孙节点）。   . 选取当前节点。   .. 选取当前节点的父节点。   @ 选取属性。    1️⃣选择所有节点：使用双斜杠&#x2F;&#x2F;选择文档中的所有节点，例如：&#x2F;&#x2F;node() 2">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Playwright">
-<meta property="og:url" content="http://example.com/2025/08/01/playwright/index.html">
+<meta property="og:title" content="XPath">
+<meta property="og:url" content="http://example.com/2025/08/01/XPath/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="Playwright*** 框架对比***    需求维度 推荐工具    纯静态&#x2F;海量列表 Scrapy   少量动态页面 Playwright 直接脚本   大规模+少量 JS Scrapy + scrapy-playwright   复杂人机交互 Playwright&#x2F;Selenium   必须 IE 兼容 Selenium    两者如何混合——“Scrapy 管调度，">
+<meta property="og:description" content="Xpath解析   表达式 描述    nodename 选取此节点的所有子节点。   &#x2F; 从根节点选取（取子节点）。   &#x2F;&#x2F; 从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置（取子孙节点）。   . 选取当前节点。   .. 选取当前节点的父节点。   @ 选取属性。    1️⃣选择所有节点：使用双斜杠&#x2F;&#x2F;选择文档中的所有节点，例如：&#x2F;&#x2F;node() 2">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-01T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-09-02T02:22:21.717Z">
+<meta property="article:modified_time" content="2025-09-02T02:55:49.743Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="爬虫">
@@ -35,7 +35,7 @@
   
   
   
-  <title>Playwright - 哒妮哒妮</title>
+  <title>XPath - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +201,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Playwright"></span>
+            <span id="subtitle" data-typed-text="XPath"></span>
           
         </div>
 
@@ -224,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          973 字
+          1k 字
         
       </span>
     
@@ -272,104 +272,160 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Playwright</h1>
+            <h1 id="seo-header">XPath</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="Playwright"><a href="#Playwright" class="headerlink" title="Playwright"></a>Playwright</h1><p>*** 框架对比***</p>
-<table>
+                <h2 id="Xpath解析"><a href="#Xpath解析" class="headerlink" title="Xpath解析"></a>Xpath解析</h2><table>
 <thead>
 <tr>
-<th>需求维度</th>
-<th>推荐工具</th>
+<th>表达式</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>纯静态&#x2F;海量列表</td>
-<td>Scrapy</td>
+<td>nodename</td>
+<td>选取此节点的所有子节点。</td>
 </tr>
 <tr>
-<td>少量动态页面</td>
-<td>Playwright 直接脚本</td>
+<td>&#x2F;</td>
+<td>从根节点选取（取子节点）。</td>
 </tr>
 <tr>
-<td>大规模+少量 JS</td>
-<td>Scrapy + scrapy-playwright</td>
+<td>&#x2F;&#x2F;</td>
+<td>从匹配选择的当前节点选择文档中的节点，而不考虑它们的位置（取子孙节点）。</td>
 </tr>
 <tr>
-<td>复杂人机交互</td>
-<td>Playwright&#x2F;Selenium</td>
+<td>.</td>
+<td>选取当前节点。</td>
 </tr>
 <tr>
-<td>必须 IE 兼容</td>
-<td>Selenium</td>
+<td>..</td>
+<td>选取当前节点的父节点。</td>
+</tr>
+<tr>
+<td>@</td>
+<td>选取属性。</td>
 </tr>
 </tbody></table>
 <ul>
-<li>两者如何混合——“Scrapy 管调度，Playwright 管渲染”<br>• scrapy-playwright：官方插件，把 Playwright 作为 Scrapy 的下载器。</li>
-<li>优点：<br>– 继续享受 Scrapy 的调度&#x2F;去重&#x2F;管道；<br>– 只有真正需要 JS 的请求才走 Playwright，其他仍走高速 HTTP。</li>
+<li>1️⃣选择所有节点：<br><code>使用双斜杠//选择文档中的所有节点，例如：//node()</code></li>
+<li>2️⃣按标签名选择节点：<br><code>使用标签名选择节点，例如：//book</code></li>
+<li>3️⃣按属性选择节点：<br><code>使用方括号[]和@符号选择具有特定属性值的节点，例如：//book[@category=&quot;children&quot;]</code></li>
+<li>4️⃣选择父节点、子节点和兄弟节点：<br><code>使用父节点(…)、子节点(/)和兄弟节点(//)选择节点</code></li>
+<li>5️⃣  8️⃣ 9️⃣ 🔟使用通配符选择节点：<br><code>使用星号*选择任何节点，例如：//book/*选择所有book节点的子节点</code></li>
+<li>6️⃣使用逻辑运算符选择节点：<br><code>使用and、or、not等逻辑运算符选择节点，例如：//book[price&lt;10 and @category=&quot;children&quot;]</code></li>
+<li>7️⃣使用内置函数处理节点：<br><code>使用内置函数处理节点的文本和数值，例如：//book[substring(title,1,3)=&quot;The&quot;]选择标题以&quot;The&quot;开头的书籍</code></li>
 </ul>
-<p><code>Playwright = 一个可以“自动化任何现代浏览器”（Chromium、Firefox、WebKit）的跨语言库，用它写出来的脚本能像真人一样打开网页、点击、输入、滚动、截图、下文件、抓接口、跑单测、生成 PDF/视频——速度快、稳定性高、反爬绕过能力强。</code></p>
-<p>1️⃣ <code>inner_text</code>基本用法: 获取某个元素「可见文本」的API</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ptthon">text = await page.inner_text(selector) #selector：CSS/XPath 选择器，定位目标元素。<br></code></pre></td></tr></table></figure>
-<table>
+<h2 id="路径表达式"><a href="#路径表达式" class="headerlink" title="路径表达式"></a>路径表达式</h2><table>
 <thead>
 <tr>
-<th>方法</th>
-<th>是否只取可见文本</th>
-<th>是否包含隐藏元素文本</th>
+<th>表达式</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>inner_text()</code></td>
-<td>✅ 只取可见</td>
-<td>❌ 不包含</td>
+<td>bookstore</td>
+<td>选取 bookstore 元素的所有子节点。</td>
 </tr>
 <tr>
-<td><code>text_content()</code></td>
-<td>❌ 取所有（包括 <code>display:none</code>）</td>
-<td>✅ 包含</td>
+<td>&#x2F;bookstore</td>
+<td>选取根元素 bookstore。</td>
+</tr>
+<tr>
+<td>bookstore&#x2F;book</td>
+<td>选取属于 bookstore 的子元素的所有 book 元素。</td>
+</tr>
+<tr>
+<td>&#x2F;&#x2F;book</td>
+<td>选取所有 book 子元素，而不管它们在文档中的位置。</td>
+</tr>
+<tr>
+<td>bookstore&#x2F;&#x2F;book</td>
+<td>选取属于 bookstore 元素的后代的所有 book 元素，而不管它们的位置。</td>
+</tr>
+<tr>
+<td>@lang</td>
+<td>选取名为 lang 的所有属性。</td>
 </tr>
 </tbody></table>
-<p>2️⃣ <code>query_selector </code> 根据 CSS&#x2F;XPath 选择器，返回第一个匹配的元素句柄（ElementHandle），找不到就返回 None。</p>
+<p><code>XPath路径表达式的基本语法如下：</code><br>&#x2F;                 : 定位到根节点<br>&#x2F;bookstore        : 定位到根节点下的bookstore节点<br>&#x2F;bookstore&#x2F;book   : 定位到bookstore节点下的所有book节点<br>&#x2F;&#x2F;book            : 递归查找所有book节点<br>&#x2F;&#x2F;book[@category&#x3D;’web’] : 查找所有category属性值为web的book节点</p>
 <table>
 <thead>
 <tr>
-<th>方法</th>
-<th>返回</th>
+<th>路径表达式</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>query_selector</code></td>
-<td>第一个匹配元素（ElementHandle 或 None）</td>
+<td>&#x2F;bookstore&#x2F;book[1]</td>
+<td>选取属于 bookstore 子元素的第一个 book 元素。</td>
 </tr>
 <tr>
-<td><code>query_selector_all</code></td>
-<td><strong>列表</strong> <code>[ElementHandle, …]</code>，空列表 <code>[]</code></td>
+<td>&#x2F;bookstore&#x2F;book[last()]</td>
+<td>选取属于 bookstore 子元素的最后一个 book 元素。</td>
+</tr>
+<tr>
+<td>&#x2F;bookstore&#x2F;book[last()-1]</td>
+<td>选取属于 bookstore 子元素的倒数第二个 book 元素。</td>
+</tr>
+<tr>
+<td>&#x2F;bookstore&#x2F;book[position()&lt;3]</td>
+<td>选取最前面的两个属于 bookstore 元素的子元素的 book 元素。</td>
+</tr>
+<tr>
+<td>&#x2F;&#x2F;title[@lang$]</td>
+<td>选取所有拥有名为 lang 的属性的 title 元素。</td>
+</tr>
+<tr>
+<td>&#x2F;&#x2F;title[@lang&#x3D;’eng’]</td>
+<td>选取所有 title 元素，且这些元素拥有值为 eng 的 lang 属性。</td>
+</tr>
+<tr>
+<td>&#x2F;bookstore&#x2F;book[price&gt;35.00]</td>
+<td>选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。</td>
+</tr>
+<tr>
+<td>&#x2F;bookstore&#x2F;book[price&gt;35.00]&#x2F;&#x2F;title</td>
+<td>选取 bookstore 元素中的 book 元素的所有 title 元素，且其中的 price 元素的值须大于 35.00。</td>
 </tr>
 </tbody></table>
-<p>3️⃣ <code>get_attribute</code> 把 HTML 标签里的 属性&#x3D;”值” 取出来。</p>
-<table>
+<h2 id="未知节点"><a href="#未知节点" class="headerlink" title="未知节点"></a>未知节点</h2><table>
 <thead>
 <tr>
-<th>方法</th>
-<th>功能</th>
-<th>示例</th>
+<th>通配符&#x2F;路径表达式</th>
+<th>描述</th>
 </tr>
 </thead>
 <tbody><tr>
-<td><code>get_attribute</code></td>
-<td>取 <strong>标签属性值</strong></td>
-<td><code>&lt;a href=&quot;x&quot;&gt;</code> → <code>&quot;x&quot;</code></td>
+<td><code>*</code></td>
+<td>匹配任何元素节点。</td>
 </tr>
 <tr>
-<td><code>inner_text</code> &#x2F; <code>text_content</code></td>
-<td>取 <strong>元素内部可见文本</strong></td>
-<td><code>&lt;a href=&quot;x&quot;&gt;点我&lt;/a&gt;</code> → <code>&quot;点我&quot;</code></td>
+<td><code>@*</code></td>
+<td>匹配任何属性节点。</td>
+</tr>
+<tr>
+<td><code>/bookstore/*</code></td>
+<td>选取 bookstore 元素的所有子元素。</td>
+</tr>
+<tr>
+<td><code>//*</code></td>
+<td>选取文档中的所有元素。</td>
+</tr>
+<tr>
+<td><code>//title[@*]</code></td>
+<td>选取所有带有属性的 title 元素。</td>
 </tr>
 </tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">async</span> <span class="hljs-keyword">with</span> async_playwright() <span class="hljs-keyword">as</span> p: <span class="hljs-comment">#Playwright 的“启动写法</span><br>    browser = <span class="hljs-keyword">await</span> p.chromium.launch(<br>                            headless=<span class="hljs-literal">True</span>,  <span class="hljs-comment"># 无界面运行，省资源。</span><br>                            args=[<br>                                <span class="hljs-string">&#x27;--disable-gpu&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--disable-dev-shm-usage&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--no-sandbox&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--disable-blink-features=AutomationControlled&#x27;</span>,    <span class="hljs-comment">#去掉 navigator.webdriver=true 等自动化特征，降低被反爬识别概率。</span><br>                                <span class="hljs-string">&#x27;--disable-features=IsolateOrigins,site-per-process&#x27;</span>,<br>                                <span class="hljs-string">&#x27;--disable-site-isolation-trials&#x27;</span><br>                            ],<br>                            proxy=playwright_proxy<br>                        )<br>    iphone = p.devices[<span class="hljs-string">&quot;iPhone 12&quot;</span>] <span class="hljs-comment"># Playwright 自带的「iPhone 12」设备配置（含视口、UA、触控等）。</span><br>                    <span class="hljs-comment">#创建一个新的浏览器上下文（Context），相当于一个独立的浏览器环境（类似于一个新的窗口或用户）。</span><br>                    context = <span class="hljs-keyword">await</span> browser.new_context(<br>                        **iphone,<br>                        extra_http_headers=&#123;<br>                            <span class="hljs-string">&quot;Referer&quot;</span>: <span class="hljs-string">&quot;https://mp.weixin.qq.com/&quot;</span>,<br>                            <span class="hljs-string">&quot;User-Agent&quot;</span>: <span class="hljs-string">&quot;Mozilla/5.0 (iPhone; CPU iPhone OS 16_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.42(0x18002a2e) NetType/WIFI Language/zh_CN&quot;</span>,<br>                            <span class="hljs-string">&quot;Accept&quot;</span>: <span class="hljs-string">&quot;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&quot;</span>,<br>                            <span class="hljs-string">&quot;Accept-Language&quot;</span>: <span class="hljs-string">&quot;zh-CN,zh;q=0.9,en;q=0.8&quot;</span>,<br>                            <span class="hljs-string">&quot;Accept-Encoding&quot;</span>: <span class="hljs-string">&quot;gzip, deflate, br&quot;</span>,<br>                            <span class="hljs-string">&quot;Connection&quot;</span>: <span class="hljs-string">&quot;keep-alive&quot;</span>,<br>                            <span class="hljs-string">&quot;Upgrade-Insecure-Requests&quot;</span>: <span class="hljs-string">&quot;1&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-Dest&quot;</span>: <span class="hljs-string">&quot;document&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-Mode&quot;</span>: <span class="hljs-string">&quot;navigate&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-Site&quot;</span>: <span class="hljs-string">&quot;same-origin&quot;</span>,<br>                            <span class="hljs-string">&quot;Sec-Fetch-User&quot;</span>: <span class="hljs-string">&quot;?1&quot;</span>,<br>                            <span class="hljs-string">&quot;Cache-Control&quot;</span>: <span class="hljs-string">&quot;max-age=0&quot;</span><br>                        &#125;<br>                    )<br>                    <span class="hljs-comment"># 每个新页面加载前注入自定义 JavaScript 脚本。</span><br>                    <span class="hljs-keyword">await</span> context.add_init_script(<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">                        Object.defineProperty(navigator, &#x27;webdriver&#x27;, &#123;</span><br><span class="hljs-string">                            get: () =&gt; undefined</span><br><span class="hljs-string">                        &#125;);</span><br><span class="hljs-string">                        Object.defineProperty(navigator, &#x27;plugins&#x27;, &#123;</span><br><span class="hljs-string">                            get: () =&gt; [1, 2, 3, 4, 5]</span><br><span class="hljs-string">                        &#125;);</span><br><span class="hljs-string">                        Object.defineProperty(navigator, &#x27;languages&#x27;, &#123;</span><br><span class="hljs-string">                            get: () =&gt; [&#x27;zh-CN&#x27;, &#x27;zh&#x27;]</span><br><span class="hljs-string">                        &#125;);</span><br><span class="hljs-string">                    &quot;&quot;&quot;</span>)<br>                    <span class="hljs-comment"># 创建页面并访问 同一个上下文下的页面共享 Cookie、存储等环境</span><br>                    page = <span class="hljs-keyword">await</span> context.new_page()<br>                     <span class="hljs-keyword">try</span>:<br>                        logger.info(<span class="hljs-string">f&quot;[PDF] 开始访问URL: <span class="hljs-subst">&#123;url&#125;</span>&quot;</span>)<br>                        <span class="hljs-comment"># wait_until=等待页面网络空闲（即没有新的网络请求），通常表示页面和资源加载完成。</span><br>                        <span class="hljs-keyword">await</span> page.goto(url, wait_until=<span class="hljs-string">&quot;networkidle&quot;</span>, timeout=<span class="hljs-number">10000</span>)<br>                        logger.info(<span class="hljs-string">&quot;[PDF] 页面加载完成&quot;</span>)<br>                        <span class="hljs-keyword">try</span>:<br>                            body_text = <span class="hljs-keyword">await</span> page.inner_text(<span class="hljs-string">&#x27;body&#x27;</span>)<br>                        <span class="hljs-keyword">except</span> Exception:<br>                            body_text = <span class="hljs-string">&quot;&quot;</span><br>                        <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;安全验证&quot;</span> <span class="hljs-keyword">in</span> body_text <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;网络超时&quot;</span> <span class="hljs-keyword">in</span> body_text <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;网络不给力&quot;</span> <span class="hljs-keyword">in</span> body_text:<br>                            logger.warning(<span class="hljs-string">&quot;[PDF] 检测到安全验证或网络超时提示，移除当前代理并重试&quot;</span>)<br>                            <span class="hljs-keyword">if</span> proxy:<br>                                proxy_pool.remove_proxy(proxy)<br>                            <span class="hljs-keyword">continue</span><br>                        error_text = <span class="hljs-keyword">await</span> page.query_selector(<span class="hljs-string">&quot;div.weui-msg__title&quot;</span>)<br>                        <span class="hljs-keyword">if</span> error_text:<br>                            error_content = <span class="hljs-keyword">await</span> error_text.inner_text()<br>                            <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;环境异常&quot;</span> <span class="hljs-keyword">in</span> error_content:<br>                                <span class="hljs-keyword">if</span> proxy:<br>                                    logger.warning(<span class="hljs-string">f&quot;[PDF] 检测到环境异常，移除代理: <span class="hljs-subst">&#123;proxy&#125;</span>&quot;</span>)<br>                                    proxy_pool.remove_proxy(proxy)<br>                                <span class="hljs-keyword">raise</span> Exception(<span class="hljs-string">&quot;微信环境检测异常，已移除当前代理，请稍后重试&quot;</span>)<br>                        title = <span class="hljs-keyword">await</span> page.title()<br>                        meta_img = <span class="hljs-keyword">await</span> page.query_selector(<span class="hljs-string">&quot;meta[property=&#x27;og:image&#x27;]&quot;</span>)<br>                        <span class="hljs-keyword">if</span> meta_img:<br>                            cover_image_url = <span class="hljs-keyword">await</span> meta_img.get_attribute(<span class="hljs-string">&quot;content&quot;</span>)<br></code></pre></td></tr></table></figure>
+<h2 id="实战"><a href="#实战" class="headerlink" title="实战"></a><em>实战</em></h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">url = <span class="hljs-string">&#x27;https://www.douguo.com/&#x27;</span><br>res = requests.get(url)<br><span class="hljs-built_in">print</span>(res.text)<br>html = etree.HTML(res.text)<br><span class="hljs-comment"># /从根节点选取（取子节点）。</span><br>rest = html.xpath(<span class="hljs-string">&#x27;/html/head/title/text()&#x27;</span>)  <span class="hljs-comment"># 返回Element对象</span><br><span class="hljs-built_in">print</span>(rest)<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># // 获取任何位置的数据，不从根路径出发</span><br>title_text = html.xpath(<span class="hljs-string">&#x27;//title/text()&#x27;</span>)  <span class="hljs-comment"># 一般会获取多个数据</span><br><span class="hljs-built_in">print</span>(title_text)<br></code></pre></td></tr></table></figure>
+
+<p>html &#x3D; etree.HTML(res.text)<br>这行代码的作用是将 HTTP 响应中的 HTML 文本解析为一个 Element 对象，以便后续对其进行操作，例如提取数据、修改内容、查找元素等等。其中，etree 是 Python 的一个第三方库，可以用来解析 XML 和 HTML 文本。HTML 是一种标记语言，用于构建网页和 Web 应用程序的用户界面。<br>我们在使用的时候，需要导入，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">import</span> requests<br><span class="hljs-keyword">from</span> lxml <span class="hljs-keyword">import</span> etree<br><span class="hljs-keyword">from</span> tabulate <span class="hljs-keyword">import</span> tabulate<br>url = <span class="hljs-string">&#x27;https://www.douguo.com/&#x27;</span><br>res = requests.get(url)<br><span class="hljs-built_in">print</span>(res.text)<br><span class="hljs-comment"># html = etree.HTML(res.text)</span><br>html = etree.HTML(res.text)<br>name = html.xpath(<span class="hljs-string">f&#x27;//*[@id=&quot;content&quot;]/ul[1]/li[1]/div/a/text()&#x27;</span>)<br><span class="hljs-built_in">print</span>(name)<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
@@ -416,8 +472,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Playwright</div>
-      <div>http://example.com/2025/08/01/playwright/</div>
+      <div>XPath</div>
+      <div>http://example.com/2025/08/01/XPath/</div>
     </div>
     <div class="license-meta">
       
@@ -461,9 +517,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/" title="bs4">
+                      <a href="/2025/08/01/playwright/" title="Playwright">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">bs4</span>
+                        <span class="hidden-mobile">Playwright</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -471,8 +527,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/01/XPath/" title="XPath">
-                        <span class="hidden-mobile">XPath</span>
+                      <a href="/2025/08/01/Flask%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0_hexo_cleaned/" title="Flask">
+                        <span class="hidden-mobile">Flask</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
