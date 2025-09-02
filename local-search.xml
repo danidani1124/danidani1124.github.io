@@ -4,19 +4,6 @@
   
   
   <entry>
-    <title></title>
-    <link href="/2025/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/"/>
-    <url>/2025/08/26/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/</url>
-    
-    <content type="html"><![CDATA[<h1 id="FastAPI"><a href="#FastAPI" class="headerlink" title="FastAPI"></a>FastAPI</h1><p><code>FastAPI 是一个用 Python 写 RESTful API 的“现代化、飞快的框架”，帮你几行代码就搭好一个高性能的 Web 接口。</code></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br>app = FastAPI()<br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">root</span>():<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;Hello World&quot;</span>&#125;<br></code></pre></td></tr></table></figure><h1 id="并发-async-await"><a href="#并发-async-await" class="headerlink" title="并发 async &#x2F; await"></a>并发 async &#x2F; await</h1><ul><li>如果你正在使用第三方库，它们会告诉你使用 await 关键字来调用它们，就像这样：<br><code>results = await some_library()</code></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_results</span>():<br>    results = <span class="hljs-keyword">await</span> some_library()<br>    <span class="hljs-keyword">return</span> results<br></code></pre></td></tr></table></figure><p><strong>你只能在被 async def 创建的函数内使用 await</strong></p>]]></content>
-    
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>study</title>
     <link href="/2025/08/21/study/"/>
     <url>/2025/08/21/study/</url>
@@ -141,6 +128,31 @@
       <tag>Python</tag>
       
       <tag>爬虫</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>bs4</title>
+    <link href="/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/"/>
+    <url>/2025/08/01/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/FastApi/</url>
+    
+    <content type="html"><![CDATA[<h1 id="FastAPI"><a href="#FastAPI" class="headerlink" title="FastAPI"></a>FastAPI</h1><p><code>FastAPI 是一个用 Python 写 RESTful API 的“现代化、飞快的框架”，帮你几行代码就搭好一个高性能的 Web 接口。</code></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> fastapi <span class="hljs-keyword">import</span> FastAPI<br>app = FastAPI()<br><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&quot;/&quot;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">root</span>():<br>    <span class="hljs-keyword">return</span> &#123;<span class="hljs-string">&quot;message&quot;</span>: <span class="hljs-string">&quot;Hello World&quot;</span>&#125;<br></code></pre></td></tr></table></figure><h1 id="并发-async-await"><a href="#并发-async-await" class="headerlink" title="并发 async &#x2F; await"></a>并发 async &#x2F; await</h1><ul><li>如果你正在使用第三方库，它们会告诉你使用 await 关键字来调用它们，就像这样：<br><code>results = await some_library()</code></li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">@app.get(<span class="hljs-params"><span class="hljs-string">&#x27;/&#x27;</span></span>)</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">def</span> <span class="hljs-title function_">read_results</span>():<br>    results = <span class="hljs-keyword">await</span> some_library()<br>    <span class="hljs-keyword">return</span> results<br></code></pre></td></tr></table></figure><p><strong>你只能在被 async def 创建的函数内使用 await</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Python框架</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
       
     </tags>
     
