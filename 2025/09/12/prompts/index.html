@@ -19,23 +19,22 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="requests1234import requests   #加载requests模块r &#x3D; requests.get(&#x27;https:&#x2F;&#x2F;www.baidu.com&#x27;) #爬取url的网址信息print(r.status_code)   #查看状态200为正常，404为错误r.headers                #获得头部信息   response对象的属性   属性">
+    <meta name="description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344def reflect(chat_mdl, history: list[dict], tool_call_res: list[Tuple]):    tool_calls &#x3D; [&#123;&quot;name&quot;: p[0], &amp;q">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Scrapy">
-<meta property="og:url" content="http://example.com/2025/09/02/requests%E5%BA%93/index.html">
+<meta property="og:title" content="Ragflow0.20.4(prompts)">
+<meta property="og:url" content="http://example.com/2025/09/12/prompts/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="requests1234import requests   #加载requests模块r &#x3D; requests.get(&#x27;https:&#x2F;&#x2F;www.baidu.com&#x27;) #爬取url的网址信息print(r.status_code)   #查看状态200为正常，404为错误r.headers                #获得头部信息   response对象的属性   属性">
+<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435363738394041424344def reflect(chat_mdl, history: list[dict], tool_call_res: list[Tuple]):    tool_calls &#x3D; [&#123;&quot;name&quot;: p[0], &amp;q">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-09-02T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-09-02T05:46:17.143Z">
+<meta property="article:published_time" content="2025-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-18T07:58:23.344Z">
 <meta property="article:author" content="WZN">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="大模型框架">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Scrapy - 哒妮哒妮</title>
+  <title>Ragflow0.20.4(prompts) - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Scrapy"></span>
+            <span id="subtitle" data-typed-text="Ragflow0.20.4(prompts)"></span>
           
         </div>
 
@@ -212,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-09-02 09:11" pubdate>
-          2025年9月2日 上午
+        <time datetime="2025-09-12 00:00" pubdate>
+          2025年9月12日 凌晨
         </time>
       </span>
     
@@ -224,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          478 字
         
       </span>
     
@@ -235,7 +234,7 @@
         
         
         
-          11 分钟
+          4 分钟
         
       </span>
     
@@ -272,108 +271,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Scrapy</h1>
+            <h1 id="seo-header">Ragflow0.20.4(prompts)</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests   <span class="hljs-comment">#加载requests模块</span><br>r = requests.get(<span class="hljs-string">&#x27;https://www.baidu.com&#x27;</span>) <span class="hljs-comment">#爬取url的网址信息</span><br><span class="hljs-built_in">print</span>(r.status_code)   <span class="hljs-comment">#查看状态200为正常，404为错误</span><br>r.headers                <span class="hljs-comment">#获得头部信息</span><br></code></pre></td></tr></table></figure>
-
-
-<h2 id="response对象的属性"><a href="#response对象的属性" class="headerlink" title="response对象的属性"></a>response对象的属性</h2><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>r.status_code</code></td>
-<td>HTTP 请求的返回状态</td>
-</tr>
-<tr>
-<td><code>r.text</code></td>
-<td>HTTP 响应内容的字符串形式，即 URL 对应页面的文本内容</td>
-</tr>
-<tr>
-<td><code>r.encoding</code></td>
-<td>从 HTTP header 中推测的响应内容编码方式</td>
-</tr>
-<tr>
-<td><code>r.apparent_encoding</code></td>
-<td>从内容中分析出的响应内容编码方式（备选编码方式）</td>
-</tr>
-<tr>
-<td><code>r.content</code></td>
-<td>HTTP 响应内容的二进制形式</td>
-</tr>
-</tbody></table>
-<h2 id="使用-re-模块匹配字符串"><a href="#使用-re-模块匹配字符串" class="headerlink" title="使用 re 模块匹配字符串"></a>使用 re 模块匹配字符串</h2><ul>
-<li>使用 match() 方法进行匹配<br>  match() 方法用于从字符串的开始处进行匹配，如果在起始位置匹配成功，则返回 Match 对象，否则返回 None。其语法格式如下：(一旦当第一个字母不符合条件时，则不再进行匹配)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.<span class="hljs-keyword">match</span>(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
-<p><code>pattern：表示模式字符串，由要匹配的正则表达式转换而来。string：表示要匹配的字符串。</code></p>
-<ul>
-<li>使用 search() 方法进行匹配<br>  search() 方法用于在整个字符串中搜索第一个匹配的值，如果匹配成功，则返回 Match 对象，否则返回 None。search() 方法的语法格式如下：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.search(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
-
-<ul>
-<li>使用 findall() 方法进行匹配<br>  在整个字符串中搜索所有符合正则表达式的字符串，并以列表的形式返回所有符合条件的结果。如果匹配不成功，返回空列表。findall() 方法的语法格式如下：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.findall(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
-
-<h2 id="使用-re-模块替换字符串"><a href="#使用-re-模块替换字符串" class="headerlink" title="使用 re 模块替换字符串"></a>使用 re 模块替换字符串</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.sub(pattern, repl, string, count, flags)<br></code></pre></td></tr></table></figure>
-<p><code>pattern：表示模式字符串，要被替换的。repl：用来替换的字符串。string：表示要被查找替换的原始字符串。count：可选参数，表示模式匹配后替换的最大次数，默认值为 0，表示替换所有的匹配。flags：可选参数，表示标志位，用于控制匹配方式，如是否区分字母大小写、是否包括换行等等。</code></p>
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><code>“^” 表示行的开始，“$” 表示行的结尾</code></p>
-<table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>说明</th>
-<th>举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>.</code></td>
-<td>匹配除换行符以外的任意字符</td>
-<td><code>a.c</code> 可匹配“acdin8Rit”中的 <code>a、c、d、8、R、it</code></td>
-</tr>
-<tr>
-<td><code>\w</code></td>
-<td>匹配字母、数字、下划线或汉字</td>
-<td><code>\w</code> 可匹配“miO次9inqw”中的 <code>m、i、O、次、9、q、w</code>，不能匹配空格</td>
-</tr>
-<tr>
-<td><code>\W</code></td>
-<td>匹配除 <code>\w</code> 以外的字符</td>
-<td><code>\W</code> 可匹配“92dinsc”中的 <code>in</code>，不能匹配 <code>9、2、d、s、c</code></td>
-</tr>
-<tr>
-<td><code>\s</code></td>
-<td>匹配单个空白符（包括 Tab 和换行）</td>
-<td><code>\s</code> 可匹配“c\t8B”中的 <code>\t</code></td>
-</tr>
-<tr>
-<td><code>\S</code></td>
-<td>匹配除空白符以外的所有字符</td>
-<td><code>\S</code> 可匹配“字we2it90”中的 <code>字、w、e、2、9、0</code></td>
-</tr>
-<tr>
-<td><code>\b</code></td>
-<td>匹配单词边界（开始或结束）</td>
-<td>在“there were deserts where”中，<code>\bw</code> 匹配 <code>were</code> 的 <code>w</code>，不匹配 <code>where</code> 的 <code>w</code></td>
-</tr>
-<tr>
-<td><code>\d</code></td>
-<td>匹配数字</td>
-<td><code>\d</code> 可匹配“dg34&amp;”中的 <code>3、4</code></td>
-</tr>
-</tbody></table>
-<p>常用元字符<br>字符	描述	实例	试一试<br>[]	一组字符	“[a-m]”	<br>\	示意特殊序列（也可用于转义特殊字符）	“\d”	<br>.	任何字符（换行符除外）	“he..o”	<br>^	起始于	“^hello”	<br>$	结束于	“world$”	<br>*	零次或多次出现	“aix*”	<br>+	一次或多次出现	“aix+”	<br>{}	确切地指定的出现次数	“al{2}”	<br><code>	</code>	两者任一	<code>&quot;falls	stays&quot;</code>	<br>特殊序列<br>字符	描述	实例<br>\A	如果指定的字符位于字符串的开头，则返回匹配项	“\AThe”<br>\b	返回指定字符位于单词的开头或末尾的匹配项	r”\bain”, r”ain\b”<br>\B	返回指定字符存在的匹配项，但不在单词的开头（或结尾处）	r”\Bain”, r”ain\B”<br>\d	返回字符串包含数字的匹配项（数字 0-9）	“\d”<br>\D	返回字符串不包含数字的匹配项	“\D”<br>\s	返回字符串包含空白字符的匹配项	“\s”<br>\S	返回字符串不包含空白字符的匹配项	“\S”<br>\w	返回一个匹配项，其中字符串包含任何单词字符（a-z, A-Z, 0-9, _）	“\w”<br>\W	返回一个匹配项，其中字符串不包含任何单词字符	“\W”<br>\Z	如果指定的字符位于字符串的末尾，则返回匹配项	“Spain\Z”<br>集合<br>表达式	描述<br>[arn]	返回一个匹配项，其中存在指定字符（a, r 或 n）之一<br>[a-n]	返回字母顺序 a 和 n 之间的任意小写字符匹配项<br>[^arn]	返回除 a、r 和 n 之外的任意字符的匹配项<br>[0123]	返回存在任何指定数字（0、1、2 或 3）的匹配项<br>[0-9]	返回 0 与 9 之间任意数字的匹配<br>[0-5][0-9]	返回介于 0 到 9 之间的任何数字的匹配项<br>[a-zA-Z]	返回字母顺序 a 和 z 之间的任何字符的匹配，小写或大写<br>[+]	在集合中，+, *, ., <code>	, (), $, &#123;&#125;没有特殊含义，因此[+]表示返回字符串中任何+</code> 字符的匹配项<br>正则函数<br>findall() 函数返回包含所有匹配项的列表。</p>
-<p>search() 函数搜索字符串中的匹配项，如果存在匹配则返回 Match 对象。如果有多个匹配，则仅返回首个匹配项。</p>
-<p>sub() 函数把匹配替换为您选择的文本。</p>
-
+                <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">reflect</span>(<span class="hljs-params">chat_mdl, history: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">dict</span>], tool_call_res: <span class="hljs-built_in">list</span>[<span class="hljs-type">Tuple</span>]</span>):<br>    tool_calls = [&#123;<span class="hljs-string">&quot;name&quot;</span>: p[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;result&quot;</span>: p[<span class="hljs-number">1</span>]&#125; <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> tool_call_res]<br>    goal = history[<span class="hljs-number">1</span>][<span class="hljs-string">&quot;content&quot;</span>]    <span class="hljs-comment">#从对话历史 history 的第二个元素（索引为 1）中提取 &quot;content&quot; 字段，赋值给 goal</span><br>    template = PROMPT_JINJA_ENV.from_string(REFLECT)    <span class="hljs-comment">#使用 Jinja2 模板引擎（PROMPT_JINJA_ENV）从字符串 REFLECT 创建一个模板对象。</span><br>    user_prompt = template.render(goal=goal, tool_calls=tool_calls)<br>    hist = deepcopy(history)<br>    <span class="hljs-keyword">if</span> hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;role&quot;</span>] == <span class="hljs-string">&quot;user&quot;</span>:<br>        hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;content&quot;</span>] += user_prompt<br>    <span class="hljs-keyword">else</span>:<br>        hist.append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: user_prompt&#125;)<br>    _, msg = message_fit_in(hist, chat_mdl.max_length)  <span class="hljs-comment">#_ 表示忽略第一个返回值，msg 是一个处理后的消息列表，可能是截断后的对话历史。</span><br>    ans = chat_mdl.chat(msg[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;content&quot;</span>], msg[<span class="hljs-number">1</span>:]) <span class="hljs-comment">#第一个参数 msg[0][&quot;content&quot;] 是调整后的消息列表的第一个消息内容（可能是用户提示）。第二个参数 msg[1:] 是剩余的对话历史（列表切片）。</span><br>    ans = re.sub(<span class="hljs-string">r&quot;^.*&lt;/think&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, ans, flags=re.DOTALL)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">**Observation**</span><br><span class="hljs-string">&#123;&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">**Reflection**</span><br><span class="hljs-string">&#123;&#125;</span><br><span class="hljs-string">    &quot;&quot;&quot;</span>.<span class="hljs-built_in">format</span>(json.dumps(tool_calls, ensure_ascii=<span class="hljs-literal">False</span>, indent=<span class="hljs-number">2</span>), ans)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">next_step</span>(<span class="hljs-params">chat_mdl, history:<span class="hljs-built_in">list</span>, tools_description: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">dict</span>], task_desc</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> tools_description:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>    desc = tool_schema(tools_description)   <br>    template = PROMPT_JINJA_ENV.from_string(NEXT_STEP)<span class="hljs-comment">#是可以渲染的 Jinja2 模板对象，用于生成用户提示。</span><br>    user_prompt = <span class="hljs-string">&quot;\nWhat&#x27;s the next tool to call? If ready OR IMPOSSIBLE TO BE READY, then call `complete_task`.&quot;</span><br>    hist = deepcopy(history)<br>    <span class="hljs-keyword">if</span> hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;role&quot;</span>] == <span class="hljs-string">&quot;user&quot;</span>:<br>        hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;content&quot;</span>] += user_prompt<br>    <span class="hljs-keyword">else</span>:<br>        hist.append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: user_prompt&#125;)<br><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    hist[1:]：传入对话历史从第二个元素开始（忽略第一个元素，可能是系统提示）。</span><br><span class="hljs-string">    stop=[&quot;&lt;|stop|&gt;&quot;]：指定停止标志，当模型生成 &lt;|stop|&gt; 时停止输出。</span><br><span class="hljs-string">    json_str 是聊天模型生成的回复，预计是一个 JSON 格式的字符串，表示下一步要调用的工具。</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    json_str = chat_mdl.chat(template.render(task_analisys=task_desc, desc=desc, today=datetime.datetime.now().strftime(<span class="hljs-string">&quot;%Y-%m-%d&quot;</span>)),<br>                             hist[<span class="hljs-number">1</span>:], stop=[<span class="hljs-string">&quot;&lt;|stop|&gt;&quot;</span>])<br>    tk_cnt = num_tokens_from_string(json_str)<br>    json_str = re.sub(<span class="hljs-string">r&quot;^.*&lt;/think&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, json_str, flags=re.DOTALL)<br>    <span class="hljs-keyword">return</span> json_str, tk_cnt<br></code></pre></td></tr></table></figure>
                 
               </div>
             
@@ -391,7 +294,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%88%AC%E8%99%AB/" class="category-chain-item">爬虫</a>
+  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6/" class="category-chain-item">大模型框架</a>
   
   
 
@@ -406,9 +309,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python/" class="print-no-link">#Python</a>
-      
-        <a href="/tags/%E7%88%AC%E8%99%AB/" class="print-no-link">#爬虫</a>
+        <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6/" class="print-no-link">#大模型框架</a>
       
     </div>
   
@@ -420,8 +321,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Scrapy</div>
-      <div>http://example.com/2025/09/02/requests库/</div>
+      <div>Ragflow0.20.4(prompts)</div>
+      <div>http://example.com/2025/09/12/prompts/</div>
     </div>
     <div class="license-meta">
       
@@ -433,7 +334,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年9月2日</div>
+          <div>2025年9月12日</div>
         </div>
       
       
@@ -465,9 +366,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/09/06/Ragflow0.20.4/" title="Ragflow0.20.4">
+                      <a href="/2025/09/16/agent_with_tools/" title="Ragflow0.20.4(agent_with_tools)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ragflow0.20.4</span>
+                        <span class="hidden-mobile">Ragflow0.20.4(agent_with_tools)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -475,8 +376,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/21/study/" title="study">
-                        <span class="hidden-mobile">study</span>
+                      <a href="/2025/09/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/Redis/" title="Redis">
+                        <span class="hidden-mobile">Redis</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

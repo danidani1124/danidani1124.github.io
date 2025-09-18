@@ -19,23 +19,22 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="requests1234import requests   #加载requests模块r &#x3D; requests.get(&#x27;https:&#x2F;&#x2F;www.baidu.com&#x27;) #爬取url的网址信息print(r.status_code)   #查看状态200为正常，404为错误r.headers                #获得头部信息   response对象的属性   属性">
+    <meta name="description" content="Redis一、Redis 的物理结构Redis 的物理结构是：Redis 由一个或多个 Redis 服务器（指运行 Redis 服务器程序的机器）组成，每个 Redis 服务器由一个或多个 Redis 数据库组成，而每个 Redis 数据库由多个 key-value 组成。┌—————-Redis 进程—————-┐│  默认 16 个逻辑库（DB0 ~ DB15）          ││  彼此">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Scrapy">
-<meta property="og:url" content="http://example.com/2025/09/02/requests%E5%BA%93/index.html">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://example.com/2025/09/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/Redis/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="requests1234import requests   #加载requests模块r &#x3D; requests.get(&#x27;https:&#x2F;&#x2F;www.baidu.com&#x27;) #爬取url的网址信息print(r.status_code)   #查看状态200为正常，404为错误r.headers                #获得头部信息   response对象的属性   属性">
+<meta property="og:description" content="Redis一、Redis 的物理结构Redis 的物理结构是：Redis 由一个或多个 Redis 服务器（指运行 Redis 服务器程序的机器）组成，每个 Redis 服务器由一个或多个 Redis 数据库组成，而每个 Redis 数据库由多个 key-value 组成。┌—————-Redis 进程—————-┐│  默认 16 个逻辑库（DB0 ~ DB15）          ││  彼此">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-09-02T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-09-02T05:46:17.143Z">
+<meta property="article:published_time" content="2025-09-10T01:11:32.000Z">
+<meta property="article:modified_time" content="2025-09-10T06:09:08.956Z">
 <meta property="article:author" content="WZN">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="爬虫">
+<meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Scrapy - 哒妮哒妮</title>
+  <title>Redis - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -201,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Scrapy"></span>
+            <span id="subtitle" data-typed-text="Redis"></span>
           
         </div>
 
@@ -212,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-09-02 09:11" pubdate>
-          2025年9月2日 上午
+        <time datetime="2025-09-10 09:11" pubdate>
+          2025年9月10日 上午
         </time>
       </span>
     
@@ -224,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          329 字
         
       </span>
     
@@ -235,7 +234,7 @@
         
         
         
-          11 分钟
+          3 分钟
         
       </span>
     
@@ -272,107 +271,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Scrapy</h1>
+            <h1 id="seo-header">Redis</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="requests"><a href="#requests" class="headerlink" title="requests"></a>requests</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> requests   <span class="hljs-comment">#加载requests模块</span><br>r = requests.get(<span class="hljs-string">&#x27;https://www.baidu.com&#x27;</span>) <span class="hljs-comment">#爬取url的网址信息</span><br><span class="hljs-built_in">print</span>(r.status_code)   <span class="hljs-comment">#查看状态200为正常，404为错误</span><br>r.headers                <span class="hljs-comment">#获得头部信息</span><br></code></pre></td></tr></table></figure>
-
-
-<h2 id="response对象的属性"><a href="#response对象的属性" class="headerlink" title="response对象的属性"></a>response对象的属性</h2><table>
-<thead>
-<tr>
-<th>属性</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>r.status_code</code></td>
-<td>HTTP 请求的返回状态</td>
-</tr>
-<tr>
-<td><code>r.text</code></td>
-<td>HTTP 响应内容的字符串形式，即 URL 对应页面的文本内容</td>
-</tr>
-<tr>
-<td><code>r.encoding</code></td>
-<td>从 HTTP header 中推测的响应内容编码方式</td>
-</tr>
-<tr>
-<td><code>r.apparent_encoding</code></td>
-<td>从内容中分析出的响应内容编码方式（备选编码方式）</td>
-</tr>
-<tr>
-<td><code>r.content</code></td>
-<td>HTTP 响应内容的二进制形式</td>
-</tr>
-</tbody></table>
-<h2 id="使用-re-模块匹配字符串"><a href="#使用-re-模块匹配字符串" class="headerlink" title="使用 re 模块匹配字符串"></a>使用 re 模块匹配字符串</h2><ul>
-<li>使用 match() 方法进行匹配<br>  match() 方法用于从字符串的开始处进行匹配，如果在起始位置匹配成功，则返回 Match 对象，否则返回 None。其语法格式如下：(一旦当第一个字母不符合条件时，则不再进行匹配)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.<span class="hljs-keyword">match</span>(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
-<p><code>pattern：表示模式字符串，由要匹配的正则表达式转换而来。string：表示要匹配的字符串。</code></p>
+                <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="一、Redis-的物理结构"><a href="#一、Redis-的物理结构" class="headerlink" title="一、Redis 的物理结构"></a>一、Redis 的物理结构</h2><p><code>Redis 的物理结构是：Redis 由一个或多个 Redis 服务器（指运行 Redis 服务器程序的机器）组成，每个 Redis 服务器由一个或多个 Redis 数据库组成，而每个 Redis 数据库由多个 key-value 组成。</code><br>┌—————-Redis 进程—————-┐<br>│  默认 16 个逻辑库（DB0 ~ DB15）          │<br>│  彼此隔离，用 SELECT 0&#x2F;1&#x2F;2… 切换      │<br>└—————————————–┘</p>
 <ul>
-<li>使用 search() 方法进行匹配<br>  search() 方法用于在整个字符串中搜索第一个匹配的值，如果匹配成功，则返回 Match 对象，否则返回 None。search() 方法的语法格式如下：</li>
+<li>端口同是 6379，DB 之间数据不互通</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.search(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
+<h2 id="二、每个-DB-里只有一层结构：键→值"><a href="#二、每个-DB-里只有一层结构：键→值" class="headerlink" title="二、每个 DB 里只有一层结构：键→值"></a>二、每个 DB 里只有一层结构：键→值</h2><h2 id="DB1-本质就是一个大-Map：key-value"><a href="#DB1-本质就是一个大-Map：key-value" class="headerlink" title="DB1 本质就是一个大 Map：key               value"></a>DB1 本质就是一个大 Map：<br>key               value</h2><p>celery            list [“task1”, “task2” …]   ← 队列<br>celery.metadata   hash  {task1: {…}}         ← 任务元数据<br>user:123          hash  {name: “tom”}           ← 你自己存的业务数据<br>ragflow::lock::xx string 1                      ← 分布式锁</p>
+<p><code>“队列”只是值类型为 list 的一个普通 key，名字随便取（默认叫 celery）。</code></p>
+<h2 id="三、Redis-的数据类型三、Celery-的“队列”究竟怎么放"><a href="#三、Redis-的数据类型三、Celery-的“队列”究竟怎么放" class="headerlink" title="三、Redis 的数据类型三、Celery 的“队列”究竟怎么放"></a>三、Redis 的数据类型三、Celery 的“队列”究竟怎么放</h2><p>1.派单时<br>celery.send_task(…, queue&#x3D;’celery’)<br>内部执行：<br>LPUSH celery  {“id”:”123”, “task”:”ragflow.tasks.parse_document”}</p>
+<p>2.Worker 启动时<br>BRPOP celery   ← 阻塞式弹出，谁先到谁先干</p>
+<p>3.结论</p>
+<!-- 队列 = 一个 list 类型的键
+生产者是 Web 进程，消费者是 Celery Worker
+不同队列就是不同 key 名，如 parse、ocr、index... -->
 
-<ul>
-<li>使用 findall() 方法进行匹配<br>  在整个字符串中搜索所有符合正则表达式的字符串，并以列表的形式返回所有符合条件的结果。如果匹配不成功，返回空列表。findall() 方法的语法格式如下：</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.findall(pattern, string, [flags])<br></code></pre></td></tr></table></figure>
-
-<h2 id="使用-re-模块替换字符串"><a href="#使用-re-模块替换字符串" class="headerlink" title="使用 re 模块替换字符串"></a>使用 re 模块替换字符串</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">re.sub(pattern, repl, string, count, flags)<br></code></pre></td></tr></table></figure>
-<p><code>pattern：表示模式字符串，要被替换的。repl：用来替换的字符串。string：表示要被查找替换的原始字符串。count：可选参数，表示模式匹配后替换的最大次数，默认值为 0，表示替换所有的匹配。flags：可选参数，表示标志位，用于控制匹配方式，如是否区分字母大小写、是否包括换行等等。</code></p>
-<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p><code>“^” 表示行的开始，“$” 表示行的结尾</code></p>
-<table>
-<thead>
-<tr>
-<th>元字符</th>
-<th>说明</th>
-<th>举例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>.</code></td>
-<td>匹配除换行符以外的任意字符</td>
-<td><code>a.c</code> 可匹配“acdin8Rit”中的 <code>a、c、d、8、R、it</code></td>
-</tr>
-<tr>
-<td><code>\w</code></td>
-<td>匹配字母、数字、下划线或汉字</td>
-<td><code>\w</code> 可匹配“miO次9inqw”中的 <code>m、i、O、次、9、q、w</code>，不能匹配空格</td>
-</tr>
-<tr>
-<td><code>\W</code></td>
-<td>匹配除 <code>\w</code> 以外的字符</td>
-<td><code>\W</code> 可匹配“92dinsc”中的 <code>in</code>，不能匹配 <code>9、2、d、s、c</code></td>
-</tr>
-<tr>
-<td><code>\s</code></td>
-<td>匹配单个空白符（包括 Tab 和换行）</td>
-<td><code>\s</code> 可匹配“c\t8B”中的 <code>\t</code></td>
-</tr>
-<tr>
-<td><code>\S</code></td>
-<td>匹配除空白符以外的所有字符</td>
-<td><code>\S</code> 可匹配“字we2it90”中的 <code>字、w、e、2、9、0</code></td>
-</tr>
-<tr>
-<td><code>\b</code></td>
-<td>匹配单词边界（开始或结束）</td>
-<td>在“there were deserts where”中，<code>\bw</code> 匹配 <code>were</code> 的 <code>w</code>，不匹配 <code>where</code> 的 <code>w</code></td>
-</tr>
-<tr>
-<td><code>\d</code></td>
-<td>匹配数字</td>
-<td><code>\d</code> 可匹配“dg34&amp;”中的 <code>3、4</code></td>
-</tr>
-</tbody></table>
-<p>常用元字符<br>字符	描述	实例	试一试<br>[]	一组字符	“[a-m]”	<br>\	示意特殊序列（也可用于转义特殊字符）	“\d”	<br>.	任何字符（换行符除外）	“he..o”	<br>^	起始于	“^hello”	<br>$	结束于	“world$”	<br>*	零次或多次出现	“aix*”	<br>+	一次或多次出现	“aix+”	<br>{}	确切地指定的出现次数	“al{2}”	<br><code>	</code>	两者任一	<code>&quot;falls	stays&quot;</code>	<br>特殊序列<br>字符	描述	实例<br>\A	如果指定的字符位于字符串的开头，则返回匹配项	“\AThe”<br>\b	返回指定字符位于单词的开头或末尾的匹配项	r”\bain”, r”ain\b”<br>\B	返回指定字符存在的匹配项，但不在单词的开头（或结尾处）	r”\Bain”, r”ain\B”<br>\d	返回字符串包含数字的匹配项（数字 0-9）	“\d”<br>\D	返回字符串不包含数字的匹配项	“\D”<br>\s	返回字符串包含空白字符的匹配项	“\s”<br>\S	返回字符串不包含空白字符的匹配项	“\S”<br>\w	返回一个匹配项，其中字符串包含任何单词字符（a-z, A-Z, 0-9, _）	“\w”<br>\W	返回一个匹配项，其中字符串不包含任何单词字符	“\W”<br>\Z	如果指定的字符位于字符串的末尾，则返回匹配项	“Spain\Z”<br>集合<br>表达式	描述<br>[arn]	返回一个匹配项，其中存在指定字符（a, r 或 n）之一<br>[a-n]	返回字母顺序 a 和 n 之间的任意小写字符匹配项<br>[^arn]	返回除 a、r 和 n 之外的任意字符的匹配项<br>[0123]	返回存在任何指定数字（0、1、2 或 3）的匹配项<br>[0-9]	返回 0 与 9 之间任意数字的匹配<br>[0-5][0-9]	返回介于 0 到 9 之间的任何数字的匹配项<br>[a-zA-Z]	返回字母顺序 a 和 z 之间的任何字符的匹配，小写或大写<br>[+]	在集合中，+, *, ., <code>	, (), $, &#123;&#125;没有特殊含义，因此[+]表示返回字符串中任何+</code> 字符的匹配项<br>正则函数<br>findall() 函数返回包含所有匹配项的列表。</p>
-<p>search() 函数搜索字符串中的匹配项，如果存在匹配则返回 Match 对象。如果有多个匹配，则仅返回首个匹配项。</p>
-<p>sub() 函数把匹配替换为您选择的文本。</p>
+<h2 id="celery-是什么？"><a href="#celery-是什么？" class="headerlink" title="celery 是什么？"></a>celery 是什么？</h2><p><code>Celery 是一个分布式任务队列，它负责在后台运行一系列任务，比如：派单、OCR、索引、翻译...</code><br>celery 就是“分布式任务调度库”——帮你把“任务”从 Web 端丢到 Redis 队列，再让远程&#x2F;本地的 Worker 把任务捞起来执行。</p>
+<p>Web 进程（生产者） →  Redis（broker 队列） →  Worker（消费者）</p>
 
                 
               </div>
@@ -391,7 +309,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%88%AC%E8%99%AB/" class="category-chain-item">爬虫</a>
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="category-chain-item">数据库</a>
   
   
 
@@ -406,9 +324,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python/" class="print-no-link">#Python</a>
-      
-        <a href="/tags/%E7%88%AC%E8%99%AB/" class="print-no-link">#爬虫</a>
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#数据库</a>
       
     </div>
   
@@ -420,8 +336,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Scrapy</div>
-      <div>http://example.com/2025/09/02/requests库/</div>
+      <div>Redis</div>
+      <div>http://example.com/2025/09/10/测试文章/Redis/</div>
     </div>
     <div class="license-meta">
       
@@ -433,7 +349,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年9月2日</div>
+          <div>2025年9月10日</div>
         </div>
       
       
@@ -465,9 +381,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/09/06/Ragflow0.20.4/" title="Ragflow0.20.4">
+                      <a href="/2025/09/12/prompts/" title="Ragflow0.20.4(prompts)">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ragflow0.20.4</span>
+                        <span class="hidden-mobile">Ragflow0.20.4(prompts)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -475,8 +391,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/08/21/study/" title="study">
-                        <span class="hidden-mobile">study</span>
+                      <a href="/2025/09/10/ragflow0.20.4Canvas/" title="Ragflow0.20.4(Cavans)">
+                        <span class="hidden-mobile">Ragflow0.20.4(Cavans)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

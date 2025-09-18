@@ -27,7 +27,7 @@
 <meta property="og:description" content="RAGFLOW什么是RAGFLOWRAGFlow 是一个基于深度文档理解的开源 RAG（检索增强生成）引擎。它为任何规模的企业提供了简化的 RAG 工作流程，结合了 LLM（大型语言模型）提供真实的问答功能，并以来自各种复杂格式的有根据的引文为后盾。 SDK 是 Software Development Kit（软件开发工具包）的缩写，中文通常称“开发工具包”，用于开发特定平台或软件应用的工具集合">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-08-20T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-02T05:51:56.276Z">
+<meta property="article:modified_time" content="2025-09-03T08:53:35.047Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          3.4k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          28 分钟
+          29 分钟
         
       </span>
     
@@ -448,6 +448,11 @@
 <td>DEBUG、INFO、WARNING、ERROR</td>
 </tr>
 </tbody></table>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>&#x2F;<em>Python 解释器（python.exe）和第三方包（site-packages）理解成“两个独立文件夹”：</em>&#x2F;</p>
+<ul>
+<li>解释器：只负责把 .py 文件翻译成机器指令并执行。</li>
+<li>第三方包：被 pip install 下来的库（requests、torch、ragflow 依赖等）默认放在<br>…Python310\Lib\site-packages<br><code>解释器启动时，会把 当前虚拟环境的 site-packages 加到 sys.path，于是就能 import 到它们。</code></li>
+</ul>
 
                 
               </div>
