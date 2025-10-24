@@ -19,22 +19,22 @@
   <meta name="author" content="WZN">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Jinja2Jinja2 是一个 Python 的模板引擎，用于动态生成文本（如 HTML、JSON 或其他格式的字符串）。它允许开发者将数据动态插入到预定义的模板中，生成定制化的输出 1234567891011121314151617181920212223242526272829303132333435363738394041424344def reflect(chat_mdl, histor">
+    <meta name="description" content="相似度阈值、关键词权重rerank模型通常是独立的，不依赖特定嵌入模型，能对所有chunks统一打分，解决跨模型相似度不可比的问题。Rerank模型（如cross-encoder模型，例如bge-ranker-base或bge-reranker-v2-m3）就是为了解决这个问题而设计的。它不依赖于预计算的嵌入向量，而是直接基于原始文本进行计算，从而实现跨模型的统一排序。 rerank模型是怎么对不">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ragflow0.20.4(prompts)">
-<meta property="og:url" content="http://example.com/2025/09/12/prompts/index.html">
+<meta property="og:title" content="检索相关">
+<meta property="og:url" content="http://example.com/2025/09/22/%E6%A3%80%E7%B4%A2%E7%9B%B8%E5%85%B3/index.html">
 <meta property="og:site_name" content="哒妮哒妮">
-<meta property="og:description" content="Jinja2Jinja2 是一个 Python 的模板引擎，用于动态生成文本（如 HTML、JSON 或其他格式的字符串）。它允许开发者将数据动态插入到预定义的模板中，生成定制化的输出 1234567891011121314151617181920212223242526272829303132333435363738394041424344def reflect(chat_mdl, histor">
+<meta property="og:description" content="相似度阈值、关键词权重rerank模型通常是独立的，不依赖特定嵌入模型，能对所有chunks统一打分，解决跨模型相似度不可比的问题。Rerank模型（如cross-encoder模型，例如bge-ranker-base或bge-reranker-v2-m3）就是为了解决这个问题而设计的。它不依赖于预计算的嵌入向量，而是直接基于原始文本进行计算，从而实现跨模型的统一排序。 rerank模型是怎么对不">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-09-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2025-09-18T08:57:13.011Z">
+<meta property="article:published_time" content="2025-09-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-25T01:17:35.449Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="大模型框架">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Ragflow0.20.4(prompts) - 哒妮哒妮</title>
+  <title>检索相关 - 哒妮哒妮</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Ragflow0.20.4(prompts)"></span>
+            <span id="subtitle" data-typed-text="检索相关"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-09-12 00:00" pubdate>
-          2025年9月12日 凌晨
+        <time datetime="2025-09-22 00:00" pubdate>
+          2025年9月22日 凌晨
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          536 字
+          1.3k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          5 分钟
+          12 分钟
         
       </span>
     
@@ -271,13 +271,57 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Ragflow0.20.4(prompts)</h1>
+            <h1 id="seo-header">检索相关</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="Jinja2"><a href="#Jinja2" class="headerlink" title="Jinja2"></a>Jinja2</h2><p><code>Jinja2 是一个 Python 的模板引擎，用于动态生成文本（如 HTML、JSON 或其他格式的字符串）。它允许开发者将数据动态插入到预定义的模板中，生成定制化的输出</code></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">reflect</span>(<span class="hljs-params">chat_mdl, history: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">dict</span>], tool_call_res: <span class="hljs-built_in">list</span>[<span class="hljs-type">Tuple</span>]</span>):<br>    tool_calls = [&#123;<span class="hljs-string">&quot;name&quot;</span>: p[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;result&quot;</span>: p[<span class="hljs-number">1</span>]&#125; <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> tool_call_res]<br>    goal = history[<span class="hljs-number">1</span>][<span class="hljs-string">&quot;content&quot;</span>]    <span class="hljs-comment">#从对话历史 history 的第二个元素（索引为 1）中提取 &quot;content&quot; 字段，赋值给 goal</span><br>    template = PROMPT_JINJA_ENV.from_string(REFLECT)    <span class="hljs-comment">#使用 Jinja2 模板引擎（PROMPT_JINJA_ENV）从字符串 REFLECT 创建一个模板对象。</span><br>    user_prompt = template.render(goal=goal, tool_calls=tool_calls)<br>    hist = deepcopy(history)<br>    <span class="hljs-keyword">if</span> hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;role&quot;</span>] == <span class="hljs-string">&quot;user&quot;</span>:<br>        hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;content&quot;</span>] += user_prompt<br>    <span class="hljs-keyword">else</span>:<br>        hist.append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: user_prompt&#125;)<br>    _, msg = message_fit_in(hist, chat_mdl.max_length)  <span class="hljs-comment">#_ 表示忽略第一个返回值，msg 是一个处理后的消息列表，可能是截断后的对话历史。</span><br>    ans = chat_mdl.chat(msg[<span class="hljs-number">0</span>][<span class="hljs-string">&quot;content&quot;</span>], msg[<span class="hljs-number">1</span>:]) <span class="hljs-comment">#第一个参数 msg[0][&quot;content&quot;] 是调整后的消息列表的第一个消息内容（可能是用户提示）。第二个参数 msg[1:] 是剩余的对话历史（列表切片）。</span><br>    ans = re.sub(<span class="hljs-string">r&quot;^.*&lt;/think&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, ans, flags=re.DOTALL)<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">**Observation**</span><br><span class="hljs-string">&#123;&#125;</span><br><span class="hljs-string"></span><br><span class="hljs-string">**Reflection**</span><br><span class="hljs-string">&#123;&#125;</span><br><span class="hljs-string">    &quot;&quot;&quot;</span>.<span class="hljs-built_in">format</span>(json.dumps(tool_calls, ensure_ascii=<span class="hljs-literal">False</span>, indent=<span class="hljs-number">2</span>), ans)<br><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">next_step</span>(<span class="hljs-params">chat_mdl, history:<span class="hljs-built_in">list</span>, tools_description: <span class="hljs-built_in">list</span>[<span class="hljs-built_in">dict</span>], task_desc</span>):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> tools_description:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span><br>    desc = tool_schema(tools_description)   <br>    template = PROMPT_JINJA_ENV.from_string(NEXT_STEP)<span class="hljs-comment">#是可以渲染的 Jinja2 模板对象，用于生成用户提示。</span><br>    user_prompt = <span class="hljs-string">&quot;\nWhat&#x27;s the next tool to call? If ready OR IMPOSSIBLE TO BE READY, then call `complete_task`.&quot;</span><br>    hist = deepcopy(history)<br>    <span class="hljs-keyword">if</span> hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;role&quot;</span>] == <span class="hljs-string">&quot;user&quot;</span>:<br>        hist[-<span class="hljs-number">1</span>][<span class="hljs-string">&quot;content&quot;</span>] += user_prompt<br>    <span class="hljs-keyword">else</span>:<br>        hist.append(&#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;user&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: user_prompt&#125;)<br><br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    hist[1:]：传入对话历史从第二个元素开始（忽略第一个元素，可能是系统提示）。</span><br><span class="hljs-string">    stop=[&quot;&lt;|stop|&gt;&quot;]：指定停止标志，当模型生成 &lt;|stop|&gt; 时停止输出。</span><br><span class="hljs-string">    json_str 是聊天模型生成的回复，预计是一个 JSON 格式的字符串，表示下一步要调用的工具。</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    json_str = chat_mdl.chat(template.render(task_analisys=task_desc, desc=desc, today=datetime.datetime.now().strftime(<span class="hljs-string">&quot;%Y-%m-%d&quot;</span>)),<br>                             hist[<span class="hljs-number">1</span>:], stop=[<span class="hljs-string">&quot;&lt;|stop|&gt;&quot;</span>])<br>    tk_cnt = num_tokens_from_string(json_str)<br>    json_str = re.sub(<span class="hljs-string">r&quot;^.*&lt;/think&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, json_str, flags=re.DOTALL)<br>    <span class="hljs-keyword">return</span> json_str, tk_cnt<br></code></pre></td></tr></table></figure>
+                <h2 id="相似度阈值、关键词权重"><a href="#相似度阈值、关键词权重" class="headerlink" title="相似度阈值、关键词权重"></a>相似度阈值、关键词权重</h2><h2 id="rerank模型通常是独立的，不依赖特定嵌入模型，能对所有chunks统一打分，解决跨模型相似度不可比的问题。"><a href="#rerank模型通常是独立的，不依赖特定嵌入模型，能对所有chunks统一打分，解决跨模型相似度不可比的问题。" class="headerlink" title="rerank模型通常是独立的，不依赖特定嵌入模型，能对所有chunks统一打分，解决跨模型相似度不可比的问题。"></a>rerank模型通常是独立的，不依赖特定嵌入模型，能对所有chunks统一打分，解决跨模型相似度不可比的问题。</h2><p>Rerank模型（如cross-encoder模型，例如bge-ranker-base或bge-reranker-v2-m3）就是为了解决这个问题而设计的。它不依赖于预计算的嵌入向量，而是直接基于原始文本进行计算，从而实现跨模型的统一排序。</p>
+<h2 id="rerank模型是怎么对不同嵌入模型向量化知识库进行统一排序"><a href="#rerank模型是怎么对不同嵌入模型向量化知识库进行统一排序" class="headerlink" title="rerank模型是怎么对不同嵌入模型向量化知识库进行统一排序?"></a>rerank模型是怎么对不同嵌入模型向量化知识库进行统一排序?</h2><h2 id="有的模型可以用于排序，有的模型只能用于检索"><a href="#有的模型可以用于排序，有的模型只能用于检索" class="headerlink" title="有的模型可以用于排序，有的模型只能用于检索"></a>有的模型可以用于排序，有的模型只能用于检索</h2><h2 id="交叉编码器、双编码器"><a href="#交叉编码器、双编码器" class="headerlink" title="交叉编码器、双编码器"></a>交叉编码器、双编码器</h2><p><code>在信息检索领域（即从海量数据中查找相关信息），双编码器和交叉编码器是两种至关重要的工具。它们各自拥有独特的工作机制、优势和局限性</code></p>
+<p>*双编码器(Bi-Encoder)：高效的大规模检索*<br>双编码器分别处理文档和搜索查询。可以将其类比为两个人独立工作：一人负责概括文档，另一人则专注于搜索查询，两者之间互不交流。“双”字体现了查询和文档的独立编码过程。</p>
+<p>*交叉编码器(cross-encoder)：高效的多任务学习*<br>1.交叉编码器将两个文本片段（例如，用户查询和文档）同时作为输入。它不分别生成向量表示，而是输出 0 到 1 之间的值，表示输入对的相似度。<br>2.交叉编码器在高精度至关重要的任务中尤其重要，例如在最终文档重排序阶段，或在语义匹配的准确性至关重要时。</p>
+<h2 id="余弦相似度"><a href="#余弦相似度" class="headerlink" title="余弦相似度"></a>余弦相似度</h2><p>余弦相似度是衡量两个向量 $ \mathbf{A} $ 和 $ \mathbf{B} $ 之间夹角的指标，公式如下：<br>$$\text{cosine_similarity}(\mathbf{A}, \mathbf{B}) &#x3D; \frac{\mathbf{A} \cdot \mathbf{B}}{|\mathbf{A}| |\mathbf{B}|}$$<br><code>余弦相似度范围为 $[-1, 1]$，值越大表示越相似。</code></p>
+<h2 id="欧氏距离"><a href="#欧氏距离" class="headerlink" title="欧氏距离"></a>欧氏距离</h2><h2 id="语义相似度、文本相似度、向量相似度"><a href="#语义相似度、文本相似度、向量相似度" class="headerlink" title="语义相似度、文本相似度、向量相似度"></a>语义相似度、文本相似度、向量相似度</h2><ul>
+<li>向量相似度是实现语义相似度和文本相似度的一种常用技术:。</li>
+</ul>
+<h2 id="向量维度-≠-精度，二者的区别？"><a href="#向量维度-≠-精度，二者的区别？" class="headerlink" title="向量维度 ≠ 精度，二者的区别？"></a>向量维度 ≠ 精度，二者的区别？</h2><p>概念	说明<br>维度（Dimension）	向量的长度，比如是 384、768 还是 1024 维。它影响的是“表达能力上限”。维度越高，模型有更多空间表达复杂语义关系。但也可能引入噪声。<br>精度（Precision）	通常指模型在特定任务上的检索准确率，比如 Top-1 命中率、MRR（Mean Reciprocal Rank）、Recall@K。它取决于训练数据、目标任务是 否匹配，而不是维度本身。<br>举个例子	一个 384 维的模型可能在法律领域比 1024 维的通用模型效果还好（因为数据更贴近）</p>
+<h2 id="向量库差异对比"><a href="#向量库差异对比" class="headerlink" title="向量库差异对比"></a>向量库差异对比</h2><p>使用场景	推荐库	原因<br>本地轻量测试	FAISS &#x2F; Chroma	快、简单、集成方便<br>中型项目（多用户、多字段）	Qdrant &#x2F; Milvus	高性能 + 支持 metadata + 支持 REST&#x2F;gRPC<br>想做 hybrid 检索（关键词 + 向量）	Weaviate &#x2F; ElasticSearch	有结构化 + semantic 搜索能力<br>有中文大数据、需要稳定上线	Milvus（Zilliz 出品）	生态全、企业支持强</p>
+<h2 id="检索"><a href="#检索" class="headerlink" title="检索"></a><strong>检索</strong></h2><p><code>检索 = 信息命中的关键策略，关键词 vs 向量 vs 混合，各有千秋，选错方法可能“差之毫厘谬以千里”。</code></p>
+<ul>
+<li><p>1.常见检索方式总览<br>检索方式	技术基础	优点	缺点	应用场景示例<br>关键词检索	BM25、TF-IDF	快速、解释性强	不懂语义，无法容错	FAQ 检索、搜索引擎<br>向量检索	Embedding + Faiss &#x2F; Milvus 等	语义相关性强，能理解语言的含义	不懂结构、不精确、不透明	RAG 问答、智能客服、推荐系统<br>混合检索	向量 + 关键词 + rerank	结合语义与关键词，效果更好	实现复杂	高要求的智能搜索系统</p>
+</li>
+<li><p>2.关键词检索（Keyword-based Retrieval）</p>
+</li>
+</ul>
+<ol>
+<li>原理<br>文档、问题 → 分词 → 统计词频（TF-IDF）或 BM25 打分 → 选出包含关键词的文档,不理解「语义」层面，比如“结婚”≠“婚礼”</li>
+<li>关键词检索优点<br>快、可解释：你知道它为啥命中，因为你看到词了<br>适合标题、标签、代码搜索等场景</li>
+</ol>
+<ul>
+<li>3.向量检索</li>
+</ul>
+<ol>
+<li>原理<br>每段文本 → 转成向量（用 Embedding 模型）<br>问题 → 也转成向量<br>相似度计算（通常是余弦相似度） → 得出最相近的文本段落</li>
+<li>向量检索优点<br>可理解语言语义，如“我累了”≈“我想休息一下”,能找到意思相近但没有关键词重合的内容</li>
+<li>缺点<br>不解释为什么召回了这些文本<br>不适合精确查找、对结构敏感的信息（比如合同条款）</li>
+</ol>
+<ul>
+<li>⚖️ 4.混合检索（Hybrid Retrieval）<br>通常是以下结构：</li>
+</ul>
+<ol>
+<li>问题 -&gt; Embedding 向量</li>
+<li>向量检索召回 Top-K 文档（广撒网）</li>
+<li><ul>
+<li>BM25&#x2F;关键词命中过滤（精准查找）</li>
+</ul>
+</li>
+<li><ul>
+<li>Reranker 精排打分（语义判断）</li>
+</ul>
+</li>
+</ol>
+<h2 id="TopK-背后的“相关性”是怎么判断的？"><a href="#TopK-背后的“相关性”是怎么判断的？" class="headerlink" title="TopK 背后的“相关性”是怎么判断的？"></a>TopK 背后的“相关性”是怎么判断的？</h2><p>检索方式	相似度&#x2F;相关性分数是怎么来的？<br>BM25	基于词频+逆文档频率（TF-IDF）+词位信息<br>向量检索	计算 Query 和文档向量的余弦相似度<br>语义 rerank	用更大的 LLM 比较语义相关性（例如 bge-reranker）</p>
+
                 
               </div>
             
@@ -322,8 +366,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Ragflow0.20.4(prompts)</div>
-      <div>http://example.com/2025/09/12/prompts/</div>
+      <div>检索相关</div>
+      <div>http://example.com/2025/09/22/检索相关/</div>
     </div>
     <div class="license-meta">
       
@@ -335,7 +379,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年9月12日</div>
+          <div>2025年9月22日</div>
         </div>
       
       
@@ -367,9 +411,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/09/16/agent_with_tools/" title="Ragflow0.20.4(agent_with_tools)">
+                      <a href="/2025/09/23/message/" title="检索相关">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Ragflow0.20.4(agent_with_tools)</span>
+                        <span class="hidden-mobile">检索相关</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -377,8 +421,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2025/09/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/Redis/" title="Redis">
-                        <span class="hidden-mobile">Redis</span>
+                      <a href="/2025/09/18/%E6%A3%80%E7%B4%A2%E7%BB%84%E4%BB%B60.20.4/" title="Ragflow0.20.4(retrival)">
+                        <span class="hidden-mobile">Ragflow0.20.4(retrival)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

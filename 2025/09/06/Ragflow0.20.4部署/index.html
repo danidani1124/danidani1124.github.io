@@ -1,0 +1,762 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WZN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="uv sync --python 3.10 --all-extras # install RAGFlow dependent python modules 123456- uv sync    uv 的「同步」子命令：    读取项目根目录下的 pyproject.toml（或 uv.lock）    自动创建&#x2F;复用虚拟环境    把声明的依赖一次性装进去，并保证版本完全锁死    如果环境里有多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ragflow0.20.4">
+<meta property="og:url" content="http://example.com/2025/09/06/Ragflow0.20.4%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="uv sync --python 3.10 --all-extras # install RAGFlow dependent python modules 123456- uv sync    uv 的「同步」子命令：    读取项目根目录下的 pyproject.toml（或 uv.lock）    自动创建&#x2F;复用虚拟环境    把声明的依赖一次性装进去，并保证版本完全锁死    如果环境里有多">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-24T07:25:57.836Z">
+<meta property="article:author" content="WZN">
+<meta property="article:tag" content="大模型框架">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Ragflow0.20.4 - 哒妮哒妮</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Ragflow0.20.4"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-06 00:00" pubdate>
+          2025年9月6日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Ragflow0.20.4</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><code>uv sync --python 3.10 --all-extras # install RAGFlow dependent python modules</code></p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-bullet">- </span>uv sync<br><span class="hljs-code">    uv 的「同步」子命令：</span><br><span class="hljs-code">    读取项目根目录下的 pyproject.toml（或 uv.lock）</span><br><span class="hljs-code">    自动创建/复用虚拟环境</span><br><span class="hljs-code">    把声明的依赖一次性装进去，并保证版本完全锁死</span><br><span class="hljs-code">    如果环境里有多余的包，还会自动卸载，保持“干净”</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>–all-extras</li>
+</ul>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">把 pyproject.toml 里所有 [<span class="hljs-keyword">project</span>.optional-<span class="hljs-keyword">dependencies</span>] 定义的可选依赖组全部装上。<br>RAGFlow 把这些可选包用来支持不同嵌入模型、PDF 解析器、向量库等，所以必须一次性装全，否则运行时会缺模块。<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="部署错误"><a href="#部署错误" class="headerlink" title="部署错误"></a>部署错误</h3><p><code>RAGFlow 依赖的 pyicu 在 Windows 上编译失败，因为找不到 ICU 开发库。</code></p>
+<ul>
+<li>先装预编译的 pyicu wheel，避开编译;装完后重新同步<br><code>conda install -c conda-forge icu pyicu</code><br>从 conda-forge 频道安装 ICU 和 PyICU 两个包。</li>
+</ul>
+<h1 id="解析字"><a href="#解析字" class="headerlink" title="解析字"></a>解析字</h1><p><strong>WSL</strong> 是 Windows Subsystem for Linux（适用于 Linux 的 Windows 子系统）。 允许用户在 不安装虚拟机或双系统 的情况下，直接在 Windows 上运行 原生 Linux 二进制可执行文件（ELF 格式）。</p>
+<p><strong>文件挂载</strong>：“挂载”就是把某个外部存储或文件夹，‘嫁接’到当前系统的目录树上，让你随时随地在 Linux 环境里像本地文件一样使用它。</p>
+<h3 id="ubuntu-linux关系"><a href="#ubuntu-linux关系" class="headerlink" title="ubuntu linux关系"></a>ubuntu linux关系</h3><table>
+<thead>
+<tr>
+<th>类比对象</th>
+<th>对应关系</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>汽车引擎</td>
+<td>Linux 内核</td>
+</tr>
+<tr>
+<td>整车（引擎+车身+轮子+方向盘）</td>
+<td>Ubuntu 操作系统</td>
+</tr>
+<tr>
+<td>不同品牌的车（宝马、丰田）</td>
+<td>不同发行版（Ubuntu、Fedora、Debian）</td>
+</tr>
+</tbody></table>
+<h1 id="WSL2-Windows-Subsystem-for-Linux-Ubuntu-部署-RAGFlow"><a href="#WSL2-Windows-Subsystem-for-Linux-Ubuntu-部署-RAGFlow" class="headerlink" title="WSL2 (Windows Subsystem for Linux) + Ubuntu 部署 RAGFlow"></a>WSL2 (Windows Subsystem for Linux) + Ubuntu 部署 RAGFlow</h1><h3 id="wsl安装ubuntu错误"><a href="#wsl安装ubuntu错误" class="headerlink" title="wsl安装ubuntu错误"></a>wsl安装ubuntu错误</h3><p><code>/set hypervisorlaunchtype Auto</code></p>
+<h3 id="检查python版本"><a href="#检查python版本" class="headerlink" title="检查python版本"></a>检查python版本</h3><p>✅python3 –version</p>
+<h3 id="uv写入环境变量"><a href="#uv写入环境变量" class="headerlink" title="uv写入环境变量"></a>uv写入环境变量</h3><p><code>echo &#39;export PATH=$HOME/.local/bin:$PATH&#39; &gt;&gt; ~/.bashrc</code><br><code>source ~/.bashrc</code></p>
+<h3 id="Downloading-huggingface-repo-BAAI-bge-large-zh-v1-5-下载失败"><a href="#Downloading-huggingface-repo-BAAI-bge-large-zh-v1-5-下载失败" class="headerlink" title="Downloading huggingface repo BAAI&#x2F;bge-large-zh-v1.5.下载失败"></a>Downloading huggingface repo BAAI&#x2F;bge-large-zh-v1.5.下载失败</h3><p><code>修改的环境变量不生效，因为代码用的是 huggingface_hub.snapshot_download它默认是去 https://huggingface.co拉模型，不会自动走你上面设置的镜像。所以即使你在系统里设置了 HF_ENDPOINT，它也可能不生效（因为这里写死了 repo_id 但没传 endpoint 参数）</code><br>✅ 解决方法一：强制指定镜像 endpoint </p>
+<ul>
+<li>改 download_model 函数，加一个 endpoint 参数：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> huggingface_hub <span class="hljs-keyword">import</span> snapshot_download<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">download_model</span>(<span class="hljs-params">repo_id</span>):<br>    local_dir = os.path.abspath(os.path.join(<span class="hljs-string">&quot;huggingface.co&quot;</span>, repo_id))<br>    os.makedirs(local_dir, exist_ok=<span class="hljs-literal">True</span>)<br>    snapshot_download(<br>        repo_id=repo_id,<br>        local_dir=local_dir,<br>        endpoint=os.environ.get(<span class="hljs-string">&quot;HF_ENDPOINT&quot;</span>, <span class="hljs-string">&quot;https://huggingface.co&quot;</span>)  <span class="hljs-comment"># 强制使用镜像</span><br>    )<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="wsl-检测到-localhost-代理配置，但未镜像到-WSL。NAT-模式下的-WSL-不支持-localhost-代理。"><a href="#wsl-检测到-localhost-代理配置，但未镜像到-WSL。NAT-模式下的-WSL-不支持-localhost-代理。" class="headerlink" title="wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。"></a>wsl: 检测到 localhost 代理配置，但未镜像到 WSL。NAT 模式下的 WSL 不支持 localhost 代理。</h3><p>✅在你的windows的C:\Users&lt;your_username&gt;目录下面创建一个.wslconfig文件，往里面写入下面代码</p>
+<p>[experimental]<br>autoMemoryReclaim&#x3D;gradual<br>networkingMode&#x3D;mirrored<br>dnsTunneling&#x3D;true<br>firewall&#x3D;true<br>autoProxy&#x3D;true</p>
+<h3 id="malloc-是一个-内存分配器（memory-allocator）"><a href="#malloc-是一个-内存分配器（memory-allocator）" class="headerlink" title="malloc 是一个 内存分配器（memory allocator）"></a>malloc 是一个 内存分配器（memory allocator）</h3><p>✅ jemalloc 是高性能、低碎片、支持多线程的内存分配器，常用于高并发、大内存应用。</p>
+<h3 id="项目进入虚拟环境"><a href="#项目进入虚拟环境" class="headerlink" title="项目进入虚拟环境"></a>项目进入虚拟环境</h3><p>source .venv&#x2F;bin&#x2F;activate</p>
+<h3 id="npm-install下载慢"><a href="#npm-install下载慢" class="headerlink" title="npm install下载慢"></a>npm install下载慢</h3><ul>
+<li>1.换镜像源</li>
+<li>2.npm install –no-audit –prefer-offline<table>
+<thead>
+<tr>
+<th>flag</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>--no-audit</code></td>
+<td><strong>跳过 <code>npm audit</code> 安全检测</strong>。不扫描漏洞、不下载漏洞库，省 3-10 秒，也避免公司代理&#x2F;网络差时 audit 请求卡死。</td>
+</tr>
+<tr>
+<td><code>--prefer-offline</code></td>
+<td><strong>优先用本地缓存</strong>。只要机器里曾经下过某个包，就直接从 <code>~/.npm/_cacache</code> 拿，不再去网络校验，省流量、省时间，离线也能装。</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h3 id="wsl无法解析镜像源"><a href="#wsl无法解析镜像源" class="headerlink" title="wsl无法解析镜像源"></a>wsl无法解析镜像源</h3><p>立刻锁掉 WSL 自动生成，防止重启被覆盖<br>wsl –shutdown<br>notepad “$env:USERPROFILE.wslconfig”<br>写入：<br>[network]<br>generateResolvConf &#x3D; false<br>保存后启动 WSL：<br>wsl</p>
+<h1 id="尝试在WSL-Ubuntu-终端（项目根目录）里直接运行："><a href="#尝试在WSL-Ubuntu-终端（项目根目录）里直接运行：" class="headerlink" title="尝试在WSL Ubuntu 终端（项目根目录）里直接运行："></a>尝试在WSL Ubuntu 终端（项目根目录）里直接运行：</h1><h2 id="docker-compose-f-docker-docker-compose-base-yml-up-d"><a href="#docker-compose-f-docker-docker-compose-base-yml-up-d" class="headerlink" title="docker compose -f docker&#x2F;docker-compose-base.yml up -d\"></a>docker compose -f docker&#x2F;docker-compose-base.yml up -d\</h2><p><strong>按照指定的 YAML 文件，把一整套 Docker 容器在后台跑起来</strong></p>
+<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><ul>
+<li>source .venv&#x2F;bin&#x2F;activate</li>
+<li>export PYTHONPATH&#x3D;$(pwd)</li>
+<li>bash docker&#x2F;launch_backend_service.sh</li>
+</ul>
+<h1 id="bash-docker-launch-backend-service-sh-进入虚拟环境后其实只需执行这条命令"><a href="#bash-docker-launch-backend-service-sh-进入虚拟环境后其实只需执行这条命令" class="headerlink" title="bash docker&#x2F;launch_backend_service.sh     进入虚拟环境后其实只需执行这条命令"></a>bash docker&#x2F;launch_backend_service.sh     进入虚拟环境后其实只需执行这条命令</h1><p><em><strong>bash docker&#x2F;launch_backend_service.sh &#x3D; 运行项目提供的“一键起后端”脚本；大概率帮你 build + up 所有后端容器，并等它们就绪。</strong></em></p>
+<h3 id="8-Killed-PY-api-ragflow-server-py-启动被杀进程"><a href="#8-Killed-PY-api-ragflow-server-py-启动被杀进程" class="headerlink" title="8 Killed  $PY api&#x2F;ragflow_server.py    启动被杀进程"></a>8 Killed  $PY api&#x2F;ragflow_server.py    启动被杀进程</h3><p> ✅ 解决方案（4G 机器可行的做法）</p>
+<ol>
+<li>降低 Elasticsearch 的 JVM Heap<br>在 docker-compose.yml（或者 launch_backend_service.sh 里对应的 compose 文件）里，给 ES 加上：</li>
+</ol>
+<p>  elasticsearch:<br>    environment:<br>      - discovery.type&#x3D;single-node<br>      - ES_JAVA_OPTS&#x3D;-Xms256m -Xmx512m</p>
+<h2 id="开发完成后期RAGFlow-前端和支架服务："><a href="#开发完成后期RAGFlow-前端和支架服务：" class="headerlink" title="开发完成后期RAGFlow 前端和支架服务："></a>开发完成后期RAGFlow 前端和支架服务：</h2><p><code>pkill -f -9 &#39;ragflow_server.py|task_executor.py&#39;</code></p>
+<h1 id="前端启动失败-tailwindcss-generate-failed-after-5-seconds-please-check-your-tailwind-css-and-tailwind-config-js"><a href="#前端启动失败-tailwindcss-generate-failed-after-5-seconds-please-check-your-tailwind-css-and-tailwind-config-js" class="headerlink" title="前端启动失败 tailwindcss generate failed after 5 seconds, please check your tailwind.css and tailwind.config.js"></a><strong>前端启动失败</strong> tailwindcss generate failed after 5 seconds, please check your tailwind.css and tailwind.config.js</h1><ul>
+<li>方法 1：临时设置环境变量（只在当前命令有效）<br>在项目根目录下执行：<br>export CHECK_TIMEOUT&#x3D;20<br>npm run dev<br>export CHECK_TIMEOUT&#x3D;20：把超时时间设置为 20 秒。<br>npm run dev：启动你的开发服务器（或者 Tailwind 编译命令）。<br>这个方式只在当前终端有效，关闭终端就失效。</li>
+</ul>
+<p>-方法 2：在项目 .env 文件里永久生效<br>在项目根目录创建或编辑 .env 文件：<br>nano .env<br>在文件里添加：<br>CHECK_TIMEOUT&#x3D;20<br>保并退出（在 nano 里按 Ctrl+O → Enter → Ctrl+X）。<br>安装 dotenv（如果你的项目还没安装）：<br>npm install dotenv –save<br>在项目入口文件最上面添加：<br>require(‘dotenv’).config();<br>启动项目：<br>npm run dev<br>✅ 这样每次启动，CHECK_TIMEOUT 都是 20 秒，无需手动 export。</p>
+<h2 id="前端启动-BABEL-Note-The-code-generator-has-deoptimised-the-styling-of-home-wzn-ragflow-web-src-assets-svg-login-avatars-svg-as-it-exceeds-the-max-of-500KB"><a href="#前端启动-BABEL-Note-The-code-generator-has-deoptimised-the-styling-of-home-wzn-ragflow-web-src-assets-svg-login-avatars-svg-as-it-exceeds-the-max-of-500KB" class="headerlink" title="前端启动[BABEL] Note: The code generator has deoptimised the styling of &#x2F;home&#x2F;wzn&#x2F;ragflow&#x2F;web&#x2F;src&#x2F;assets&#x2F;svg&#x2F;login-avatars.svg as it exceeds the max of 500KB."></a>前端启动[BABEL] Note: The code generator has deoptimised the styling of &#x2F;home&#x2F;wzn&#x2F;ragflow&#x2F;web&#x2F;src&#x2F;assets&#x2F;svg&#x2F;login-avatars.svg as it exceeds the max of 500KB.</h2><p>暂停使用jemalloc<br>看对话<a target="_blank" rel="noopener" href="https://chatgpt.com/c/68f97eed-e79c-832d-8e20-c35600eb4483">https://chatgpt.com/c/68f97eed-e79c-832d-8e20-c35600eb4483</a></p>
+<h3 id="✘-sandbox-executor-manager-Error-Get-“https-r…-15-4s"><a href="#✘-sandbox-executor-manager-Error-Get-“https-r…-15-4s" class="headerlink" title="✘ sandbox-executor-manager Error Get “https://r…                                15.4s"></a>✘ sandbox-executor-manager Error Get “<a target="_blank" rel="noopener" href="https://r/">https://r</a>…                                15.4s</h3><!-- Error response from daemon: Get "https://registry-1.docker.io/v2/": net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers) -->
+
+
+<h2 id="文档解析失败"><a href="#文档解析失败" class="headerlink" title="文档解析失败"></a>文档解析失败</h2><p>要分配内存给wsl，解释失败可能是OOM 杀死进程</p>
+<p>改改成轻量模型 rag&#x2F;llm&#x2F;embedding_model.py<br>repo_id&#x3D;”BAAI&#x2F;bge-large-zh-v1.5”, -》repo_id&#x3D;”moka-ai&#x2F;m3e-small”,</p>
+<h1 id="创建v0-20-5分支"><a href="#创建v0-20-5分支" class="headerlink" title="创建v0.20.5分支"></a><strong>创建v0.20.5分支</strong></h1><h2 id="创建分支前保存v0-20-4状态"><a href="#创建分支前保存v0-20-4状态" class="headerlink" title="创建分支前保存v0.20.4状态"></a>创建分支前保存v0.20.4状态</h2><p>先把0.20.4的修改文件放在（stash 区）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash<br></code></pre></td></tr></table></figure>
+<p>现在：    你分支：v0.20.4     文件状态：<code>干净（没有修改）</code>    改动：被存放在一个 stash 快照里</p>
+<p>可以通过：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash list<br></code></pre></td></tr></table></figure>
+
+<h3 id="🧩创建并切换到新分支-v0-20-5"><a href="#🧩创建并切换到新分支-v0-20-5" class="headerlink" title="🧩创建并切换到新分支 v0.20.5"></a>🧩创建并切换到新分支 v0.20.5</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout -b v0.20.5 v0.20.5<br></code></pre></td></tr></table></figure>
+<p>你在 v0.20.5；<br>文件内容是 tag 对应的版本；<br>stash 区还在（跟分支无关，是全局的）。</p>
+<h2 id="🧩-切回-v0-20-4"><a href="#🧩-切回-v0-20-4" class="headerlink" title="🧩 切回 v0.20.4"></a>🧩 切回 v0.20.4</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git checkout v0.20.4<br></code></pre></td></tr></table></figure>
+<p>结果是： 你的工作区依然干净；  你之前改过的文件不会自动恢复； 但你的 stash 还在！</p>
+<h2 id="恢复原来的改动"><a href="#恢复原来的改动" class="headerlink" title="恢复原来的改动"></a>恢复原来的改动</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">git stash pop<br></code></pre></td></tr></table></figure>
+
+<h2 id="1️⃣-获取-0-20-5-最新版本"><a href="#1️⃣-获取-0-20-5-最新版本" class="headerlink" title="1️⃣ 获取 0.20.5 最新版本"></a>1️⃣ 获取 0.20.5 最新版本</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">git fetch upstream --tags<br>git checkout -b upgrade-0.20.5 tags/v0.20.5<br><br>upgrade-0.20.5 是你新建的分支名字<br>基于官方 0.20.5 标签，不会破坏你本地 main 分支<br></code></pre></td></tr></table></figure>
+
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>宿主机<br>├─ 源码部署：代码裸奔，依赖自己装<br>└─ 容器部署：代码在镜像里，想看见就 exec 进去或挂出来</p>
+<h3 id="容器查看内容"><a href="#容器查看内容" class="headerlink" title="容器查看内容"></a>容器查看内容</h3><p>查看 MySQL 数据（结构化部分）</p>
+<ul>
+<li>1.进入 MySQL 容器：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">docker <span class="hljs-built_in">exec</span> -it ragflow-mysql mysql -u root -p<br></code></pre></td></tr></table></figure>
+<ul>
+<li>2.查看数据库</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">SHOW DATABASES;<br>USE rag_flow;<br>SHOW TABLES;<br></code></pre></td></tr></table></figure>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6/" class="category-chain-item">大模型框架</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6/" class="print-no-link">#大模型框架</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Ragflow0.20.4</div>
+      <div>http://example.com/2025/09/06/Ragflow0.20.4部署/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WZN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/10/ragflow0.20.4Canvas/" title="Ragflow0.20.4(Cavans)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ragflow0.20.4(Cavans)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/02/requests%E5%BA%93/" title="Scrapy">
+                        <span class="hidden-mobile">Scrapy</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

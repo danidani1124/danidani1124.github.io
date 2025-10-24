@@ -1,0 +1,670 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WZN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1def chat(self, system: str, history: list, gen_conf: dict &#x3D; &#123;&#125;, **kwargs) -&gt; str:     system: 系统提示词（system prompt）     history: 聊天历史（用户和模型的对话记录）     gen_conf: 生成配置（比如 temperature、max_tok">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ragflow0.20.4(llm_service)">
+<meta property="og:url" content="http://example.com/2025/09/18/llm_service/index.html">
+<meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="1def chat(self, system: str, history: list, gen_conf: dict &#x3D; &#123;&#125;, **kwargs) -&gt; str:     system: 系统提示词（system prompt）     history: 聊天历史（用户和模型的对话记录）     gen_conf: 生成配置（比如 temperature、max_tok">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-09-19T09:28:05.894Z">
+<meta property="article:author" content="WZN">
+<meta property="article:tag" content="大模型框架">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Ragflow0.20.4(llm_service) - 哒妮哒妮</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Ragflow0.20.4(llm_service)"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-09-18 00:00" pubdate>
+          2025年9月18日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Ragflow0.20.4(llm_service)</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">chat</span>(<span class="hljs-params">self, system: <span class="hljs-built_in">str</span>, history: <span class="hljs-built_in">list</span>, gen_conf: <span class="hljs-built_in">dict</span> = &#123;&#125;, **kwargs</span>) -&gt; <span class="hljs-built_in">str</span>:<br></code></pre></td></tr></table></figure>
+<pre><code class="hljs">    system: 系统提示词（system prompt）
+    history: 聊天历史（用户和模型的对话记录）
+    gen_conf: 生成配置（比如 temperature、max_tokens 等）
+    kwargs: 额外的参数（会做清洗再传下去）
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.langfuse:   <span class="hljs-comment">#启用了 Langfuse（一个 LLM 调用追踪 &amp; 分析工具），这里会启动一个新的 “generation” 追踪，记录输入。</span><br>    generation = <span class="hljs-variable language_">self</span>.langfuse.start_generation(trace_context=<span class="hljs-variable language_">self</span>.trace_context, name=<span class="hljs-string">&quot;chat&quot;</span>, model=<span class="hljs-variable language_">self</span>.llm_name, <span class="hljs-built_in">input</span>=&#123;<span class="hljs-string">&quot;system&quot;</span>: system, <span class="hljs-string">&quot;history&quot;</span>: history&#125;)<br><br>chat_partial = partial(<span class="hljs-variable language_">self</span>.mdl.chat, system, history, gen_conf)<br><span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.is_tools <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.mdl.is_tools:<br>    chat_partial = partial(<span class="hljs-variable language_">self</span>.mdl.chat_with_tools, system, history, gen_conf)<br>    <br>use_kwargs = <span class="hljs-variable language_">self</span>._clean_param(chat_partial, **kwargs)  <span class="hljs-comment"># kwargs 交给 _clean_param 清洗、过滤或转换为 chat_partial 实际接受的参数名/格式</span><br>txt, used_tokens = chat_partial(**use_kwargs)<br>txt = <span class="hljs-variable language_">self</span>._remove_reasoning_content(txt)<br><br><br><span class="hljs-comment"># 如果配置 verbose_tool_use 为 False（不希望在最终响应中看到工具调用细节），就用正则把 &lt;tool_call&gt;...&lt;/tool_call&gt; 区段删掉。</span><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable language_">self</span>.verbose_tool_use:<br>    txt = re.sub(<span class="hljs-string">r&quot;&lt;tool_call&gt;.*?&lt;/tool_call&gt;&quot;</span>, <span class="hljs-string">&quot;&quot;</span>, txt, flags=re.DOTALL)<br><br><span class="hljs-comment"># 先判断 txt 是否是 int，再调用 TenantLLMService.increase_usage(...) 去增加租户的 token 用量统计。</span><br><span class="hljs-keyword">if</span> <span class="hljs-built_in">isinstance</span>(txt, <span class="hljs-built_in">int</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> TenantLLMService.increase_usage(<span class="hljs-variable language_">self</span>.tenant_id, <span class="hljs-variable language_">self</span>.llm_type, used_tokens, <span class="hljs-variable language_">self</span>.llm_name):<br>    logging.error(<span class="hljs-string">&quot;LLMBundle.chat can&#x27;t update token usage for &#123;&#125;/CHAT llm_name: &#123;&#125;, used_tokens: &#123;&#125;&quot;</span>.<span class="hljs-built_in">format</span>(<span class="hljs-variable language_">self</span>.tenant_id, <span class="hljs-variable language_">self</span>.llm_name, used_tokens))<br><br><br><span class="hljs-comment"># 如果启用了 langfuse，把输出 txt 和使用详情 used_tokens 更新到之前创建的 generation 对象上，然后调用 </span><br><span class="hljs-comment"># generation.end() 结束这次追踪。这样 Langfuse 会保存整条生成的输入/输出/用量等元数据。</span><br><span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.langfuse:<br>    generation.update(output=&#123;<span class="hljs-string">&quot;output&quot;</span>: txt&#125;, usage_details=&#123;<span class="hljs-string">&quot;total_tokens&quot;</span>: used_tokens&#125;)<br>    generation.end()<br><br><span class="hljs-keyword">return</span> <br></code></pre></td></tr></table></figure>
+</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">chat</span>(<span class="hljs-params">self, system, history, gen_conf=&#123;&#125;, **kwargs</span>):<br>    <span class="hljs-keyword">if</span> system:<br>        history.insert(<span class="hljs-number">0</span>, &#123;<span class="hljs-string">&quot;role&quot;</span>: <span class="hljs-string">&quot;system&quot;</span>, <span class="hljs-string">&quot;content&quot;</span>: system&#125;)<br>    gen_conf = <span class="hljs-variable language_">self</span>._clean_conf(gen_conf)<br><br>    <span class="hljs-comment"># Implement exponential backoff retry strategy</span><br>    <span class="hljs-keyword">for</span> attempt <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-variable language_">self</span>.max_retries + <span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">try</span>:<br>            response = <span class="hljs-variable language_">self</span>._chat(history, gen_conf, **kwargs)<br>            <span class="hljs-keyword">return</span> response<br>        <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:<br>            e = <span class="hljs-variable language_">self</span>._exceptions(e, attempt)<br>            <span class="hljs-keyword">if</span> e:<br>                <span class="hljs-keyword">return</span> e, <span class="hljs-number">0</span><br>    <span class="hljs-keyword">assert</span> <span class="hljs-literal">False</span>, <span class="hljs-string">&quot;Shouldn&#x27;t be here.&quot;</span><br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">_chat</span>(<span class="hljs-params">self, history, gen_conf, **kwargs</span>):<br>       logging.info(<span class="hljs-string">&quot;[HISTORY]&quot;</span> + json.dumps(history, ensure_ascii=<span class="hljs-literal">False</span>, indent=<span class="hljs-number">2</span>))<br>       <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.model_name.lower().find(<span class="hljs-string">&quot;qwen3&quot;</span>) &gt;= <span class="hljs-number">0</span>:<br>           kwargs[<span class="hljs-string">&quot;extra_body&quot;</span>] = &#123;<span class="hljs-string">&quot;enable_thinking&quot;</span>: <span class="hljs-literal">False</span>&#125;<br><br>       completion_args = <span class="hljs-variable language_">self</span>._construct_completion_args(history=history, stream=<span class="hljs-literal">False</span>, tools=<span class="hljs-literal">False</span>, **gen_conf)<br>       response = litellm.completion(<br>           **completion_args,<br>           drop_params=<span class="hljs-literal">True</span>,<br>           timeout=<span class="hljs-variable language_">self</span>.timeout,<br>       )<br>       <span class="hljs-comment"># response = self.client.chat.completions.create(model=self.model_name, messages=history, **gen_conf, **kwargs)</span><br><br>       <span class="hljs-keyword">if</span> <span class="hljs-built_in">any</span>([<span class="hljs-keyword">not</span> response.choices, <span class="hljs-keyword">not</span> response.choices[<span class="hljs-number">0</span>].message, <span class="hljs-keyword">not</span> response.choices[<span class="hljs-number">0</span>].message.content]):<br>           <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;&quot;</span>, <span class="hljs-number">0</span><br>       ans = response.choices[<span class="hljs-number">0</span>].message.content.strip()<br>       <span class="hljs-keyword">if</span> response.choices[<span class="hljs-number">0</span>].finish_reason == <span class="hljs-string">&quot;length&quot;</span>:<br>           ans = <span class="hljs-variable language_">self</span>._length_stop(ans)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">_construct_completion_args</span>(<span class="hljs-params">self, history, stream: <span class="hljs-built_in">bool</span>, tools: <span class="hljs-built_in">bool</span>, **kwargs</span>):<br>       completion_args = &#123;<br>           <span class="hljs-string">&quot;model&quot;</span>: <span class="hljs-variable language_">self</span>.model_name,<br>           <span class="hljs-string">&quot;messages&quot;</span>: history,<br>           <span class="hljs-string">&quot;api_key&quot;</span>: <span class="hljs-variable language_">self</span>.api_key,<br>           **kwargs,<br>       &#125;<br>       <span class="hljs-keyword">if</span> stream:<br>           completion_args.update(<br>               &#123;<br>                   <span class="hljs-string">&quot;stream&quot;</span>: stream,<br>               &#125;<br>           )<br>       <br>       <span class="hljs-keyword">if</span> tools <span class="hljs-keyword">and</span> <span class="hljs-variable language_">self</span>.tools:<br>           completion_args.update(<br>               &#123;<br>                   <span class="hljs-string">&quot;tools&quot;</span>: <span class="hljs-variable language_">self</span>.tools,<span class="hljs-comment">#工具定义。</span><br>                   <span class="hljs-string">&quot;tool_choice&quot;</span>: <span class="hljs-string">&quot;auto&quot;</span>,<span class="hljs-comment">#让模型自动选择是否调用工具。</span><br>               &#125;<br>           )<br><br>       <span class="hljs-comment"># 如果当前提供商在默认 base_url 列表中，则添加 &quot;api_base&quot;: self.base_url。</span><br>       <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.provider <span class="hljs-keyword">in</span> FACTORY_DEFAULT_BASE_URL:<br>           completion_args.update(&#123;<span class="hljs-string">&quot;api_base&quot;</span>: <span class="hljs-variable language_">self</span>.base_url&#125;)<br>       <br>       <span class="hljs-keyword">elif</span> <span class="hljs-variable language_">self</span>.provider == SupportedLiteLLMProvider.Bedrock:<br>           completion_args.pop(<span class="hljs-string">&quot;api_key&quot;</span>, <span class="hljs-literal">None</span>)<br>           completion_args.pop(<span class="hljs-string">&quot;api_base&quot;</span>, <span class="hljs-literal">None</span>)<br>           completion_args.update(<br>               &#123;<br>                   <span class="hljs-string">&quot;aws_access_key_id&quot;</span>: <span class="hljs-variable language_">self</span>.bedrock_ak,<br>                   <span class="hljs-string">&quot;aws_secret_access_key&quot;</span>: <span class="hljs-variable language_">self</span>.bedrock_sk,<br>                   <span class="hljs-string">&quot;aws_region_name&quot;</span>: <span class="hljs-variable language_">self</span>.bedrock_region,<br>               &#125;<br>           )<br>       <span class="hljs-keyword">return</span> completion_args<br></code></pre></td></tr></table></figure>
+
+
+
+<h1 id="前端返回的"><a href="#前端返回的" class="headerlink" title="前端返回的"></a><strong>前端返回的</strong></h1><p>“### <strong>Task Analysis: “静夜思原文”</strong> — #### <strong>1. Is it just a small talk?</strong> ❌ <strong>No</strong>, this is not small talk. The query “静夜思原文” (meaning “Original text of <em>Quiet Night Thoughts</em>“) is a <strong>factual, information-seeking request</strong>. It asks for the original poem by Li Bai titled 《静夜思》, which is one of the most famous classical Chinese poems. This requires retrieval and presentation of accurate textual content. &gt; ✅ <strong>Conclusion</strong>: Not small talk — proceed with full analysis. — #### <strong>2. What is the core objective of the task?</strong> 🎯 <strong>Core Objective</strong>: To provide the <strong>original full text</strong> of the poem 《静夜思》 written by the Tang dynasty poet <strong>Li Bai (李白)</strong> in <strong>Classical Chinese</strong>, as traditionally recognized and widely accepted in standard literary sources. This includes: - The correct version of the poem (avoiding misquotations or variants). - Presenting it in its original form (four lines, five characters per line). — #### <strong>3. What is the complexity level of the task?</strong> 🔍 <strong>Complexity Level</strong>: <strong>Low</strong> Reasoning: - The poem is among the most well-known in Chinese literature. - It has a standardized canonical version taught in schools across China. - No interpretation, translation, or contextual explanation is requested — only the <strong>original text</strong>. - Minimal ambiguity in intent. However, despite low complexity, accuracy must still be ensured due to potential variations in historical texts or common misremembered versions. &gt; ⚠️ Note: Some users may confuse slight variants (e.g., “床前明月光” vs. “牀前明月光”), but these are orthographic differences rather than substantive ones. — #### <strong>4. What types of specialized skills are required?</strong> 📚 Required Skills: - <strong>Knowledge of Classical Chinese poetry</strong> - <strong>Access to authoritative literary datasets or corpora</strong> - <strong>Ability to distinguish canonical from non-canonical versions</strong> - <strong>Basic understanding of Chinese character variants (e.g., 简体 vs. 繁体)</strong> Since the user asked for the <strong>original text</strong>, the response should reflect the standard modern simplified Chinese version typically used in mainland education unless otherwise specified. ✅ However, since no specific script (simplified&#x2F;traditional) was requested, default to <strong>modern standard simplified Chinese</strong>. — #### <strong>5. Does the task need to be decomposed into subtasks? If yes, propose the subtask structure.</strong> ✅ <strong>Yes</strong>, although simple, decomposition ensures robustness and verifiability. ##### <strong>Proposed Subtask Structure</strong>: | Subtask | Description | Purpose | |——–|————-|——–| | <strong>ST1: Clarify Intent</strong> | Confirm that the user wants the original poem text by Li Bai titled 《静夜思》 | Avoid confusion with similar titles or parodies | | <strong>ST2: Retrieve Canonical Text</strong> | Use reliable source&#x2F;data to retrieve the standard version of the poem | Ensure accuracy | | <strong>ST3: Validate Version</strong> | Cross-check against known authoritative editions (e.g., Complete Tang Poems, school textbooks) | Prevent propagation of errors or folk variants | | <strong>ST4: Format Output</strong> | Present the poem clearly, line-by-line, without additions unless needed | Meet user expectations for readability | &gt; 🔍 Since we have access to <code>search_my_dateset</code>, we can use it at <strong>ST2</strong> to retrieve the poem. — #### <strong>6. How to know the task or the subtasks are impossible to lead to success after a few rounds of interaction?</strong> 🛑 <strong>Failure Indicators</strong>: | Scenario | Detection Method | Conclusion | |——–|——————|———–| | <code>search_my_dateset</code> returns no results for queries like <code>&quot;静夜思 原文&quot;</code> or <code>&quot;静夜思 李白&quot;</code> | After 2–3 attempts with synonym variations (e.g., “全文”, “原文”, “诗”) | Dataset lacks basic cultural knowledge → critical gap | | Results contain inconsistent or conflicting versions (e.g., different wordings across results) | Multiple unresolvable discrepancies | Requires external validation; if unavailable, flag uncertainty | | Returned text is incomplete (only 1–2 lines) or corrupted | Inspection fails consistency check | Insufficient data quality | 🟢 <strong>Success Condition</strong>: One clear, consistent, complete four-line version matching established canon appears in search results. If repeated searches fail to produce such a result, conclude: &gt; ❌ “Unable to retrieve verified original text due to dataset limitations.” — #### <strong>7. What are the expected success criteria?</strong> ✅ <strong>Success Criteria</strong>: | Criterion | Description | |——–|————-| | <strong>Accuracy</strong> | Must match the standard version of 《静夜思》 as commonly accepted: <br>床前明月光， <br>疑是地上霜。 <br>举头望明月， <br>低头思故乡。 | | <strong>Completeness</strong> | All four lines present | | <strong>Original Form</strong> | In Classical Chinese (not translated or paraphrased) | | <strong>Clarity</strong> | Clearly formatted, easy to read | | <strong>Source Reliability</strong> | Based on authoritative corpus (via <code>search_my_dateset</code>) | | <strong>No Extra Content</strong> | Unless requested, do not include translation, commentary, or author bio | &gt; 🎯 Final Output Example (Expected): <code>床前明月光， 疑是地上霜。 举头望明月， 低头思故乡。</code> — ### ✅ <strong>Summary &amp; Recommended Execution Plan</strong> | Aspect | Assessment | |——-|————| | <strong>Nature of Task</strong> | Factual retrieval of a famous Chinese poem | | <strong>Core Objective</strong> | Provide the original text of 《静夜思》 by Li Bai | | <strong>Complexity</strong> | Low | | <strong>Required Skills</strong> | Knowledge of Chinese poetry, data retrieval, version validation | | <strong>Subtasks Needed?</strong> | Yes — 4-step verification process recommended | | <strong>Execution Path</strong> | 1. Call <code>search_my_dateset(query=&quot;静夜思 原文 李白&quot;)</code> 2. Extract and validate the returned poem 3. Format and return the canonical version 4. If ambiguous or missing: retry with synonyms (<code>&quot;静夜思 全文&quot;</code>, <code>&quot;李白 静夜思&quot;</code>) 5. If still unresolved: report failure with reason | | <strong>Success Criteria Met When</strong> | Accurate, complete, canonical version retrieved and presented | — ✅ <strong>Next Step Recommendation</strong>: ➡️ Execute: <code>json &#123; &quot;function&quot;: &quot;search_my_dateset&quot;, &quot;parameters&quot;: &#123; &quot;query&quot;: &quot;静夜思 原文 李白&quot; &#125; &#125; </code>“</p>
+<p>analyse_task_system<br>ANALYZE_TASK_SYSTEM &#x3D; ‘Your responsibility is to execute assigned tasks to a high standard. Please:\n1. Carefully analyze the task requirements.\n2. Develop a reasonable execution plan.\n3. Execute step-by-step and document the reasoning process.\n4. Provide clear and accurate results.\n\nIf difficulties are encountered, clearly state the problem and explore alternative approaches.’,</p>
+<p>context &#x3D; ‘Please analyze the following task:\n\nTask: 春晓原文\n\nContext: \n\n<strong>Agent Prompt</strong>\n\n<role>\n        你是\n\nnull，一位专注于的AI助手。\n</role>\n<instructions>\n        1. 理解用户请求。\n        2. 将其分解为逻辑子任务。\n        3. 逐步执行每个子任务，并清晰地进行推理。\n        4. 验证准确性和一致性。\n        5. 清晰地总结最终结果。\n</instructions>\n\n<strong>Analysis Requirements:</strong>\n1. Is it just a small talk? (If yes, no further plan or analysis is needed)\n2. What is the core objective of the task?\n3. What is the complexity level of the task?\n4. What types of specialized skills are required?\n5. Does the task need to be decomposed into subtasks? (If yes, propose the subtask structure)\n6. How to know the task or the subtasks are impossible to lead to the success after a few rounds of interaction?\n7. What are the expected success criteria?\n\n<strong>Available Sub-Agents and Their Specializations:</strong>\n\n## 1. search_my_dateset\n{\n    “type”: “function”,\n    “function”: {\n        “name”: “search_my_dateset”,\n        “description”: “”,\n        “parameters”: {\n            “type”: “object”,\n            “properties”: {\n                “query”: {\n                    “type”: “string”,\n                    “description”: “The keywords to search the dataset. The keywords should be the most important words&#x2F;terms(includes synonyms) from the original request.”\n                }\n            },\n            “required”: [\n                “query”\n            ]\n        }\n    }\n}\n\nProvide a detailed analysis of the task based on the above requirements.’</p>
+<p>kwd<br><code>### **Task Analysis: “春晓原文”**\n\n---\n\n#### **1. Is it just a small talk?**  \n**No**, this is not small talk.\n\nThe query &quot;春晓原文&quot; (meaning *&quot;Original text of \&#39;Spring Dawn\&#39;&quot;*) is a factual, information-seeking request. It refers to a well-known classical Chinese poem titled *《春晓》* (*Chūn Xiǎo*, &quot;Spring Morning&quot;) by the Tang dynasty poet **Meng Haoran** (孟浩然). The user wants the original full text of this poem.\n\nThus, this is a **knowledge retrieval task** with cultural and literary context.\n\n---\n\n#### **2. What is the core objective of the task?**\n\n&gt; **Core Objective:**  \nTo provide the **original classical Chinese text** of the poem *《春晓》* by Meng Haoran, accurately and completely.\n\nOptional (but implied in many contexts):  \n- Provide the author’s name.\n- Optionally include pinyin or translation — but since the user only asked for 原文 (&quot;original text&quot;), these are secondary unless needed for verification.\n\n---\n\n#### **3. What is the complexity level of the task?**\n\n&gt; **Complexity Level: Low**\n\nThis is a **simple factual recall or retrieval task** involving:\n- Recognition of a famous Chinese poem from its title.\n- Accurate reproduction of a 20-character classical poem.\n\nNo reasoning, computation, or subjective interpretation is required.\n\nHowever, accuracy is critical — even one incorrect character changes the meaning.\n\n---\n\n#### **4. What types of specialized skills are required?**\n\n- **Knowledge of Chinese classical poetry**: Specifically familiarity with Tang poetry and major poets like Meng Haoran.\n- **Accuracy in classical Chinese characters**: Must reproduce the exact original text without modernization or error.\n- **Language understanding**: Ability to interpret &quot;春晓原文&quot; as requesting the source text of the poem *Chunxiao*.\n\nNo advanced analytical or creative skills are needed.\n\n---\n\n#### **5. Does the task need to be decomposed into subtasks? (If yes, propose the subtask structure)**\n\nYes, although simple, decomposition ensures systematic execution and verification.\n\n##### **Proposed Subtask Structure:**\n\n1. **Subtask 1: Interpret the Query**\n   - Confirm that “春晓” refers to the poem *Chunxiao* by Meng Haoran.\n   - Clarify that “原文” means the original classical Chinese text.\n\n2. **Subtask 2: Retrieve the Poem Text**\n   - Either:\n     - Recall from internal knowledge (if permitted), or\n     - Use </code>search_my_dateset<code>function to retrieve the correct version from a trusted dataset.\n\n3. **Subtask 3: Verify Accuracy**\n   - Cross-check the retrieved poem against authoritative sources (e.g., standard anthologies).\n   - Ensure correct characters, line breaks, punctuation (if any), and author attribution.\n\n4. **Subtask 4: Present Final Output**\n   - Deliver the original text clearly.\n   - Include minimal metadata (author) for clarity and completeness.\n\n---\n\n#### **6. How to know the task or the subtasks are impossible to lead to success after a few rounds of interaction?**\n\nFailure indicators:\n\n- **Repeated failed searches**: If multiple queries using</code>search_my_dateset<code>with variations (e.g., &quot;春晓&quot;, &quot;春晓 孟浩然&quot;, &quot;Spring Dawn poem original text&quot;) return no results or irrelevant data, then the dataset may lack coverage → **task likely impossible via search**.\n\n- **Ambiguous or conflicting results**: If different versions appear (e.g., variant characters), and no consensus can be reached, confidence drops.\n\n- **Lack of ground truth access**: If unable to verify correctness due to missing reference materials, we cannot guarantee accuracy — especially important for classical texts where small errors matter.\n\n&gt; **Decision Rule**: After **2–3 unsuccessful or inconsistent attempts**, conclude that:\n&gt; - The dataset does not contain the required information.\n&gt; - The agent cannot fulfill the request confidently.\n&gt; - Escalate or inform the user accordingly.\n\nBut note: This specific poem is extremely common; failure would suggest a serious limitation.\n\n---\n\n#### **7. What are the expected success criteria?**\n\n✅ **Success Criteria:**\n\n| Criterion | Description |\n|--------|-------------|\n| **Completeness** | All four lines of the poem are provided. |\n| **Accuracy** | Each character matches the canonical version. No typos or substitutions. |\n| **Correct Authorship** | Attributed to Meng Haoran (optional but recommended). |\n| **Original Language** | Provided in Classical Chinese (not translated or paraphrased). |\n| **Clarity** | Clearly formatted (preferably one line per verse). |\n\n🎯 Example of successful output:\n```\n春眠不觉晓，\n处处闻啼鸟。\n夜来风雨声，\n花落知多少。\n```\n— 孟浩然\n\n---\n\n### ✅ Summary &amp; Conclusion\n\n| Aspect | Assessment |\n|-------|------------|\n| **Small Talk?** | No |\n| **Core Objective** | Retrieve the original Chinese text of the poem *《春晓》* by Meng Haoran |\n| **Complexity Level** | Low |\n| **Required Skills** | Knowledge of Chinese poetry, accurate recall/retrieval |\n| **Needs Decomposition?** | Yes — 4 clear subtasks: Interpret → Retrieve → Verify → Output |\n| **Failure Detection** | After 2–3 failed/inconsistent search attempts, assume impossibility |\n| **Success Criteria** | Complete, accurate, original text with proper formatting |\n\n---\n\n### ✅ Recommended Action Plan\n\nUse the</code>search_my_dateset&#96; tool with an optimized query to retrieve the poem.\n\n&gt; 🔧 **Next Step (Execution)**:\n<code>json\n&#123;\n  &quot;tool&quot;: &quot;search_my_dateset&quot;,\n  &quot;input&quot;: &#123;\n    &quot;query&quot;: &quot;春晓 原文 孟浩然&quot;\n  &#125;\n&#125;\n</code>\n\nThis combines the poem title, request for original text, and author name to maximize precision.’</p>
+<p>tools_desc<br>‘## 1. search_my_dateset\n{\n    “type”: “function”,\n    “function”: {\n        “name”: “search_my_dateset”,\n        “description”: “”,\n        “parameters”: {\n            “type”: “object”,\n            “properties”: {\n                “query”: {\n                    “type”: “string”,\n                    “description”: “The keywords to search the dataset. The keywords should be the most important words&#x2F;terms(includes synonyms) from the original request.”\n                }\n            },\n            “required”: [\n                “query”\n            ]\n        }\n    }\n}’</p>
+<h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><p><strong>Observation</strong> [ { “name”: “search_my_dateset”, “result”: “\nID: 74\n├── Title: 唐诗三百首.pdf\n└── Content:\n夕殿萤飞思悄然，孤灯挑尽未成眠。迟迟钟鼓初长夜，耿耿星河欲曙天。鸳鸯瓦冷霜华重，翡翠衾寒谁与共？悠悠生死别经年，魂魄不曾来入梦。临邛道士鸿都客，能以精诚致魂魄。\n\nID: 64\n├── Title: 唐诗三百首.pdf\n└── Content:\n林表明霁色，城中增暮寒。孟浩然：宿建德江移舟泊烟渚，日暮客愁新。野旷天低树，江清月近人。孟浩然：春晓春眠不觉晓，处处闻啼鸟。夜来风雨声，花落知多少？李白：夜思床前明月光，疑是地上霜。\n\nID: 19\n├── Title: 唐诗三百首.pdf\n└── Content:\n司空曙：喜外弟卢纶见宿静夜四无邻，荒居旧业贫。雨中黄叶树，灯下白头人。以我独沉久，愧君相访频。平生自有分，况是蔡家亲！司空曙：贼平后送人北归世乱同南去，时清独北还。他乡生白发，旧国见青山。\n\nID: 79\n├── Title: 唐诗三百首.pdf\n└── Content:\n道寄人知，悯馀声之寂寞非谓文墨，取代幽忧云尔西路蝉声唱，南冠客思侵。那堪玄鬓影，来对白头吟！露重飞难进，风多响易沉。无人信高洁，谁为表予心？•纆(mò)：绳索。杜审言：和晋陵路丞早春游望\n\nID: 54\n├── Title: 唐诗三百首.pdf\n└── Content:\n•珰(dāng)：〔玉珰〕玉制的耳饰。唐李商隐《夜思》诗：“寄恨一尺素，含情双玉璫。”李商隐：无题二首之一凤尾香罗薄几重，碧文圆顶夜深缝。扇裁月魄羞难掩，车走雷声语未通。曾是寂寥金烬暗，断无消息石榴红。\n\nID: 94\n├── Title: 唐诗三百首.pdf\n└── Content:\n158李商隐：落花170ix159李商隐：凉思171160李商隐：北青萝172161温庭筠：送人东游173162马戴：灞上秋居174163马戴：楚江怀古175164张乔：书边事176165崔涂：巴山道中除夜有怀177166崔涂：孤雁178167杜荀鹤：春宫怨179168韦庄：章台夜思180169僧皎然：寻陆鸿渐不遇181\n\nID: 28\n├── Title: 唐诗三百首.pdf\n└── Content:\n弦弦掩抑声声思，似诉平生不得志。低眉信手续续弹，说尽心中无限事。轻拢慢捻抹复挑，初为霓裳后六么。大弦嘈嘈如急雨，小弦切切如私语。嘈嘈切切错杂弹，大珠小珠落玉盘。间关莺语花底滑，幽咽泉流水下滩。\n\nID: 98\n├── Title: 唐诗三百首.pdf\n└── Content:\n举头望明月，低头思故乡。” } ] <strong>Reflection</strong> ### <strong>1. Goal Achievement Status</strong> - <strong>Does the current outcome align with the original purpose of this task phase?</strong> <strong>Partially aligned</strong>, but <strong>not yet fully achieved</strong>. The goal is to retrieve the <strong>complete and correctly formatted original text of Li Bai’s <em>Jing Ye Si</em> (<em>静夜思</em>)</strong>. While fragments of the poem have been found across multiple search results (e.g., ID:64 has the first two lines, ID:98 has the last two), they are <strong>scattered</strong> and not presented as a unified, verified whole. - <strong>Critical gaps</strong>: - No single result provides the <strong>complete four-line poem</strong> in one coherent excerpt. - There is a risk of <strong>misattribution or fragmentation</strong>, especially since ID:64 mentions “Li Bai: 夜思” — which may be an alternate title or mislabeling — and other entries mix poems by different poets. - The word “床” (bed) appears in context, but there’s no full stanza confirmation from a reliable contiguous source passage. — ### <strong>2. Step Completion Check</strong> - ✅ <strong>Completed steps</strong>: - Query executed: search_my_dateset with “静夜思 原文”. - Relevant document segments retrieved that contain parts of the poem. - Identification of potential sources (ID:64 and ID:98) containing partial lines. - ❌ <strong>Pending&#x2F;incomplete steps</strong>: - <strong>Synthesize the complete poem</strong> from fragmented results. - <strong>Verify authenticity and order</strong> of the lines (i.e., confirm it matches the standard version of <em>静夜思</em>). - <strong>Confirm author attribution</strong> (Li Bai) and eliminate ambiguity caused by similar titles like “夜思”. — ### <strong>3. Information Adequacy</strong> - <strong>Is the collected data sufficient to proceed?</strong> <strong>Almost, but not quite.</strong> We have: - Lines 1–2: “床前明月光，疑是地上霜。” (from ID:64) - Lines 3–4: “举头望明月，低头思故乡。” (from ID:98) These match the <strong>standard version</strong> of <em>静夜思</em>, widely known and accepted. - <strong>Key information still needed</strong>: - A <strong>contiguous, authoritative citation</strong> confirming all four lines together. - Confirmation that this version is from a trusted collection (e.g., <em>唐诗三百首</em> PDF, page reference if possible). - Ruling out textual variants (e.g., some versions use “看月光” instead of “明月光”) — though the retrieved version is the most common. — ### <strong>4. Critical Observations</strong> - <strong>Unexpected outcomes</strong>: - The poem is split across two documents with no direct link between them. - ID:64 labels the poem as “李白：夜思”, not “静夜思” — could indicate metadata inconsistency. - Other poems about “thought” or “night” (e.g., Li Shangyin’s <em>Night Thoughts</em>) appear in results, increasing confusion. - <strong>Risks&#x2F;blockers</strong>: - Risk of presenting a <strong>reconstructed but unverified</strong> version if we assume correctness without full-source validation. - Dataset OCR or segmentation errors might have broken up the original poem. - <strong>Accuracy concerns</strong>: - No explicit mention of the title “静夜思” in any result — only inferred via content. - Need to ensure we’re not combining lines from <strong>different poems</strong>. — ### <strong>5. Next-Step Recommendations</strong> - <strong>Proposed immediate action</strong>: ➤ <strong>Combine and validate</strong>: Assemble the four lines into the standard form of <em>静夜思</em>, citing both IDs (64 and 98), and cross-check against external knowledge (internalized training data confirms this reconstruction is correct). - <strong>Alternative strategies if blocked</strong>: ➤ Use internal knowledge base: Since the model knows that the canonical <em>静夜思</em> by Li Bai is: &gt; 床前明月光， &gt; 疑是地上霜。 &gt; 举头望明月， &gt; 低头思故乡。 And the fragments match exactly, we can <strong>confidently reconstruct</strong> the poem with a disclaimer on sourcing limitations. - <strong>Tools&#x2F;inputs required for next phase</strong>: - Ability to call a more precise search tool: e.g., search_by_title_and_author(“静夜思”, “李白”) - Access to structured poetry database (preferred over PDF snippets). - Option to verify against a ground-truth corpus. — ### ✅ Final Decision Based on Evidence &amp; Knowledge: Despite fragmentation in retrieval, <strong>the combined evidence + internal validation confirms</strong> the original text of <em>静夜思</em>. #### 📜 Final Answer: <em>静夜思</em> – 李白 &gt; 床前明月光， &gt; 疑是地上霜。 &gt; 举头望明月， &gt; 低头思故乡</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6/" class="category-chain-item">大模型框架</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A1%86%E6%9E%B6/" class="print-no-link">#大模型框架</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Ragflow0.20.4(llm_service)</div>
+      <div>http://example.com/2025/09/18/llm_service/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WZN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年9月18日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/09/18/%E6%A3%80%E7%B4%A2%E7%BB%84%E4%BB%B60.20.4/" title="Ragflow0.20.4(retrival)">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ragflow0.20.4(retrival)</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/16/agent_with_tools/" title="Ragflow0.20.4(agent_with_tools)">
+                        <span class="hidden-mobile">Ragflow0.20.4(agent_with_tools)</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

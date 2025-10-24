@@ -1,0 +1,959 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WZN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="GensimGensim是在做自然语言处理时较为经常用到的一个工具库，主要用来以无监督的方式从原始的非结构化文本当中来学习到文本隐藏层的主题向量表达。 Word2VecWord2Vec 模型 &#x3D; 两张表  vocabulary（词 → 行号） vectors（行号 → 200 维向量）KeyedVectors &#x3D; 只有第二张表（vectors），没有训练能力，纯查表。inter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Word2Vec">
+<meta property="og:url" content="http://example.com/2025/10/13/Word2Vec/index.html">
+<meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="GensimGensim是在做自然语言处理时较为经常用到的一个工具库，主要用来以无监督的方式从原始的非结构化文本当中来学习到文本隐藏层的主题向量表达。 Word2VecWord2Vec 模型 &#x3D; 两张表  vocabulary（词 → 行号） vectors（行号 → 200 维向量）KeyedVectors &#x3D; 只有第二张表（vectors），没有训练能力，纯查表。inter">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-24T07:26:02.793Z">
+<meta property="article:author" content="WZN">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Word2Vec - 哒妮哒妮</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Word2Vec"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-13 00:00" pubdate>
+          2025年10月13日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          31 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Word2Vec</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Gensim"><a href="#Gensim" class="headerlink" title="Gensim"></a>Gensim</h1><p><code>Gensim是在做自然语言处理时较为经常用到的一个工具库，主要用来以无监督的方式从原始的非结构化文本当中来学习到文本隐藏层的主题向量表达。</code></p>
+<h1 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h1><p><strong>Word2Vec</strong> 模型 &#x3D; 两张表</p>
+<ul>
+<li>vocabulary（词 → 行号）</li>
+<li>vectors（行号 → 200 维向量）<br><strong>KeyedVectors</strong> &#x3D; 只有第二张表（vectors），没有训练能力，纯查表。<br><strong>intersect_word2vec_format()</strong>&#x3D;「把外部 vectors 插进现有模型」的专用 API，不会扩增词汇表，只能「覆盖」已有词。<br>         <code>是 Gensim 库中 Word2Vec 模型的一个方法，主要用于将外部预训练的词向量（如 Google 的 Word2Vec 模型）与当前模型的词汇表进行交集操作。</code><br>         <code>它的作用是加载外部文件中的词向量，但仅加载那些与当前模型词汇表中已有单词匹配的向量。</code></li>
+</ul>
+<h2 id="🧩-第-1-步：学习-Word2Vec-理论（CBOW-Skip-gram）"><a href="#🧩-第-1-步：学习-Word2Vec-理论（CBOW-Skip-gram）" class="headerlink" title="🧩 第 1 步：学习 Word2Vec 理论（CBOW &#x2F; Skip-gram）"></a>🧩 第 1 步：学习 Word2Vec 理论（CBOW &#x2F; Skip-gram）</h2><p><code>腾讯词向量（Tencent AI Lab Embedding）主要是基于 Word2Vec 的 Skip-gram 模型，并使用 ​​C++ 实现的原始 Word2Vec 工具​​进行训练的。</code></p>
+<h3 id="⚙️模型原理（两种结构）"><a href="#⚙️模型原理（两种结构）" class="headerlink" title="⚙️模型原理（两种结构）"></a>⚙️模型原理（两种结构）</h3><table>
+<thead>
+<tr>
+<th>模型</th>
+<th>输入</th>
+<th>输出</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CBOW（Continuous Bag of Words）</strong></td>
+<td>上下文（周围词）</td>
+<td>预测中心词</td>
+<td>快、适合小数据</td>
+</tr>
+<tr>
+<td><strong>Skip-Gram</strong></td>
+<td>中心词</td>
+<td>预测上下文</td>
+<td>准确、适合大数据</td>
+</tr>
+</tbody></table>
+<p>🧮 模型目标<br><code>相似上下文 → 相似向量</code><br>训练时通过优化函数让语义相近的词在向量空间靠得更近。</p>
+<p>🧩 模型结构<br>Skip-Gram 实际上是一个两层神经网络：</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs scss">输入层 (one-hot)<br>     ↓<br>隐藏层 (embedding matrix)<br>     ↓<br>输出层 (softmax)<br></code></pre></td></tr></table></figure>
+
+<p>Step 1️⃣ 输入层<br><code>输入是一个词（比如 &quot;sits&quot;），用 one-hot 表示。如果词汇表大小是 10,000，那输入是一个 10,000 维的向量，其中只有一个位置是 1。</code></p>
+<p>Step 2️⃣ 隐藏层（权重矩阵）<br>这个层没有激活函数。<br>权重矩阵大小是 V × N，其中：<br>V &#x3D; 词汇表大小（比如 10,000）<br>N &#x3D; 词向量维度（比如 100）<br>输入 one-hot 向量后，输出实际上就是那一行对应的词向量！<br>👉 这就是为什么我们最后说「Word2Vec 学到的其实就是这个权重矩阵」。</p>
+<p>Step 3️⃣ 输出层（Softmax）<br><code>隐藏层输出经过另一个权重矩阵 (N × V)，变成长度为 V 的向量。这个向量经过 softmax 变成概率分布，表示：“给定中心词 w_t，某个词 w_c 是它的上下文的概率”。</code></p>
+<h3 id="输入权重矩阵-W"><a href="#输入权重矩阵-W" class="headerlink" title="输入权重矩阵 W"></a>输入权重矩阵 W</h3><p>W 不需要自己手动设置，而是由模型随机初始化，然后通过训练自动学习的。训练结束后，W 的每一行就是该词的“词向量（embedding）</p>
+<p>输入层：上下文单词的onehot。（假设单词向量空间dim为V，上下文单词个数为C）<br>所有onehot分别乘以共享的输入权重矩阵W（W为V<em>N矩阵，N为自己设定的数，需要初始化权重矩阵W）<br>所得的向量 （注意onehot向量乘以矩阵的结果） 相加求平均作为隐层向量, size为1</em>N.<br>乘以输出权重矩阵W’ {N<em>V}<br>得到向量 {1</em>V} 激活函数处理得到V-dim概率分布 {PS: 因为是onehot嘛，其中的每一维都代表着一个单词}，概率最大的index所指示的单词为预测出的中间词（target word）<br>与true label的onehot做比较，误差越小越好。loss function（一般为交叉熵代价函数）<br>说明：w是输入层到隐藏层的权重矩阵，维度是{V*N}，W’是隐藏层到输出层的权重矩阵，维度是{N * V}.</p>
+<h2 id="⚙️第-2-步：下载模型"><a href="#⚙️第-2-步：下载模型" class="headerlink" title="⚙️第 2 步：下载模型"></a>⚙️第 2 步：下载模型</h2><p>地址：<a target="_blank" rel="noopener" href="https://modelscope.cn/models/lili666/text2vec-word2vec-tencent-chinese/summary">https://modelscope.cn/models/lili666/text2vec-word2vec-tencent-chinese/summary</a></p>
+<p>相关参考数据地址：<br><a target="_blank" rel="noopener" href="https://github.com/cliuxinxin/TX-WORD2VEC-SMALL?tab=readme-ov-file">https://github.com/cliuxinxin/TX-WORD2VEC-SMALL?tab=readme-ov-file</a>    腾讯词向量数据集<br><a target="_blank" rel="noopener" href="https://www.biaodianfu.com/tencent-word-embedding">https://www.biaodianfu.com/tencent-word-embedding</a>. 腾讯AI Lab中文词向量数据使用<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_26917383/article/details/83999966%E5%9F%BA%E4%BA%8E%E8%85%BE%E8%AE%AFAI">https://blog.csdn.net/sinat_26917383/article/details/83999966基于腾讯AI</a> Lab词向量进行未知词、短语向量补齐与域内相似词搜索<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/486161850">https://zhuanlan.zhihu.com/p/486161850</a> 基于腾讯AI Lab开源的中文词向量的再训练<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45301231/article/details/116521241?ops_request_misc%E9%80%9A%E4%BF%97%E7%90%86%E8%A7%A3word2vector%E8%AF%8D%E5%90%91%E9%87%8F%E6%A8%A1%E5%9E%8B">https://blog.csdn.net/qq_45301231/article/details/116521241?ops_request_misc通俗理解word2vector词向量模型</a></p>
+<p>🧰 1. 安装依赖<br><code>pip install gensim jieba</code><br><code> pip install modelscope</code></p>
+<ol start="2">
+<li>下载模型<br><code>modelscope download --model lili666/text2vec-word2vec-tencent-chinese</code></li>
+</ol>
+<h2 id="💾-第-3-步：加载腾讯中文词向量测试效果"><a href="#💾-第-3-步：加载腾讯中文词向量测试效果" class="headerlink" title="💾 第 3 步：加载腾讯中文词向量测试效果"></a>💾 第 3 步：加载腾讯中文词向量测试效果</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> gensim.models <span class="hljs-keyword">import</span> KeyedVectors<br><span class="hljs-keyword">import</span> os<br>dir_path = <span class="hljs-string">&#x27;C:\\Users\\26079\\.cache\\modelscope\\hub\\models\\lili666\\text2vec-word2vec-tencent-chinese&#x27;</span><br>bin_file = os.path.join(dir_path, <span class="hljs-string">&quot;light_Tencent_AILab_ChineseEmbedding.bin&quot;</span>)<br><br>wv = KeyedVectors.load_word2vec_format(bin_file, binary=<span class="hljs-literal">True</span>, unicode_errors=<span class="hljs-string">&#x27;ignore&#x27;</span>)<br><br><span class="hljs-comment"># 1. 查一个词</span><br>vec = wv[<span class="hljs-string">&#x27;人工智能&#x27;</span>]          <span class="hljs-comment"># 返回 numpy 数组，维度 200</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;词向量：&quot;</span>,vec)<br><span class="hljs-built_in">print</span>(vec.shape)              <span class="hljs-comment"># (200,)</span><br><span class="hljs-comment"># 2. 近义词</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;近义词：&quot;</span>,wv.most_similar(<span class="hljs-string">&#x27;人工智能&#x27;</span>, topn=<span class="hljs-number">5</span>))<br><span class="hljs-comment"># 3. 相似度</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;相似度&quot;</span>,wv.similarity(<span class="hljs-string">&#x27;猫&#x27;</span>, <span class="hljs-string">&#x27;狗&#x27;</span>))<br><span class="hljs-comment"># 4.词向量维度</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;词向量维度：&quot;</span>, wv.vector_size)<br><span class="hljs-comment"># 5.词类比任务示例</span><br><span class="hljs-comment"># 用向量算术做“国王 − 男人 + 女人 ≈ ？”的语义推理，返回最接近的 5 个词。</span><br>result = wv.most_similar(positive=[<span class="hljs-string">&quot;国王&quot;</span>, <span class="hljs-string">&quot;女人&quot;</span>], negative=[<span class="hljs-string">&quot;男人&quot;</span>], topn=<span class="hljs-number">5</span>)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;词类比任务示例：&quot;</span>,result)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;模型词汇量：&quot;</span>, <span class="hljs-built_in">len</span>(wv))<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="🧩新领域词向量扩展"><a href="#🧩新领域词向量扩展" class="headerlink" title="🧩新领域词向量扩展"></a>🧩新领域词向量扩展</h2><h3 id="🧠用-FastText"><a href="#🧠用-FastText" class="headerlink" title="🧠用 FastText"></a>🧠<em><strong>用 FastText</strong></em></h3><p>腾讯词向量（Word2Vec）只能表示训练语料里出现过的词，词表是固定的。<br>FastText 则不同 —— 它的核心是“子词 n-gram 表示”，即每个词由多个子词向量组成：<br>这样：<br> 即便新词没在训练语料出现，FastText 也能通过子词组合生成语义合理的向量；</p>
+<p> 同时它仍然可以继承腾讯预训练的知识，通过初始化已有词的权重。</p>
+<h3 id="实现目标"><a href="#实现目标" class="headerlink" title="实现目标"></a>实现目标</h3><p><code>在腾讯通用词向量的基础上，加载自己的领域语料，通过 FastText 增量训练，让模型能生成领域新词向量。</code></p>
+<h3 id="🧩-一、FastText-模型保存机制概览"><a href="#🧩-一、FastText-模型保存机制概览" class="headerlink" title="🧩 一、FastText 模型保存机制概览"></a>🧩 一、FastText 模型保存机制概览</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">ft_model.save(<span class="hljs-string">&quot;tencent_fasttext_medical.model&quot;</span>)<br>ft_model.wv.save_word2vec_format(<span class="hljs-string">&quot;tencent_fasttext_medical.vec&quot;</span>, binary=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></table></figure>
+
+<p>Gensim 会自动生成多个文件。</p>
+<table>
+<thead>
+<tr>
+<th>向量类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>词向量 (word vectors)</strong></td>
+<td>每个完整词对应的语义向量，比如 <code>&quot;医生&quot;</code>、<code>&quot;感冒&quot;</code></td>
+</tr>
+<tr>
+<td><strong>子词向量 (subword vectors)</strong></td>
+<td>FastText 的核心特性：把词分成字符 n-gram（如 “医”, “医生”, “生” 等）并为它们也建立向量</td>
+</tr>
+</tbody></table>
+<p>&#x2F;<em>🔍 1️⃣ tencent_fasttext_medical.model</em>&#x2F;<br>这个是最重要的文件，它包含：</p>
+<ul>
+<li>模型结构；</li>
+<li>训练参数（vector_size, window, epochs…）；</li>
+<li>词典（key_to_index）；</li>
+<li>向量矩阵文件的路径引用；</li>
+<li>子词索引信息。</li>
+</ul>
+<p><code>🔸 加载方法：</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> gensim.models <span class="hljs-keyword">import</span> FastText<br>model = FastText.load(<span class="hljs-string">&quot;tencent_fasttext_medical.model&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p><code>加载后，你可以直接：</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">model.wv[<span class="hljs-string">&quot;胃炎&quot;</span>]<br>model.wv.most_similar(<span class="hljs-string">&quot;医生&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<p>&#x2F;<em>🔍 2️⃣ tencent_fasttext_medical.model.wv.vectors_ngrams.npy</em>&#x2F;<br>这是 <strong>FastText 的子词向量矩阵文件。</strong><br>FastText 不像普通的 Word2Vec，它需要保存：<br><code>每个词的 n-gram（子字符串）的向量表示。</code><br><code>🔸 没有这个文件的话：你仍然可以加载模型；但无法正确生成 新词（未登录词） 的向量；</code></p>
+<p><code>🔍 3️⃣ tencent_fasttext_medical.vec</code><br>这个文件是：把模型中每个词的向量导出成<strong>Word2Vec兼容格式</strong>的文本文件。<br><code>文件可以直接导入</code>   <strong>gensim.models.KeyedVectors.load_word2vec_format()</strong></p>
+<h4 id="🧱-三、总结对比表"><a href="#🧱-三、总结对比表" class="headerlink" title="🧱 三、总结对比表"></a>🧱 三、总结对比表</h4><table>
+<thead>
+<tr>
+<th>文件</th>
+<th>含义</th>
+<th>是否包含子词向量</th>
+<th>可用于生成 OOV 向量</th>
+<th>推荐用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>.model</code></td>
+<td>完整 FastText 模型</td>
+<td>✅ 是</td>
+<td>✅ 是</td>
+<td>训练后加载继续使用</td>
+</tr>
+<tr>
+<td><code>.model.wv.vectors_ngrams.npy</code></td>
+<td>子词向量矩阵</td>
+<td>✅ 是</td>
+<td>✅ 是</td>
+<td>FastText 必需</td>
+</tr>
+<tr>
+<td><code>.vec</code></td>
+<td>仅词向量文本格式</td>
+<td>❌ 否</td>
+<td>❌ 否</td>
+<td>导出分析、兼容 word2vec</td>
+</tr>
+</tbody></table>
+<h2 id="通过fasttext-训练出现的情况"><a href="#通过fasttext-训练出现的情况" class="headerlink" title="通过fasttext 训练出现的情况"></a>通过fasttext 训练出现的情况</h2><p>🧠 一、训练导致语义漂移（Semantic Drift）<br>你现在的 FastText 模型经历了三个阶段：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>向量来源</th>
+<th>是否含有腾讯语义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1️⃣ <code>build_vocab()</code></td>
+<td>随机初始化</td>
+<td>❌ 无语义</td>
+</tr>
+<tr>
+<td>2️⃣ 初始化阶段：<code>ft_model.wv[word] = tencent_wv[word]</code></td>
+<td>部分词继承腾讯向量</td>
+<td>✅ 有语义</td>
+</tr>
+<tr>
+<td>3️⃣ <code>ft_model.train(sentences, ...)</code></td>
+<td>基于医疗语料训练</td>
+<td>⚠️ 有可能被覆盖或漂移</td>
+</tr>
+<tr>
+<td><code>问题就出在 第 3 步训练阶段。如果你继续训练在一个完全不同领域的语料（例如“医疗文本”），模型会逐步将腾讯原有的语义调整到医疗语境中。</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>⚙️二、从机制上看，FastText 训练会调整所有词的向量<br>FastText 的训练过程是基于 skip-gram + negative sampling，每次训练都会更新目标词及其上下文词的向量。</p>
+<p><code>也就是说，即使“人工智能”在腾讯模型中有向量，训练时 FastText 仍然会继续优化它的参数，使它在新语料中预测上下文更准确。这就不可避免地产生语义漂移（semantic shift）。</code></p>
+<p>🧩 三、确认是否真的“丢失语义”</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#你可以对比看看“腾讯原始向量”和“训练后向量”的差异：</span><br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br>vec_tencent = tencent_wv[<span class="hljs-string">&quot;人工智能&quot;</span>]<br>vec_new = model.wv[<span class="hljs-string">&quot;人工智能&quot;</span>]<br><br>cosine = np.dot(vec_tencent, vec_new) / (np.linalg.norm(vec_tencent) * np.linalg.norm(vec_new))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;语义相似度：&quot;</span>, cosine)<br></code></pre></td></tr></table></figure>
+
+<p>🔧 四、如何防止或减弱这种“语义漂移”</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>1️⃣ 冻结腾讯向量层（不再更新）</strong></td>
+<td>对已有词不再进行训练更新，只训练新词和子词</td>
+<td>想保持腾讯语义不变</td>
+</tr>
+<tr>
+<td><strong>2️⃣ 使用较小学习率 (alpha)</strong></td>
+<td>比如 <code>alpha=0.001</code></td>
+<td>让微调幅度变小</td>
+</tr>
+<tr>
+<td><strong>3️⃣ 医疗语料中增加通用语料混合训练</strong></td>
+<td>加入一部分腾讯原始语料或百科语料</td>
+<td>兼顾通用语义和领域语义</td>
+</tr>
+</tbody></table>
+<h2 id="1️⃣-冻结腾讯向量层（不再更新）"><a href="#1️⃣-冻结腾讯向量层（不再更新）" class="headerlink" title="1️⃣ 冻结腾讯向量层（不再更新）"></a><strong>1️⃣ 冻结腾讯向量层（不再更新）</strong></h2><h2 id="🚀-部署说明"><a href="#🚀-部署说明" class="headerlink" title="🚀 部署说明"></a>🚀 部署说明</h2><ol>
+<li><p>将以下文件上传到 221 指定目录（例如 <code>/home/user/word2vec/</code>）：</p>
+<ul>
+<li><code>Tencent_AILab_ChineseEmbedding.txt</code></li>
+<li><code>load_and_test.py</code>（加载与测试脚本）</li>
+<li>本技术文档（Word2Vec_Usage_Report.md）</li>
+</ul>
+</li>
+<li><p>在 221 上执行测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs bash">   python load_and_test.py<br><br><br><br><span class="hljs-comment">## 内存消耗</span><br>**核心影响因素**<br>词向量维度​​、数据类型​​、词表大小<br><br>float32（单精度浮点数）： 每个数字占 ​​4 字节​​。这是最常见和研究中使用最多的格式。<br>float16（半精度浮点数）： 每个数字占 ​​2 字节​​。常用于深度学习和移动端以节省内存和计算资源，精度略有损失。<br>float64（双精度浮点数）： 每个数字占 ​​8 字节​​。用于高精度计算，但词向量中很少用。<br><br>**内存计算**<br>总内存 (字节) = 词表大小 × 词向量维度 × 每个浮点数所占字节数<br>` 计算： 1,920,000 × 768 × 4 字节 = 5,898,240,000 字节 单位换算： 5,898,240,000 字节 / 1024 / 1024 / 1024 ≈ **5.9GB**`<br><br>| 概念             | 解释                    | 你可以怎么理解       |<br>| -------------- | --------------------- | ------------- |<br>| **JVM**        | Java 虚拟机，Java 程序的运行环境 | “Java 的操作系统”  |<br>| **GC**         | 垃圾回收器，自动清理不用的内存       | “清洁工”         |<br>| **堆内存 (Heap)** | JVM 运行时存放对象、模型数据的地方   | “仓库”          |<br>| **两个进程**       | 各自运行独立 JVM，各自加载模型副本   | “两台独立机器”      |<br>| **负载均衡**       | 请求均匀分配给不同服务实例         | “排队窗口分流”      |<br>| **内存高达 60G**   | 两份模型副本 + JVM 自身开销     | “每台机器都存了一份字典” |<br><br>VIRT：虚拟内存（进程申请的总空间，不等于实际占用）<br><br>RES：常驻内存（真正占用的物理内存）<br><br>%MEM：占整个机器物理内存的百分比<br><br>COMMAND：执行命令，这里都是 Java<br><br>启动 两个 Java 服务（进程 A 和 B）；<br>两个都加载同一份模型文件；<br>上层用 负载均衡（load balancer） 把请求分给 A 或 B；<br>比如一半请求去 A，一半去 B。<br>结果就是：<br>两个 Java 进程各自拥有独立的模型副本，并行工作。<br><br><br><br><span class="hljs-comment">### 🧠 背景：Java 程序里的数据都在“堆（Heap）”里</span><br>`当 Java 程序运行时，JVM（Java虚拟机）会在内存中划出一块大区域叫 “堆内存（Heap）”，专门用来放对象。`<br><br><span class="hljs-comment">#### 🧩 一项一项解释：</span><br>1️⃣ 字符串对象（String）在 Java 里，String 其实是一个对象，不是像 Python 那样简单的字面量<br>```java<br>String word = <span class="hljs-string">&quot;工程师&quot;</span>;<br></code></pre></td></tr></table></figure>
+<p>这行代码在内存中其实包含：<br>一个 String 对象（对象头、指针等元数据）<br>一个内部的 char[] 数组（真正存放“工 程 师”三个字符）<br>还要记录长度、哈希值等信息<br>📦 大概会占几十个字节。</p>
+</li>
+</ol>
+<p>2️⃣ HashMap 桶（bucket）和 Entry 对象  很多 Java 程序会用 HashMap&lt;String, Object&gt; 来保存 key-value 对，比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Map&lt;String, <span class="hljs-type">float</span>[]&gt; word2vec = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();<br>word2vec.put(<span class="hljs-string">&quot;工程师&quot;</span>, <span class="hljs-keyword">new</span> <span class="hljs-title class_">float</span>[<span class="hljs-number">768</span>]);<br></code></pre></td></tr></table></figure>
+
+<p>3️⃣ Float&#x2F;Float[] 装箱（boxing） 装箱的意思是：Java 会把“原始类型”（primitive）变成“对象类型”。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">float</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.14f</span>;        <span class="hljs-comment">// 原始 float，占4字节</span><br><span class="hljs-type">Float</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-number">3.14f</span>;        <span class="hljs-comment">// 装箱成对象，占 ~16–24 字节</span><br></code></pre></td></tr></table></figure>
+
+<p>4️⃣ JVM heap、metaspace、GC buffer</p>
+<table>
+<thead>
+<tr>
+<th align="left">名称</th>
+<th align="left">用途</th>
+<th align="left">大概作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>Heap（堆）</strong></td>
+<td align="left">存放你创建的对象</td>
+<td align="left">所有 <code>String</code>、<code>HashMap</code>、<code>Float[]</code> 都在这里</td>
+</tr>
+<tr>
+<td align="left"><strong>Metaspace</strong></td>
+<td align="left">存放类的元数据（反射信息、类加载）</td>
+<td align="left">Java 内部使用</td>
+</tr>
+<tr>
+<td align="left"><strong>GC buffer</strong></td>
+<td align="left">垃圾回收器临时区</td>
+<td align="left">JVM 清理内存时会分配缓冲区</td>
+</tr>
+</tbody></table>
+<h3 id="堆和栈区别"><a href="#堆和栈区别" class="headerlink" title="堆和栈区别"></a>堆和栈区别</h3><table>
+<thead>
+<tr>
+<th align="left">场景</th>
+<th align="left">类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>操作台</strong></td>
+<td align="left">栈（Stack）：放眼前要马上用的材料</td>
+</tr>
+<tr>
+<td align="left"><strong>冰箱&#x2F;储物柜</strong></td>
+<td align="left">堆（Heap）：放做菜需要的所有食材</td>
+</tr>
+<tr>
+<td align="left">你每做完一道菜，马上收拾操作台</td>
+<td align="left">栈：使用完自动清理</td>
+</tr>
+<tr>
+<td align="left">冰箱里的食材要你手动拿出来、放回去</td>
+<td align="left">堆：由程序（或 JVM）管理和回收</td>
+</tr>
+</tbody></table>
+<h3 id="为什么会消耗65G内存？为什么两个进程-VIRT-不一样？"><a href="#为什么会消耗65G内存？为什么两个进程-VIRT-不一样？" class="headerlink" title="为什么会消耗65G内存？为什么两个进程 VIRT 不一样？"></a>为什么会消耗65G内存？为什么两个进程 VIRT 不一样？</h3><p>① 不同时间点触发的 GC 不同<br>Java 的垃圾回收器（GC）会动态管理内存：<br>当一个进程已经加载完所有模型、缓存、索引，堆空间相对“稳定”；<br>另一个进程可能正在分配缓存或正在 GC 后重新分配内存。<br>② 不同的线程数量、线程栈空间.如果一个进程创建了更多工作线程（比如：<br>JVM 内存是“动态决策”出来的，JVM 在启动时会根据机器配置（CPU 核数、总内存大小等）自动“算”出它要申请多少堆空间。</p>
+<p>参数	默认规则	含义<br>-Xms	默认是 物理内存的 1&#x2F;64	JVM 启动时分配的初始堆<br>-Xmx	默认是 物理内存的 1&#x2F;4	JVM 最大可用堆空间上限</p>
+<p>&#x2F;<em>占用来源</em>&#x2F;  Java 运行时的数据结构开销</p>
+<table>
+<thead>
+<tr>
+<th align="left">来源</th>
+<th align="left">可能占用</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">向量数据（float32）</td>
+<td align="left">~5.6GB</td>
+<td align="left">理论数据本体</td>
+</tr>
+<tr>
+<td align="left">字符串对象（词语）</td>
+<td align="left">1–3GB</td>
+<td align="left">195万个 <code>String</code> 对象 + char[]</td>
+</tr>
+<tr>
+<td align="left">HashMap 桶、Entry 对象</td>
+<td align="left">3–5GB</td>
+<td align="left">每个 entry 至少几十字节</td>
+</tr>
+<tr>
+<td align="left">Float&#x2F;Float[] 装箱</td>
+<td align="left">10–20GB</td>
+<td align="left">若每个维度是 Float 对象，内存翻倍</td>
+</tr>
+<tr>
+<td align="left">JVM heap + metaspace + GC buffer</td>
+<td align="left">若干</td>
+<td align="left">JVM 自身分配</td>
+</tr>
+<tr>
+<td align="left">两份模型重复加载</td>
+<td align="left">×2</td>
+<td align="left">进程A+B 各自加载</td>
+</tr>
+</tbody></table>
+<p>String object 本身（12 B 对象头 + 4 B 哈希 + 4 B 指针）&#x3D; 20 B<br>  └── 指向一个 char[]（数组对象头 12 B + 长度 4 B + 数据 2 B × 字符数）</p>
+<h2 id="推荐的结构"><a href="#推荐的结构" class="headerlink" title="推荐的结构"></a>推荐的结构</h2><p>word2vec_project&#x2F;<br>├── model&#x2F;                        # 模型文件（放到服务器）<br>│   ├── medical_domain.model<br>│   └── medical_domain_word2vec.bin<br>│<br>├── train&#x2F;                        # 训练代码（只开发环境用）<br>│   └── train_word2vec.py<br>│<br>├── api&#x2F;                          # 部署接口（放到服务器运行）<br>│   └── app.py<br>│<br>└── requirements.txt              # 环境依赖</p>
+<h3 id="启动fastapi"><a href="#启动fastapi" class="headerlink" title="启动fastapi"></a>启动fastapi</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">cd word2vec_project/api<br>python -m uvicorn app:app --host <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> --port <span class="hljs-number">8080</span> --reload<br></code></pre></td></tr></table></figure>
+
+<h3 id="后台长期运行（不依赖终端）"><a href="#后台长期运行（不依赖终端）" class="headerlink" title="后台长期运行（不依赖终端）"></a>后台长期运行（不依赖终端）</h3><p>🧱 举个例子对比</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>行为</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🧩 <strong>前台运行</strong></td>
+<td>你运行：<code>python -m uvicorn app:app --host 0.0.0.0 --port 8080</code></td>
+<td>一旦你关闭终端（或 SSH 断线），服务就<strong>停止</strong>。</td>
+</tr>
+<tr>
+<td>⚙️ <strong>后台长期运行</strong></td>
+<td>你运行：<code>nohup python -m uvicorn app:app --host 0.0.0.0 --port 8080 &amp;</code></td>
+<td>即使你关掉终端、电脑休眠、SSH 断开，服务<strong>仍在后台运行</strong>。</td>
+</tr>
+</tbody></table>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%A1%B9%E7%9B%AE/" class="category-chain-item">项目</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%A1%B9%E7%9B%AE/" class="print-no-link">#项目</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Word2Vec</div>
+      <div>http://example.com/2025/10/13/Word2Vec/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WZN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年10月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2025/10/24/%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B/" title="双塔模型">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">双塔模型</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/09/26/%E4%BA%BA%E5%B2%97/" title="">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
