@@ -1,0 +1,757 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="WZN">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="torch-rechub项目项目简介（简介 + 关键位置） 项目用途：一个基于 PyTorch 的推荐系统工具箱（matching、ranking、multi-task 等），包含模型、数据处理、训练器与示例脚本。 主要目录（你会用到的）：   matching：匹配&#x2F;检索模型实现（其中 dssm.py 实现了 Deep Structured Semantic Model，两塔结构）。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="torch-rechub">
+<meta property="og:url" content="http://example.com/2025/10/31/torch-rechub%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="哒妮哒妮">
+<meta property="og:description" content="torch-rechub项目项目简介（简介 + 关键位置） 项目用途：一个基于 PyTorch 的推荐系统工具箱（matching、ranking、multi-task 等），包含模型、数据处理、训练器与示例脚本。 主要目录（你会用到的）：   matching：匹配&#x2F;检索模型实现（其中 dssm.py 实现了 Deep Structured Semantic Model，两塔结构）。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-31T01:11:32.000Z">
+<meta property="article:modified_time" content="2025-10-31T06:35:28.666Z">
+<meta property="article:author" content="WZN">
+<meta property="article:tag" content="推荐算法">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>torch-rechub - 哒妮哒妮</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="torch-rechub"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-31 09:11" pubdate>
+          2025年10月31日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">torch-rechub</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="torch-rechub项目"><a href="#torch-rechub项目" class="headerlink" title="torch-rechub项目"></a>torch-rechub项目</h1><h2 id="项目简介（简介-关键位置）"><a href="#项目简介（简介-关键位置）" class="headerlink" title="项目简介（简介 + 关键位置）"></a>项目简介（简介 + 关键位置）</h2><ol>
+<li>项目用途：一个基于 PyTorch 的推荐系统工具箱（matching、ranking、multi-task 等），包含模型、数据处理、训练器与示例脚本。</li>
+<li>主要目录（你会用到的）：</li>
+</ol>
+<ul>
+<li>matching：匹配&#x2F;检索模型实现（其中 dssm.py 实现了 Deep Structured Semantic Model，<strong>两塔结构</strong>）。</li>
+<li>basic：基础组件（features、layers、MLP、EmbeddingLayer 等）。</li>
+<li>utils：数据工具与帮助函数（data.py 提供 MatchDataGenerator、df_to_dict、pad&#x2F;neg-sample等）。</li>
+<li>trainers：训练器（MatchTrainer 提供 point&#x2F;pair&#x2F;list 三种模式，保存模型、inference embedding 等）。</li>
+<li>matching：matching 的示例脚本（例如 run_ml_dssm.py，对 MovieLens 做了完整的预处理、训练和评估流程）。<br>README.md：包含运行示例命令（也演示了运行 run_ml_dssm.py 的方法）。</li>
+</ul>
+<h2 id="核心组件（简要契约）"><a href="#核心组件（简要契约）" class="headerlink" title="核心组件（简要契约）"></a>核心组件（简要契约）</h2><ol>
+<li>输入（数据）：CSV 原始行为日志（至少包含 user_id, item_id, timestamp），可带属性列（如 gender、age、genres 等）。示例脚本会对类别做 LabelEncoder 并把 id +1（0 用作 padding）。</li>
+<li>特征（代码层面）：使用 SparseFeature, SequenceFeature, DenseFeature 在脚本里声明用户塔与物品塔所需特征并传入模型。</li>
+<li>模型输出：两塔分别输出 L2 归一化后的用户&#x2F;物品向量（embedding）。训练器会保存 model.pth；可调用 MatchTrainer.inference_embedding 导出用户&#x2F;物品 embedding 做召回&#x2F;评估。</li>
+<li>训练模式：默认是 point-wise（MatchTrainer mode&#x3D;0），也支持 pair-wise（BPR）和 list-wise。</li>
+</ol>
+<h2 id="用例：训练双塔（DSSM）的步骤（从零到可运行）"><a href="#用例：训练双塔（DSSM）的步骤（从零到可运行）" class="headerlink" title="用例：训练双塔（DSSM）的步骤（从零到可运行）"></a>用例：训练双塔（DSSM）的步骤（从零到可运行）</h2><h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>  最简单：使用仓库自带&#x2F;示例的 MovieLens 预处理文件（run_ml_dssm.py 默认读取 .&#x2F;data&#x2F;ml-1m&#x2F;ml-1m_sample.csv）</p>
+<h3 id="查看-修改特征定义"><a href="#查看-修改特征定义" class="headerlink" title="查看&#x2F;修改特征定义"></a>查看&#x2F;修改特征定义</h3><p>在示例脚本 run_ml_dssm.py 中会构造：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">user_features = [SparseFeature(<span class="hljs-string">&#x27;user_id&#x27;</span>, vocab_size=..., embed_dim=<span class="hljs-number">16</span>), ...]<br>user_features += [SequenceFeature(<span class="hljs-string">&quot;hist_movie_id&quot;</span>, vocab_size=..., embed_dim=<span class="hljs-number">16</span>, pooling=<span class="hljs-string">&quot;mean&quot;</span>, shared_with=<span class="hljs-string">&quot;movie_id&quot;</span>)]<br>item_features = [SparseFeature(<span class="hljs-string">&#x27;movie_id&#x27;</span>, vocab_size=..., embed_dim=<span class="hljs-number">16</span>), ...]<br></code></pre></td></tr></table></figure>
+<p>（vocab_size 通常为该列的最大编码 + 1）。</p>
+<h3 id="配置模型超参（示例）"><a href="#配置模型超参（示例）" class="headerlink" title="配置模型超参（示例）"></a>配置模型超参（示例）</h3><p>在 run_ml_dssm.py，模型构建示例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">model = DSSM(<br>    user_features,<br>    item_features,<br>    temperature=<span class="hljs-number">0.02</span>,<br>    user_params=&#123;<span class="hljs-string">&quot;dims&quot;</span>: [<span class="hljs-number">256</span>,<span class="hljs-number">128</span>,<span class="hljs-number">64</span>], <span class="hljs-string">&quot;activation&quot;</span>: <span class="hljs-string">&quot;prelu&quot;</span>&#125;,<br>    item_params=&#123;<span class="hljs-string">&quot;dims&quot;</span>: [<span class="hljs-number">256</span>,<span class="hljs-number">128</span>,<span class="hljs-number">64</span>], <span class="hljs-string">&quot;activation&quot;</span>: <span class="hljs-string">&quot;prelu&quot;</span>&#125;)<br></code></pre></td></tr></table></figure>
+<p>调整 dims 控制 MLP 宽度&#x2F;深度；embed_dim 在 Feature 定义控制 embedding 大小。</p>
+<h3 id="运行训练（示例命令）"><a href="#运行训练（示例命令）" class="headerlink" title="运行训练（示例命令）"></a>运行训练（示例命令）</h3><ul>
+<li>如果使用 CPU 或小机器，请把 batch_size 调小（e.g., 1024 或 256）。在有 GPU 时可用大 batch。</li>
+</ul>
+<p><code>vocab_size = 最大编码 + 1 就是「one-hot 向量长度」——Embedding 表总行数。</code><br><code>&quot;dims&quot;: [256,128,64] 表示把特征先过 3 层全连接，依次 256→128→64 维；&quot;activation&quot;: &quot;prelu&quot; 是每层后面接的激活函数。</code></p>
+<ul>
+<li>在项目根目录下运行：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使用默认示例数据（MovieLens）</span><br>python .\examples\matching\run_ml_dssm.py --dataset_path .\data\ml-1m\ml-1m_sample.csv --device cpu --epoch 10 --batch_size 1024 --save_dir .\saved\dssm_test\<br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>片段</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>python .\examples\matching\run_ml_dssm.py</code></td>
+<td>启动官方写好的“一站式”演示脚本，里面已经包好：读数据 → 构造特征 → 建塔 → 训练 → 导出向量。</td>
+</tr>
+<tr>
+<td><code>--dataset_path .\data\ml-1m\ml-1m_sample.csv</code></td>
+<td>告诉脚本“我用哪份数据”。这里给的其实是 <strong>MovieLens-1M 的采样子集</strong>（1000 用户左右，几十秒就能跑完）。如果你想换成自己的数据，只要保持列名一致（user_id, item_id, rating 或 label），把路径指过去即可。</td>
+</tr>
+<tr>
+<td><code>--device cpu</code></td>
+<td>强制用 CPU 训练（没 GPU 或想省显存时写这个）。</td>
+</tr>
+<tr>
+<td><code>--epoch 10</code></td>
+<td>一共跑 10 个轮次，先快速看效果。</td>
+</tr>
+<tr>
+<td><code>--batch_size 1024</code></td>
+<td>每步喂 1024 条样本，CPU 一般 512~2048 都可。</td>
+</tr>
+<tr>
+<td><code>--save_dir .\saved\dssm_test\</code></td>
+<td>训练结束后，脚本会把：<br>① 最好模型 <code>best_model.pt</code><br>② 用户塔向量 <code>user_embedding.npy</code><br>③ 物品塔向量 <code>item_embedding.npy</code><br>④ 配置文件 <code>args.json</code><br>全都丢进这个文件夹，方便你下一步 Faiss 建索引或直接加载做召回。</td>
+</tr>
+</tbody></table>
+<h3 id="训练与评估流程（脚本内部）"><a href="#训练与评估流程（脚本内部）" class="headerlink" title="训练与评估流程（脚本内部）"></a>训练与评估流程（脚本内部）</h3><p>脚本会：<br>    读 CSV、LabelEncode、构造序列 hist（generate_seq_feature_match）；<br>    构造 MatchDataGenerator，得到 (train_dl, test_dl, item_dl)；<br>    用 MatchTrainer.fit(train_dl) 训练并保存 model.pth；<br>    再用 trainer.inference_embedding 导出 user&#x2F;item embedding，并用 match_evaluation 评估 topk 准确率（示例中会打印结果）。</p>
+<p><code>LabelEncoder（来自 sklearn.preprocessing）把类别型（categorical）变量映射为连续的整数标签（0,1,2,...）。它只处理一维标签数组。</code><br><code>这里把编码结果 +1 的原因：保留 0 作为 padding 索引（sequence padding），embedding 的 index 0 用作填充。</code></p>
+<p>本周主要学习了基于 PyTorch 的推荐系统工具箱 torch-rechub，重点研究了其双塔模型（DSSM）的实现原理和应用。该项目采用模块化设计，包含特征工程、模型构建、训练优化等完整流程。在特征处理方面，学习了如何使用 LabelEncoder 进行类别型特征的编码转换，以及如何构建用户-物品交互序列特征。在模型架构上，掌握了双塔模型中用户塔和物品塔的构建方法，理解了如何通过 embedding 层和 MLP 层提取特征表示。在训练部分，熟悉了点击预测任务的实现方式，包括负样本采样、批处理数据加载和模型参数优化等环节。通过 MovieLens 数据集的实践，深入理解了推荐系统从数据预处理到模型训练的完整工作流程，为后续开发推荐系统奠定了良好基础。</p>
+<h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><h3 id="LabelEncoder-类别型特征的编码转换"><a href="#LabelEncoder-类别型特征的编码转换" class="headerlink" title="LabelEncoder 类别型特征的编码转换"></a>LabelEncoder 类别型特征的编码转换</h3><p>👉<br>LabelEncoder 把物品编号映射成连续整数（0~N），<br>这些整数就能用来在 Embedding 表中查到对应的向量。</p>
+<h3 id="用户-物品交互序列特征"><a href="#用户-物品交互序列特征" class="headerlink" title="用户-物品交互序列特征"></a>用户-物品交互序列特征</h3><p>🧩 序列推荐（sequential recommendation）的关键概念<br>模型用用户的历史行为（点击序列） [i1, i2] 来预测他是否会点击 i3</p>
+<h3 id="双塔模型中用户塔和物品塔的构建方法"><a href="#双塔模型中用户塔和物品塔的构建方法" class="headerlink" title="双塔模型中用户塔和物品塔的构建方法"></a>双塔模型中用户塔和物品塔的构建方法</h3><ol>
+<li><p>双塔基本架构<br> 用户塔（User Tower）和物品塔（Item Tower）是完全独立的<br> 每个塔的基本结构：Input -&gt; Embedding Layer -&gt; MLP Layers -&gt; L2 Normalization<br> 最终通过内积计算相似度得到匹配分数</p>
+<p> <code>“塔的输入维度”就是把所有特征对应的 Embedding 向量挨个拼起来后，喂给 MLP 的那一串数字的总长度</code></p>
+<p> 假设用户塔只用 3 个稀疏特征：</p>
+<table>
+<thead>
+<tr>
+<th>特征名</th>
+<th>取值举例</th>
+<th>词表大小 vocab_size</th>
+<th>嵌入维度 embed_dim</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user_id</td>
+<td>10001</td>
+<td>50 000</td>
+<td>64</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>“M”</td>
+<td>3</td>
+<td>16</td>
+</tr>
+<tr>
+<td>age_bucket</td>
+<td>“25-34”</td>
+<td>10</td>
+<td>16</td>
+</tr>
+</tbody></table>
+<ol>
+<li>每个特征先查自己的 Embedding 表，得到一条向量：<br> user_id → 64 维<br> gender → 16 维<br> age_bucket → 16 维</li>
+<li>拼接（concat） → 一条用户样本的向量长度<br> 64 + 16 + 16 &#x3D; 96 维 这 96 就是“用户塔的输入维度”。</li>
+<li>随后塔里的 MLP 接收这 96 维，再往下压缩：96 → 256 → 128 → 64（输出向量）</li>
+</ol>
+<p> <code>共享的embedding层（处理所有稀疏特征）self.embedding = EmbeddingLayer(user_features + item_features)</code><br> 一次性给“所有稀疏特征”建一张公共的 Embedding 查表字典</p>
+<p> <strong>为什么需要“共享”</strong><br>     稀疏特征（user_id、item_id、category…）都要先 map 成稠密向量才能进神经网络。<br>     如果用户塔和物品塔各自建自己的 nn.Embedding，<br>     同一个 user_id 会出现两份矩阵，浪费显存；<br>     梯度更新也互不干扰，可能把相同 ID 学到两个完全不同的向量，效果反而差。<br>     把<strong>所有稀疏特征</strong>扔给同一个 EmbeddingLayer 对象，它就：<br>     -按特征名自动去重；<br>     为每个特征维护一张 vocab_size × embed_dim 的表；<br>     前向传播时“谁用谁来查”，<strong>同 ID 同特征永远返回同一向量。</strong></p>
+</li>
+<li><p>特征表示过程<br> 2.1 Embedding 层（稀疏特征转稠密）<br> Embedding 处理过程：<br> 每个稀疏特征先通过 LabelEncoder 转为整数 ID<br> 每个 ID 查表得到对应的 embedding 向量（如16维）<br> 序列特征（如历史观看）会先embed再做pooling<br> 所有特征的 embedding 向量拼接，得到该塔的输入向量<br> <code>pooling = 把“一串向量”压成“一个向量”</code><br> 用户看过 50 部影片 → 50 个 item_id<br> 每个 item_id 先 embed 成 16 维 → 得到形状 (50, 16)<br> pooling 把这 50 条 16 维向量压成 1 条 16 维向量（或 32&#x2F;64 维，看你设置），再和用户其他特征拼在一起喂给塔。<br> 2.2 MLP 层（特征交互）<br> <code>MLP = 把“拼好的特征”层层压缩+非线性变换，输出一个紧凑的向量表示，让双塔能算相似度、也能被 Faiss/Annoy 快速检索。</code></p>
+<p> 2.3 L2归一化 <code>把向量除以自己的 模长，让结果变成 单位向量（长度=1）</code></p>
+</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/" class="print-no-link">#推荐算法</a>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>torch-rechub</div>
+      <div>http://example.com/2025/10/31/torch-rechub项目/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>WZN</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年10月31日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2025/10/24/%E5%8F%8C%E5%A1%94%E6%A8%A1%E5%9E%8B/" title="双塔模型">
+                        <span class="hidden-mobile">双塔模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
