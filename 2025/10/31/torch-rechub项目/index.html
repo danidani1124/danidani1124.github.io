@@ -27,10 +27,11 @@
 <meta property="og:description" content="torch-rechub项目项目简介（简介 + 关键位置） 项目用途：一个基于 PyTorch 的推荐系统工具箱（matching、ranking、multi-task 等），包含模型、数据处理、训练器与示例脚本。 主要目录（你会用到的）：   matching：匹配&#x2F;检索模型实现（其中 dssm.py 实现了 Deep Structured Semantic Model，两塔结构）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-31T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-10-31T06:35:28.666Z">
+<meta property="article:modified_time" content="2025-11-10T01:27:45.652Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="推荐算法">
 <meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -224,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.8k 字
         
       </span>
     
@@ -235,7 +236,7 @@
         
         
         
-          17 分钟
+          24 分钟
         
       </span>
     
@@ -308,7 +309,7 @@
 <ul>
 <li>在项目根目录下运行：</li>
 </ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使用默认示例数据（MovieLens）</span><br>python .\examples\matching\run_ml_dssm.py --dataset_path .\data\ml-1m\ml-1m_sample.csv --device cpu --epoch 10 --batch_size 1024 --save_dir .\saved\dssm_test\<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使用默认示例数据（MovieLens）</span><br>python .\examples\matching\run_ml_dssm.py --dataset_path .\examples\matching\data\ml-1m\ml-1m_sample.csv --device cpu --epoch 10 --batch_size 1024 --save_dir .\saved\dssm_test\<br><br></code></pre></td></tr></table></figure>
 <table>
 <thead>
 <tr>
@@ -343,6 +344,7 @@
 </tbody></table>
 <h3 id="训练与评估流程（脚本内部）"><a href="#训练与评估流程（脚本内部）" class="headerlink" title="训练与评估流程（脚本内部）"></a>训练与评估流程（脚本内部）</h3><p>脚本会：<br>    读 CSV、LabelEncode、构造序列 hist（generate_seq_feature_match）；<br>    构造 MatchDataGenerator，得到 (train_dl, test_dl, item_dl)；<br>    用 MatchTrainer.fit(train_dl) 训练并保存 model.pth；<br>    再用 trainer.inference_embedding 导出 user&#x2F;item embedding，并用 match_evaluation 评估 topk 准确率（示例中会打印结果）。</p>
 <p><code>LabelEncoder（来自 sklearn.preprocessing）把类别型（categorical）变量映射为连续的整数标签（0,1,2,...）。它只处理一维标签数组。</code><br><code>这里把编码结果 +1 的原因：保留 0 作为 padding 索引（sequence padding），embedding 的 index 0 用作填充。</code></p>
+<p><code>原始最小编号变成 1，最大编号变成 N。0 就被空出来了，留给一个特殊符号 “PAD”——在序列特征里（比如用户看过的最后 50 部电影），不足 50 部的地方要用 0 补齐，这个 0 就是 PAD;如果不用 0 当 PAD，就得额外在词汇表末尾再插一个 PAD 号，写代码容易乱；PyTorch 默认 padding_idx=0，也省得改</code></p>
 <p>本周主要学习了基于 PyTorch 的推荐系统工具箱 torch-rechub，重点研究了其双塔模型（DSSM）的实现原理和应用。该项目采用模块化设计，包含特征工程、模型构建、训练优化等完整流程。在特征处理方面，学习了如何使用 LabelEncoder 进行类别型特征的编码转换，以及如何构建用户-物品交互序列特征。在模型架构上，掌握了双塔模型中用户塔和物品塔的构建方法，理解了如何通过 embedding 层和 MLP 层提取特征表示。在训练部分，熟悉了点击预测任务的实现方式，包括负样本采样、批处理数据加载和模型参数优化等环节。通过 MovieLens 数据集的实践，深入理解了推荐系统从数据预处理到模型训练的完整工作流程，为后续开发推荐系统奠定了良好基础。</p>
 <h2 id="特征处理"><a href="#特征处理" class="headerlink" title="特征处理"></a>特征处理</h2><h3 id="LabelEncoder-类别型特征的编码转换"><a href="#LabelEncoder-类别型特征的编码转换" class="headerlink" title="LabelEncoder 类别型特征的编码转换"></a>LabelEncoder 类别型特征的编码转换</h3><p>👉<br>LabelEncoder 把物品编号映射成连续整数（0~N），<br>这些整数就能用来在 Embedding 表中查到对应的向量。</p>
 <h3 id="用户-物品交互序列特征"><a href="#用户-物品交互序列特征" class="headerlink" title="用户-物品交互序列特征"></a>用户-物品交互序列特征</h3><p>🧩 序列推荐（sequential recommendation）的关键概念<br>模型用用户的历史行为（点击序列） [i1, i2] 来预测他是否会点击 i3</p>
@@ -390,6 +392,22 @@
 <p> 2.3 L2归一化 <code>把向量除以自己的 模长，让结果变成 单位向量（长度=1）</code></p>
 </li>
 </ol>
+<h2 id="import-argparse作用"><a href="#import-argparse作用" class="headerlink" title="import argparse作用"></a>import argparse作用</h2><p><code> import argparse命令行解析，所有超参一目了然 argparse 就是“命令行超参遥控器”，不用改代码，就能快速做 grid-search 或者切换环境。命令行里直接拧旋钮</code></p>
+<h2 id="seed怎么复现"><a href="#seed怎么复现" class="headerlink" title="seed怎么复现"></a>seed怎么复现</h2><p>seed（随机种子）像给所有“随机数生成器”上了一把锁，只要 seed 相同，随机数的出拳顺序就永远一模一样，于是：</p>
+<ul>
+<li>用同样的数据、同样的超参、同样的 seed，模型每次跑出来的结果都一样。</li>
+</ul>
+<h2 id="用户-物品静态属性表user-profile-户塔物品塔user-cols特征区别"><a href="#用户-物品静态属性表user-profile-户塔物品塔user-cols特征区别" class="headerlink" title="用户&#x2F;物品静态属性表user_profile 户塔物品塔user_cols特征区别"></a>用户&#x2F;物品静态属性表user_profile 户塔物品塔user_cols特征区别</h2><ol>
+<li>静态属性表（ user_profile ）的作用：<br> 核心用途：<br> 长期稳定的特征存储：<br> 存储用户或物品的静态属性（如用户的性别、年龄、注册时间；物品的类别、品牌、发布时间等）。<br> 这些特征通常不会频繁变化，适合作为基础数据长期维护。<br> 冷启动支持：<br> 对于新用户或新物品，缺乏交互数据时，静态属性是推荐的主要依据。<br> 例如：新用户注册后，根据年龄和性别推荐热门物品。<br> 多任务共享：<br> 静态属性可以被多个模型或任务复用（如排序模型、召回模型、数据分析）。</li>
+<li>用户塔&#x2F;物品塔（ user_cols ）的作用<br> 核心用途：<br> 动态特征处理：<br> 用户塔和物品塔是模型的一部分（如双塔模型），用于实时计算用户和物品的嵌入（embedding）。<br> 输入特征可能包括静态属性（如年龄）和动态特征（如最近点击记录）。<br> 实时性要求高：<br> 用户塔会根据用户的最新行为动态调整嵌入（例如：用户刚点击了运动鞋，推荐相关物品）。<br> 模型特异性：<br> 不同模型可能对同一特征的处理方式不同（如归一化、分桶策略），因此特征需要在塔内单独定义。</li>
+</ol>
+<h2 id="训练好的模型model-pth"><a href="#训练好的模型model-pth" class="headerlink" title="训练好的模型model.pth"></a>训练好的模型model.pth</h2><ul>
+<li>你必须“重新构建模型结构”是因为 PyTorch 的 model.pth 只保存了模型的参数（权重），而不是模型的结构（类、特征定义、网络层次等）。<br>只有把结构和参数都还原，才能用 .load_state_dict() 恢复模型并进行推理。</li>
+</ul>
+<p>简要原理：</p>
+<ul>
+<li>model.pth 只是一组权重（比如每一层的 weight&#x2F;bias），它不知道你的模型有几层、每层叫什么、特征怎么定义。<br>你必须用和训练时完全一致的 DSSM(…) 构造模型对象，然后用 model.load_state_dict(torch.load(…)) 把权重加载进去，这样模型才“活”起来，能做推理和推荐。<br>这和 Keras&#x2F;TensorFlow 的“结构+权重一起保存”不同，PyTorch 推荐“结构代码+权重分开管理”，这样灵活但需要你自己保证一致。<br>所以：<br>你每次用训练好的模型做推荐，都要先用和训练时一样的 feature&#x2F;参数构建模型，再加载权重，然后才能推理。</li>
+</ul>
 
                 
               </div>
@@ -408,7 +426,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="category-chain-item">深度学习</a>
+  <a href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="category-chain-item">机器学习</a>
   
   
 
@@ -426,6 +444,8 @@
         <a href="/tags/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95/" class="print-no-link">#推荐算法</a>
       
         <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
       
     </div>
   
@@ -481,6 +501,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2025/11/10/%E6%B5%8B%E8%AF%95%E6%96%87%E7%AB%A0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" title="机器学习">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">机器学习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
