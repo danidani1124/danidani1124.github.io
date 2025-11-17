@@ -27,7 +27,7 @@
 <meta property="og:description" content="模型评估指标在推荐系统或匹配类任务里，常用的模型评估指标可以分为「预测问题评价指标」「分类问题评价指标」「回归问题评价指标」在推荐 &#x2F; 匹配场景里，**“预测、分类、回归”这三类指标并不是按“任务名字”划分的，而是按「模型到底输出什么」**来划分的。 ① 预测问题指标 —— 模型输出「一个具体数值」输出例子  用户 A 明天会在抖音看多少分钟短视频？→ 18.5 分钟 用户 B 对这部电">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-11-10T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-11-11T07:08:43.349Z">
+<meta property="article:modified_time" content="2025-11-17T03:17:04.474Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="推荐算法">
 <meta property="article:tag" content="深度学习">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          3.9k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          29 分钟
+          33 分钟
         
       </span>
     
@@ -278,7 +278,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="模型评估指标"><a href="#模型评估指标" class="headerlink" title="模型评估指标"></a>模型评估指标</h1><p><em><strong>在推荐系统或匹配类任务里，常用的模型评估指标可以分为「预测问题评价指标」「分类问题评价指标」「回归问题评价指标」</strong></em><br>在推荐 &#x2F; 匹配场景里，**“预测、分类、回归”这三类指标并不是按“任务名字”划分的，而是按「模型到底输出什么」**来划分的。</p>
+                <h1 id="模型评估指标"><a href="#模型评估指标" class="headerlink" title="模型评估指标"></a>模型评估指标</h1><h2 id=""><a href="#" class="headerlink" title=""></a></h2><p><em><strong>在推荐系统或匹配类任务里，常用的模型评估指标可以分为「预测问题评价指标」「分类问题评价指标」「回归问题评价指标」</strong></em><br>在推荐 &#x2F; 匹配场景里，**“预测、分类、回归”这三类指标并不是按“任务名字”划分的，而是按「模型到底输出什么」**来划分的。</p>
 <p>① 预测问题指标 —— 模型输出「一个具体数值」<br><strong>输出例子</strong></p>
 <ul>
 <li>用户 A 明天会在抖音看多少分钟短视频？→ 18.5 分钟</li>
@@ -671,6 +671,48 @@
 <h3 id="3-2-训练与测试误差"><a href="#3-2-训练与测试误差" class="headerlink" title="3.2 训练与测试误差"></a>3.2 训练与测试误差</h3><p><strong>训练误差（Training Error）：</strong> 训练误差是模型在训练数据上的表现，反映了模型是否能够很好地适应训练数据。如果训练误差很大，可能说明模型不够复杂，欠拟合；如果训练误差很小，可能说明模型太复杂，容易过拟合。</p>
 <p><strong>测试误差（Test Error）：</strong> 测试误差是模型在未见过的数据上的表现，反映了模型的泛化能力。测试误差应当与训练误差相匹配，若测试误差远高于训练误差，通常是过拟合。</p>
 <h3 id="3-3-评估指标"><a href="#3-3-评估指标" class="headerlink" title="3.3 评估指标"></a>3.3 评估指标</h3><p>准确率 精确率（Precision）和召回率（Recall）<br>F1 分数： 精确率与召回率的调和平均数，用于综合考虑模型的表现。</p>
+<h1 id="模型训练参数"><a href="#模型训练参数" class="headerlink" title="模型训练参数"></a>模型训练参数</h1><h2 id="🔍-温度系数"><a href="#🔍-温度系数" class="headerlink" title="🔍 温度系数"></a>🔍 温度系数</h2><p><code>温度系数是控制模型“输出分布有多尖锐或多平滑”的一个旋钮。</code></p>
+<table>
+<thead>
+<tr>
+<th>温度 $T$</th>
+<th>效果</th>
+<th>直观理解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>T → 0</strong></td>
+<td>分布更“尖锐”</td>
+<td>模型更“自信”，几乎只选最大 logit 的类别</td>
+</tr>
+<tr>
+<td><strong>T &#x3D; 1</strong></td>
+<td>原始 softmax</td>
+<td>标准输出</td>
+</tr>
+<tr>
+<td><strong>T → ∞</strong></td>
+<td>分布更“平滑”</td>
+<td>所有类别概率趋近相等，模型“犹豫”</td>
+</tr>
+</tbody></table>
+<h2 id="🔍-学习率"><a href="#🔍-学习率" class="headerlink" title="🔍 学习率"></a>🔍 学习率</h2><p><code>它决定了模型在每次参数更新时的步长大小，直接影响模型的收敛速度、稳定性以及最终性能。</code><br> <strong>控制参数更新幅度</strong><br>在梯度下降中，参数更新公式为：θ_new&#x3D;θ_old − η⋅∇_θJ(θ)</p>
+<ul>
+<li>η 就是学习率，∇_θJ(θ) 是损失函数的梯度。</li>
+<li>学习率大 → 步长大，可能跳过最优解（震荡或发散）。</li>
+<li>学习率小 → 步长小，收敛缓慢，可能陷入局部最优。</li>
+</ul>
+<h2 id="NDCG-10"><a href="#NDCG-10" class="headerlink" title="NDCG@10"></a>NDCG@10</h2><p><code>NDCG@10 是“归一化折损累积增益@前10位”（Normalized Discounted Cumulative Gain at top-10）用来衡量排序模型把最相关结果放到越靠前位置的能力，是信息检索和排序任务里最常用的离线评价指标之一。</code></p>
+<h2 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h2><p>Softmax 是机器学习里**把“原始分数”变成“概率”**的标准做法</p>
+<h3 id="✅-标准-Softmax-公式："><a href="#✅-标准-Softmax-公式：" class="headerlink" title="✅ 标准 Softmax 公式："></a>✅ 标准 Softmax 公式：</h3><p>  对于一组输入分数（logits）：<br>                            z &#x3D; [z1, z2, …, zK]<br>  每个softmax输出概率 p_i 为：<br>                            p_i &#x3D; exp(z_i) &#x2F; Σ(exp(z_j)) for j &#x3D; 1 to K</p>
+<h3 id="🌡️-带温度-T-的-Softmax："><a href="#🌡️-带温度-T-的-Softmax：" class="headerlink" title="🌡️ 带温度 T 的 Softmax："></a>🌡️ 带温度 T 的 Softmax：</h3><p>把温度 T 放进去，只需在指数里除一下：<br>                            p_i &#x3D; exp(z_i&#x2F;T) &#x2F; Σ(exp(z_j&#x2F;T)) for j &#x3D; 1 to K<br>                                  T → 0：概率趋近于 one-hot（最硬的判决）。<br>                                  T → 1：原始 softmax。<br>                                  T → ∞：所有概率趋近于均匀分布（最“佛系”）。<br>🎯 一张小图<br>    输入 logits → 指数化 → 归一化 → 输出概率</p>
+<h2 id="“Hit-命中率"><a href="#“Hit-命中率" class="headerlink" title="“Hit 命中率"></a>“Hit 命中率</h2><p> 就是‘有没有猜中’的 0&#x2F;1 计数器”——猜中了叫 hit</p>
+<ul>
+<li>同样先拿到每个用户的 Top-10 推荐列表。</li>
+<li>只要至少有一个测试集里的真实物品出现在列表里，就算 1 次 hit，否则 0。</li>
+<li>最后 hit_rate &#x3D; 总 hit 用户数 &#x2F; 总用户数。</li>
+<li>特点：只关心“有没有”，不关心“命中几个&#x2F;排第几”。</li>
+</ul>
 
                 
               </div>
