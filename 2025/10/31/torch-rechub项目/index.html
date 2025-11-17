@@ -27,7 +27,7 @@
 <meta property="og:description" content="torch-rechub项目项目简介（简介 + 关键位置） 项目用途：一个基于 PyTorch 的推荐系统工具箱（matching、ranking、multi-task 等），包含模型、数据处理、训练器与示例脚本。 主要目录（你会用到的）：   matching：匹配&#x2F;检索模型实现（其中 dssm.py 实现了 Deep Structured Semantic Model，两塔结构）。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-10-31T01:11:32.000Z">
-<meta property="article:modified_time" content="2025-11-17T03:17:02.232Z">
+<meta property="article:modified_time" content="2025-11-17T03:21:52.265Z">
 <meta property="article:author" content="WZN">
 <meta property="article:tag" content="推荐算法">
 <meta property="article:tag" content="深度学习">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          3.8k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          30 分钟
+          33 分钟
         
       </span>
     
@@ -429,6 +429,9 @@
 <li>model.pth 只是一组权重（比如每一层的 weight&#x2F;bias），它不知道你的模型有几层、每层叫什么、特征怎么定义。<br>你必须用和训练时完全一致的 DSSM(…) 构造模型对象，然后用 model.load_state_dict(torch.load(…)) 把权重加载进去，这样模型才“活”起来，能做推理和推荐。<br>这和 Keras&#x2F;TensorFlow 的“结构+权重一起保存”不同，PyTorch 推荐“结构代码+权重分开管理”，这样灵活但需要你自己保证一致。<br>所以：<br>你每次用训练好的模型做推荐，都要先用和训练时一样的 feature&#x2F;参数构建模型，再加载权重，然后才能推理。</li>
 </ul>
 <h1 id="模型调参优化计划"><a href="#模型调参优化计划" class="headerlink" title="模型调参优化计划"></a>模型调参优化计划</h1><h2 id="第一阶段：基础参数优化（影响特征表达能力）"><a href="#第一阶段：基础参数优化（影响特征表达能力）" class="headerlink" title="第一阶段：基础参数优化（影响特征表达能力）"></a>第一阶段：基础参数优化（影响特征表达能力）</h2><p>核心目标：提升模型对用户&#x2F;物品特征的表示能力，解决当前指标过低的问题。      |<br>| 参数 | 当前值 | 建议尝试范围 | 调整理由 | |———————|————–|——————————|————————————————————————–| | 嵌入维度 embed_dim | 8 | 16, 32 | 当前维度较小，可能导致特征表达能力不足。增大维度可捕捉更细粒度特征关系。 | | 负采样比例 neg_ratio | 3 | 5, 10 | 负样本数量过少会导致模型难以区分正负样本，增加负样本可提升判别能力。 | | 序列长度 seq_max_len | 10 | 20, 30 | 过短的用户行为序列无法捕捉长期偏好，适当增加可包含更多历史交互信息。 |</p>
+<p>实验设计：固定其他参数，每次调整1个变量</p>
+<h2 id="第二阶段：网络结构优化（影响特征交互能力）"><a href="#第二阶段：网络结构优化（影响特征交互能力）" class="headerlink" title="第二阶段：网络结构优化（影响特征交互能力）"></a>第二阶段：网络结构优化（影响特征交互能力）</h2><p>核心目标：调整MLP网络深度&#x2F;宽度，优化特征非线性转换能力。<br> 参数 | 当前值 | 建议尝试范围 | 调整理由 | |———————|———————–|——————————|————————————————————————–| | MLP隐藏层 user_dims&#x2F;item_dims | [256,128,64] | [128,64], [512,256,128,64] | 当前3层网络可能过深导致梯度消失，或维度不足。简化&#x2F;加深网络观察性能变化。 | | 激活函数 activation | prelu | relu, gelu | prelu对数据分布敏感，尝试更稳定的relu或gelu（适合推荐场景）。 | | 温度系数 temperature | 0.02 | 0.1, 0.5 | 过小的温度会导致相似度分布过于尖锐，适当增大可提升泛化能力。 |</p>
+<h2 id="第三阶段：训练策略优化（影响收敛效果）"><a href="#第三阶段：训练策略优化（影响收敛效果）" class="headerlink" title="第三阶段：训练策略优化（影响收敛效果）"></a>第三阶段：训练策略优化（影响收敛效果）</h2><p>| 参数 | 当前值 | 建议尝试范围 | 调整理由 | |———————–|————–|——————————|————————————————————————–| | 学习率 learning_rate | 0.0001 | 0.0005, 0.001 | 当前学习率可能过低导致收敛慢，可增大学习率并配合学习率衰减策略。 | | 权重衰减 weight_decay | 1e-6 | 1e-5, 5e-5 | 增大正则化强度，防止因嵌入维度&#x2F;网络规模增加导致的过拟合。 | | 训练轮数 epoch | 10 | 20, 30 | 若训练损失未收敛（持续下降），增加epoch让模型充分学习。 | | 批大小 batch_size | 1024 | 2048 (若内存允许) | 增大batch_size可提升梯度估计稳定性，加速收敛。 |</p>
 <h3 id="三、一分钟改完的命令行"><a href="#三、一分钟改完的命令行" class="headerlink" title="三、一分钟改完的命令行"></a>三、一分钟改完的命令行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">python run_ml_dssm.py \<br>  --dataset_path ./data/ml-1m/ml-1m_sample.csv \<br>  --epoch 15 \<br>  --learning_rate 0.0005 \<br>  --batch_size 256 \<br>  --weight_decay 0.00005 \<br>  --device cpu \<br>  --save_dir ./saved/dssm_lowdim/<br></code></pre></td></tr></table></figure>
                 
               </div>
